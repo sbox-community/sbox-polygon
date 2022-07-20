@@ -1,0 +1,33 @@
+{
+  "Title": "Polygon",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "polygon",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": [
+    "/attachments/*",
+    "/fonts/*",
+    "/weapons/*",
+    "/materials/*",
+    "/code/swb_base/translations/languages/*",
+    "/code/swb_base/ui/*",
+    "/code/swb_base/editor/*",
+    "/sounds/*",
+    "/particles/*"
+  ],
+  "HasCode": true,
+  "CodePath": "/code/",
+  "RootNamespace": "Sandbox",
+  "Metadata": {
+    "MaxPlayers": 0,
+    "MinPlayers": 0,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [],
+    "RankType": "Best",
+    "PerMapRanking": true,
+    "LeaderboardType": "Descending"
+  }
+}
