@@ -21,13 +21,20 @@
   "CodePath": "/code/",
   "RootNamespace": "Sandbox",
   "Metadata": {
-    "MaxPlayers": 0,
-    "MinPlayers": 0,
+    "MaxPlayers": 6,
+    "MinPlayers": 1,
     "GameNetworkType": "Multiplayer",
-    "MapSelect": "Unrestricted",
-    "MapList": [],
+    "MapSelect": "Official",
+    "MapList": [
+      "local.polygonmap"
+    ],
     "RankType": "Best",
     "PerMapRanking": true,
-    "LeaderboardType": "Descending"
+    "LeaderboardType": "Descending",
+    "Compiler": {
+      "RootNamespace": "Sandbox",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    }
   }
 }

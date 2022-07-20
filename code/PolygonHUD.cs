@@ -50,9 +50,15 @@ public partial class PolygonHUD : Panel
         p.Style.FlexDirection = FlexDirection.Column;
         p.Style.BorderWidth = Length.Pixels(1);
         p.Style.BorderColor = new Color(0, 0, 0, 0.3f);
-        p.Style.Set("background: linear-gradient(to bottom, rgba(20,20,20,1) 0%, rgba(56,56,56,1) 100%);box-shadow: 0px 0px 20px 0px rgb(0, 0, 0);");
+        p.Style.Set("background: linear-gradient(to bottom, rgba(20,20,20,1) 0%, rgba(56,56,56,1) 100%);box-shadow: 0px 0px 20px 0px rgb(0, 0, 0);transition: all 0.1s ease-out;transform: scale(0.9);");
 
-        if(enable_closebutton)
+        //animation
+        _ = Timer(1, () => {
+            if(activeMenu != null && p != null)
+                p.Style.Set("transition: all 0.1s ease-out;transform: scale(1);");
+        });
+
+        if (enable_closebutton)
         { 
             var b = p.AddChild<Button>();
             b.Style.AlignItems = Align.Center;
@@ -195,7 +201,7 @@ public partial class PolygonHUD : Panel
 
         i = 0;
 
-        foreach (var data in (Game.Current as PolygonGame).top10names)
+        foreach (var data in (Game.Current as PolygonGame).top10)
         {
             var rowpanel = serverscores.Add.Panel();
             rowpanel.Style.JustifyContent = Justify.SpaceBetween;
@@ -205,7 +211,7 @@ public partial class PolygonHUD : Panel
 
             var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.7f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
             var score = rowpanel.AddChild<Label>();
-            score.Text = $"{(Game.Current as PolygonGame).top10scores[i]} sec";
+            score.Text = $"{data.score} sec";
             score.Style.FontColor = color;
             score.Style.FontSize = Length.Pixels(18);
             score.Style.FontFamily = "Roboto";
@@ -214,7 +220,7 @@ public partial class PolygonHUD : Panel
             score.Style.Top = Length.Percent(-45);
 
             var name = rowpanel.AddChild<Label>();
-            name.Text = $"{data}";
+            name.Text = $"{data.name}";
             name.Style.FontColor = color;
             name.Style.FontSize = Length.Pixels(14);
             name.Style.FontFamily = "Roboto";
@@ -223,7 +229,7 @@ public partial class PolygonHUD : Panel
             name.Style.Top = Length.Percent(-45);
 
             var date = rowpanel.AddChild<Label>();
-            date.Text = $"{DateTimeOffset.FromUnixTimeSeconds((Game.Current as PolygonGame).top10dates[i]).LocalDateTime.ToString("HH:mm:ss  (MM/dd/yyyy)")}";
+            date.Text = $"{DateTimeOffset.FromUnixTimeSeconds(data.date).LocalDateTime.ToString("HH:mm:ss  (MM/dd/yyyy)")}";
             date.Style.FontColor = color.WithAlpha(0.5f);
             date.Style.FontSize = Length.Pixels(16);
             date.Style.FontFamily = "Roboto";
@@ -416,5 +422,10 @@ public partial class PolygonHUD : Panel
             highRecord.Style.FontSize = fontscale; 
         }
 
+    }
+    async static Task Timer(int s, Action callback)
+    {
+        await System.Threading.Tasks.Task.Delay(s);
+        callback?.Invoke();
     }
 }

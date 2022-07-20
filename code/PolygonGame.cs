@@ -28,13 +28,8 @@ public partial class PolygonGame : Sandbox.Game
     private static StandardOutputDelegate stbcall = stopButtonCallback;
     private static StandardOutputDelegate enemytargetcb = enemyTargetBreakCallback;
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
-
-    //Not supported
-    //[Net] public List<top10val> top10 { get; set; } = new();
-    [Net] public List<string> top10names { get; set; } = new();
-    [Net] public List<long> top10dates { get; set; } = new();
-    [Net] public List<float> top10scores { get; set; } = new();
-
+    [Net] public List<top10val> top10 { get; set; } = new();
+ 
     //map only
     public static Dictionary<long, Dictionary<string, List<PolygonPlayer.ScoreData>>> ServerScores = new();
     public record struct polygonData
@@ -51,11 +46,11 @@ public partial class PolygonGame : Sandbox.Game
         //firedbulletcount, weapontype, targethitzone, score?
     }
 
-    public struct top10val
+    public partial class top10val : BaseNetworkable
     {
-        public string name { get; init; }
-        public long date { get; init; }
-        public float score { get; init; }
+        [Net] public string name { get; set; }
+        [Net] public long date { get; set; }
+        [Net] public float score { get; set; }
     }
 
     public PolygonGame()
@@ -185,7 +180,7 @@ public partial class PolygonGame : Sandbox.Game
     public static void breakAllDoors()
     {
         foreach(var door in breakableDoors)
-            door.FireInput("Break",null);
+            door.Delete();//door.FireInput("Break",null); //gibs have collision, should be nocollide with player
     }
     private static void startPolygon(ref Entity activator)
     {
@@ -347,15 +342,10 @@ public partial class PolygonGame : Sandbox.Game
         if (allscores.Count > 10)
             allscores.RemoveRange(10, allscores.Count - 10);
 
-        top10names.Clear();
-        top10dates.Clear();
-        top10scores.Clear();
+        top10.Clear();
+        
         foreach(var values in allscores)
-        {
-            top10names.Add( values.name );
-            top10dates.Add( values.date );
-            top10scores.Add( values.score );
-        }
+            top10.Add(new top10val() { name = values.name, date = values.date, score = values.score});
         
     }
 

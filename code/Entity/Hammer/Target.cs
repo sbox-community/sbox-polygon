@@ -313,9 +313,9 @@ namespace Sandbox
 
 		public override void TakeDamage( DamageInfo info )
 		{
-			// The target was damaged, even if its unbreakable, we still want to fire it
-			// TODO: Add damage type as argument? Or should it be the new health value?
-			OnDamaged.Fire( this );
+            // The target was damaged, even if its unbreakable, we still want to fire it
+            // TODO: Add damage type as argument? Or should it be the new health value?
+            OnDamaged.Fire( this );
 			if ( !Breakable ) return;
             LastDamage = info ;//because of lack of base.TakeDamage is like await
 			base.TakeDamage( info );
@@ -329,7 +329,11 @@ namespace Sandbox
 
 		public override void OnKilled()
 		{
-			if ( LifeState != LifeState.Alive )
+
+            //Not working?
+            PlaySound($"break_wood_plank_0{Rand.Int(1, 3)}");
+
+            if ( LifeState != LifeState.Alive )
 				return;
 
 			var result = new Breakables.Result();
@@ -338,7 +342,7 @@ namespace Sandbox
 
 			OnBreak.Fire( LastDamage.Attacker );
 
-			base.OnKilled();
+            base.OnKilled();
 		}
 
 		/// <summary>
