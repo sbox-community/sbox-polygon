@@ -327,7 +327,7 @@ public partial class PolygonHUD : Panel
         cheatlabel.Style.FontFamily = "Roboto";
 
     }
-
+    //TODO: add "Press 'G' to early finish polygon"
     public static void startInfoPanelBuild()
     {
         startInfoPanel = Local.Hud.AddChild<Label>();
@@ -410,12 +410,16 @@ public partial class PolygonHUD : Panel
             }
         }
 
+        //pressed is not suitable for low fps situations
         if(Input.Pressed(InputButton.Score))
             scoreboardBuild();
         else if(Input.Released(InputButton.Score))
             scoreboardRemove();
 
-        if(highRecord!=null)
+        if (Input.Pressed(InputButton.Drop))
+            PolygonGame.terminate();
+
+        if (highRecord!=null)
         {
 
             var fontscale = 10f * MathF.Abs(MathF.Cos(Time.Now * 4)).Remap(0f, 1f, 0.95f, 1.05f);

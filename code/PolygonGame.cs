@@ -189,13 +189,13 @@ public partial class PolygonGame : Sandbox.Game
 
         if (polygonIsInUse)
         {
-            ply.information("Polygon is in use.");
+            ply.information(To.Single(activator), "Polygon is in use.");
             return;
         }
 
         if(ply.ActiveChild == null)
         {
-            ply.information("You can not start polygon without a weapon.");
+            ply.information(To.Single(activator), "You can not start polygon without a weapon.");
             return;
         }
         
@@ -209,7 +209,7 @@ public partial class PolygonGame : Sandbox.Game
 
         timeLeft = curTime + 180; //3min cooldown, it should be for per map
 
-        ply.startInfo(freezetime);
+        ply.startInfo(To.Single(activator), freezetime);
 
         _ = ply.playerWaitUntilStartPolygon(freezetime);
 
@@ -226,7 +226,7 @@ public partial class PolygonGame : Sandbox.Game
             {
                 if(polygonOwner.polygonPlayer != activator)
                 {
-                    ply.information("Polygon is in use.");
+                    ply.information(To.Single(activator), "Polygon is in use.");
                     return;
                 }
                 else
@@ -235,7 +235,7 @@ public partial class PolygonGame : Sandbox.Game
 
                     var succeed = !(polygonOwner.cheated) && !forcefailed && polygonOwner.shootedFriendlyTargets == 0 && polygonOwner.shootedEnemyTargets == polygonOwner.initialEnemyTargets;
                     var score = curTimeMS - polygonOwner.timeStart;
-                    ply.statistics(succeed, polygonOwner.cheated, score, $"{polygonOwner.shootedEnemyTargets}/{polygonOwner.initialEnemyTargets}", $"{polygonOwner.shootedFriendlyTargets}/{polygonOwner.initialFriendlyTargets}");
+                    ply.statistics(To.Single(activator), succeed, polygonOwner.cheated, score, $"{polygonOwner.shootedEnemyTargets}/{polygonOwner.initialEnemyTargets}", $"{polygonOwner.shootedFriendlyTargets}/{polygonOwner.initialFriendlyTargets}");
 
                     if(succeed)
                     {
@@ -347,6 +347,14 @@ public partial class PolygonGame : Sandbox.Game
         foreach(var values in allscores)
             top10.Add(new top10val() { name = values.name, date = values.date, score = values.score});
         
+    }
+
+    [ConCmd.Server]
+    public static void terminate()
+    {
+        var client = ConsoleSystem.Caller;
+
+        finishPolygon(activator: client.Pawn, forcefailed:true);
     }
 
     [Event.Tick.Server]

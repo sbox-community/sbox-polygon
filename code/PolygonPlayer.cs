@@ -96,6 +96,8 @@ public partial class PolygonPlayer : PlayerBase
 
         Health = 100;
     }
+
+    //TODO: build freeze as serverside 
     public override void BuildInput(InputBuilder input)
     {
         if (Freeze)
@@ -245,6 +247,8 @@ public partial class PolygonPlayer : PlayerBase
 
         stopSounds();
         PolygonHUD.startInfoPanelBuild();
+
+        //TODO: curtime should come from server
         PolygonHUD.startInfoActive = PolygonGame.curTime + freezetime;
     }
 
