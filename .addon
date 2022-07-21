@@ -26,7 +26,7 @@
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Official",
     "MapList": [
-      "local.polygonmap"
+      "alphaceph.oldfactory"
     ],
     "RankType": "Best",
     "PerMapRanking": true,
