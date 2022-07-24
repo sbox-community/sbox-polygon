@@ -254,6 +254,13 @@ public partial class PolygonGame : Sandbox.Game
                         _ = GameServices.SubmitScore(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f);
                         recordServerScore(polygonOwner.polygonPlayer.Client, score);
                     }
+
+                    if (forcefailed)
+                        if (startPos is Vector3 pos)
+                        {
+                            ply.Velocity = 0;
+                            ply.Position = pos;
+                        }
                 }
             }
             breakFinishDoors();

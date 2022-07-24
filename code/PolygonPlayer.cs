@@ -98,7 +98,7 @@ public partial class PolygonPlayer : PlayerBase
         EnableHideInFirstPerson = true;
         EnableShadowInFirstPerson = true;
 
-        Health = 300;
+        Health = 100;
     }
 
     //TODO: build freeze as serverside 
