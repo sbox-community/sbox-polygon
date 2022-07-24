@@ -320,7 +320,7 @@ public partial class PolygonGame : Sandbox.Game
         data = data.OrderBy(x => x.score).ToList();
 
         if (data.Count > 10)
-            data.RemoveRange(10, data.Count - 11);
+            data.RemoveRange(10, data.Count - 10);
 
         ServerScores[cl.PlayerId][Map.Name] = data;
 
@@ -353,7 +353,7 @@ public partial class PolygonGame : Sandbox.Game
         }
         allscores = allscores.OrderBy(x => x.score).ToList();
         if (allscores.Count > 10)
-            allscores.RemoveRange(10, allscores.Count - 11);
+            allscores.RemoveRange(10, allscores.Count - 10);
 
         top10.Clear();
         

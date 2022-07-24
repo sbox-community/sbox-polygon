@@ -98,7 +98,7 @@ public partial class PolygonPlayer : PlayerBase
         EnableHideInFirstPerson = true;
         EnableShadowInFirstPerson = true;
 
-        Health = 100;
+        Health = 300;
     }
 
     //TODO: build freeze as serverside 
@@ -178,7 +178,7 @@ public partial class PolygonPlayer : PlayerBase
        //Inventory.DropActive();
         Inventory.DeleteContents();
 
-        BecomeRagdollOnClient(LastDamage.Force, GetHitboxBone(LastDamage.HitboxIndex));
+        BecomeRagdollOnClient( Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, GetHitboxBone(LastDamage.HitboxIndex ) );
 
         Controller = null;
         CameraMode = new SpectateRagdollCamera();

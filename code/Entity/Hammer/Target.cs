@@ -313,6 +313,10 @@ namespace Sandbox
 
 		public override void TakeDamage( DamageInfo info )
 		{
+            //in order to prevent breaking target other players
+            if (info.Attacker != Owner)
+                return;
+
             // The target was damaged, even if its unbreakable, we still want to fire it
             // TODO: Add damage type as argument? Or should it be the new health value?
             OnDamaged.Fire( this );
@@ -335,10 +339,6 @@ namespace Sandbox
 
 			var result = new Breakables.Result();
             result.CopyParamsFrom( LastDamage );
-
-            //in order to prevent breaking target other players
-            if (LastAttacker != Owner)
-                return;
 
             Breakables.Break( this, result );
 			OnBreak.Fire( LastDamage.Attacker );

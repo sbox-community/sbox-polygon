@@ -561,7 +561,7 @@ public partial class PolygonHUD : Panel
             globalRecords.Entries = globalRecords.Entries.OrderBy(x => x.Rating).ToList();
 
             if (globalRecords.Entries.Count > 10)
-                globalRecords.Entries.RemoveRange(10, globalRecords.Count - 11);
+                globalRecords.Entries.RemoveRange(10, globalRecords.Entries.Count - 10);
         }
     }
 }
