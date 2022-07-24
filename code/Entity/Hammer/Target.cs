@@ -330,17 +330,19 @@ namespace Sandbox
 		public override void OnKilled()
 		{
 
-            //Not working?
-            PlaySound($"break_wood_plank_0{Rand.Int(1, 3)}");
-
             if ( LifeState != LifeState.Alive )
 				return;
 
 			var result = new Breakables.Result();
             result.CopyParamsFrom( LastDamage );
-			Breakables.Break( this, result );
 
+            //in order to prevent breaking target other players
+            if (LastAttacker != Owner)
+                return;
+
+            Breakables.Break( this, result );
 			OnBreak.Fire( LastDamage.Attacker );
+            PolygonPlayer.hitTarget(Position);
 
             base.OnKilled();
 		}

@@ -311,6 +311,9 @@ namespace SWB_Base
             if (LifeState == LifeState.Dead)
                 return;
 
+            if (Tags.Has("nocollide"))
+                return;
+
             base.TakeDamage(info);
 
             this.ProceduralHitReaction(info);

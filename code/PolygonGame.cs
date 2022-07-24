@@ -12,9 +12,9 @@ using System.Linq;
 public partial class PolygonGame : Sandbox.Game
 {
     public static polygonData polygonOwner = new();
-  
     public static bool polygonIsInUse { get { return polygonOwner.active; } }
     public static long timeLeft = 0;
+    public static int coolDown = 180; //3min cooldown, it should be calculated for per map 
     public static long curTime => DateTimeOffset.Now.ToUnixTimeSeconds();
     public static long curTimeMS => DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
@@ -22,15 +22,14 @@ public partial class PolygonGame : Sandbox.Game
     public static Entity stopbutton;
     public static List<Entity> enemyTargets = new();
     public static List<Entity> friendTargets = new();
-    public static List<Entity> breakableDoors = new();
-    public static Vector3 startPos;
+    public static List<Entity> startDoors = new();
+    public static List<Entity> finishDoors = new();
+    public static Vector3? startPos;
     private static StandardOutputDelegate sbcall = startButtonCallback;
     private static StandardOutputDelegate stbcall = stopButtonCallback;
     private static StandardOutputDelegate enemytargetcb = enemyTargetBreakCallback;
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
     [Net] public List<top10val> top10 { get; set; } = new();
- 
-    //map only
     public static Dictionary<long, Dictionary<string, List<PolygonPlayer.ScoreData>>> ServerScores = new();
     public record struct polygonData
     {
@@ -40,10 +39,8 @@ public partial class PolygonGame : Sandbox.Game
         public ushort shootedEnemyTargets { get; set; }
         public int initialFriendlyTargets { get; set; }
         public ushort shootedFriendlyTargets { get; set; }
-        public bool cheated { get; set; }
+        public bool cheated { get; set; } //firedbulletcount, weapontype, targethitpos
         public bool active { get; init; }
-
-        //firedbulletcount, weapontype, targethitzone, score?
     }
 
     public partial class top10val : BaseNetworkable
@@ -66,7 +63,6 @@ public partial class PolygonGame : Sandbox.Game
     {
         base.PostLevelLoaded();
         findMapEntities();
-        
     }
 
     public override void ClientJoined(Client client)
@@ -85,7 +81,8 @@ public partial class PolygonGame : Sandbox.Game
         ServerScores.Remove(client.PlayerId);
         base.ClientDisconnect(client, reason);
     }
-        private static ValueTask startButtonCallback(Entity activator, float delay)
+
+    private static ValueTask startButtonCallback(Entity activator, float delay)
     {
         startPolygon(ref activator);
         return new();
@@ -102,25 +99,18 @@ public partial class PolygonGame : Sandbox.Game
         if(polygonIsInUse)
         {
             if (activator != null && polygonOwner.polygonPlayer == activator)
-            {
                 polygonOwner.shootedEnemyTargets += 1;
-                (activator.Client.Pawn as PolygonPlayer).hitTarget();
-            }
             else
                 polygonOwner.cheated = true;
         }
         return new();
     }
-
     private static ValueTask friendTargetBreakCallback(Entity activator, float delay)
     {
         if (polygonIsInUse)
         {
             if (activator != null && polygonOwner.polygonPlayer == activator)
-            { 
                 polygonOwner.shootedFriendlyTargets += 1;
-                (activator.Client.Pawn as PolygonPlayer).hitTarget(true);
-            }
             else
                 polygonOwner.cheated = true;
         }
@@ -129,7 +119,8 @@ public partial class PolygonGame : Sandbox.Game
 
     public static void findMapEntities()
     {
-        breakableDoors.Clear();
+        startDoors.Clear();
+        finishDoors.Clear();
 
         foreach (var ent in All)
         {
@@ -139,27 +130,31 @@ public partial class PolygonGame : Sandbox.Game
             if (ent.Name == "polygon_stop")
                 stopbutton = ent;
 
-            if (ent.Name == "polygon_start_door")
-                breakableDoors.Add(ent);
-
-            if (ent.Name == "polygon_stop_door")
-                breakableDoors.Add(ent);
-
             if (ent.Name == "polygon_startpos")
                 startPos = ent.Position;
+
+            
+            if (ent.Name == "polygon_start_door") //optional
+                startDoors.Add(ent);
+
+            if (ent.Name == "polygon_stop_door") //optional
+                finishDoors.Add(ent);
         }
 
-        if (startbutton != null)
-            startbutton.AddOutputEvent("OnPressed", sbcall);
-        else
-            Log.Error("This map not supported!");
+        if(startbutton == null || stopbutton == null || startPos == null)
+        { 
+            Log.Error("This map is not supported!");
+            return;
+        }
         
-        if(stopbutton != null)
-            stopbutton.AddOutputEvent("OnPressed", stbcall);
+        startbutton.AddOutputEvent("OnPressed", sbcall);
+        stopbutton.AddOutputEvent("OnPressed", stbcall);
+        
     }
 
-    public static void findTargets()
+    public static void findTargets(Entity owner = null)
     {
+
         enemyTargets.Clear();
         friendTargets.Clear();
 
@@ -172,15 +167,27 @@ public partial class PolygonGame : Sandbox.Game
         }
 
         foreach (var ent in enemyTargets)
+        {
             ent.AddOutputEvent("OnBreak", enemytargetcb);
+            ent.Owner = owner;
+        }
 
         foreach (var ent in friendTargets)
+        {
             ent.AddOutputEvent("OnBreak", friendtargetcb);
+            ent.Owner = owner;
+        }
+
     }
-    public static void breakAllDoors()
+    public static void breakStartDoors()
     {
-        foreach(var door in breakableDoors)
+        foreach (var door in startDoors)
             door.Delete();//door.FireInput("Break",null); //gibs have collision, should be nocollide with player
+    }
+    public static void breakFinishDoors()
+    {
+        foreach (var door in finishDoors)
+            door.Delete();
     }
     private static void startPolygon(ref Entity activator)
     {
@@ -201,19 +208,24 @@ public partial class PolygonGame : Sandbox.Game
         
         var freezetime = 4;
 
-
         RespawnEntities();
-        findTargets();
+        findTargets(activator);
 
         polygonOwner = new polygonData() { active = true, polygonPlayer = activator, initialEnemyTargets = enemyTargets.Count, initialFriendlyTargets= friendTargets.Count,cheated = false, timeStart = 0, shootedEnemyTargets = 0, shootedFriendlyTargets = 0};
 
-        timeLeft = curTime + 180; //3min cooldown, it should be for per map
+        timeLeft = curTime + coolDown; 
 
         ply.startInfo(To.Single(activator), freezetime);
 
+        ply.Tags.Set("nocollide", true);
+
         _ = ply.playerWaitUntilStartPolygon(freezetime);
 
-        activator.Position = startPos;
+        if (startPos is Vector3 pos)
+        {
+            activator.Velocity = 0;
+            activator.Position = pos;
+        }
     }
 
     public static void finishPolygon(Entity activator = null, bool forcefailed = false)
@@ -231,7 +243,7 @@ public partial class PolygonGame : Sandbox.Game
                 }
                 else
                 {
-                    ply.InPolygon = 0;
+                    ply.polygonTime = 0;
 
                     var succeed = !(polygonOwner.cheated) && !forcefailed && polygonOwner.shootedFriendlyTargets == 0 && polygonOwner.shootedEnemyTargets == polygonOwner.initialEnemyTargets;
                     var score = curTimeMS - polygonOwner.timeStart;
@@ -239,12 +251,13 @@ public partial class PolygonGame : Sandbox.Game
 
                     if(succeed)
                     {
-                        _ = GameServices.SubmitScore(polygonOwner.polygonPlayer.Client.PlayerId, (curTimeMS - polygonOwner.timeStart) / 1000f);
+                        _ = GameServices.SubmitScore(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f);
                         recordServerScore(polygonOwner.polygonPlayer.Client, score);
                     }
-                    //PlayerGameRank.LeaderboardFacet
                 }
             }
+            breakFinishDoors();
+            ply.Tags.Set("nocollide", false);
             polygonOwner = new();
         }
     }
@@ -307,7 +320,7 @@ public partial class PolygonGame : Sandbox.Game
         data = data.OrderBy(x => x.score).ToList();
 
         if (data.Count > 10)
-            data.RemoveRange(10, data.Count - 10);
+            data.RemoveRange(10, data.Count - 11);
 
         ServerScores[cl.PlayerId][Map.Name] = data;
 
@@ -315,7 +328,7 @@ public partial class PolygonGame : Sandbox.Game
         scores.Remove(Map.Name);
         scores.Add(Map.Name, data);
         FileSystem.Data.WriteJson(filename, scores);
-        (Game.Current as PolygonGame).computeTop10();
+        (Current as PolygonGame).computeTop10();
     }
 
     private static Client clientFromSteamID64(long sid64)
@@ -340,7 +353,7 @@ public partial class PolygonGame : Sandbox.Game
         }
         allscores = allscores.OrderBy(x => x.score).ToList();
         if (allscores.Count > 10)
-            allscores.RemoveRange(10, allscores.Count - 10);
+            allscores.RemoveRange(10, allscores.Count - 11);
 
         top10.Clear();
         
@@ -350,7 +363,7 @@ public partial class PolygonGame : Sandbox.Game
     }
 
     [ConCmd.Server]
-    public static void terminate()
+    public static void forceFinish()
     {
         var client = ConsoleSystem.Caller;
 

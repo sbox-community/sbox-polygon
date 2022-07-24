@@ -8,7 +8,7 @@ using System;
 
 public partial class PolygonPlayer : PlayerBase
 {
-    [Net, Local] public long InPolygon { get; set; } = 0;
+    [Net, Local] public long polygonTime { get; set; } = 0;
     [Net, Local] public bool Freeze { get; set; } = false;
     public Sound PolygonMusic = new();
     public Sound PolygonFinalSound = new();
@@ -16,6 +16,7 @@ public partial class PolygonPlayer : PlayerBase
     //cl only
     public List<ScoreData> LocalScores = new();
     private long curDemoID=0;
+    public bool tutorialCompleted = false;
 
     //from cs:z deleted scenes
     private static List<string> SucceedSoundList = new()
@@ -69,7 +70,10 @@ public partial class PolygonPlayer : PlayerBase
         Inventory = new PolygonInventory(this);
 
         if (IsClient)
+        {
             loadLocalScores();
+            tutorialStart();
+        }
     }
 
     public PolygonPlayer(Client client) : this()
@@ -200,10 +204,11 @@ public partial class PolygonPlayer : PlayerBase
         await Task.Delay(freezetime*1000);
         if (this != null && Client != null)
         {
-            InPolygon = PolygonGame.curTimeMS;
-            PolygonGame.polygonOwner.timeStart = InPolygon;
+            polygonTime = PolygonGame.curTimeMS;
+            PolygonGame.polygonOwner.timeStart = polygonTime;
             Freeze = false;
-            PolygonGame.breakAllDoors();
+            PolygonGame.breakStartDoors();
+            startSound(PolygonGame.startbutton);
         }
         else
             PolygonGame.finishPolygon(null);
@@ -248,15 +253,18 @@ public partial class PolygonPlayer : PlayerBase
         stopSounds();
         PolygonHUD.startInfoPanelBuild();
 
-        //TODO: curtime should come from server
         PolygonHUD.startInfoActive = PolygonGame.curTime + freezetime;
     }
 
     [ClientRpc]
-    public void hitTarget(bool friend=false)
+    public static void hitTarget(Vector3 pos)
     {
-        //TODO: find another sound
-        //PlaySound("swb_hitmarker").SetPitch(friend?0.5f:1).SetVolume(friend?3:5);
+        Sound.FromWorld("bell_impact", pos);
+    }
+    [ClientRpc]
+    public static void startSound(Entity ent)
+    {
+        Sound.FromEntity("alarm_bell_trimmed", ent);
     }
 
     public void loadLocalScores()
@@ -275,11 +283,11 @@ public partial class PolygonPlayer : PlayerBase
     public void recordLocalScore(float score)
     {
         var filename = $"{Local.PlayerId}.dat";
-        LocalScores.Add(new ScoreData() { score = score/1000f, date = PolygonGame.curTime, map = Map.Name, demoid = curDemoID });
+        LocalScores.Add(new ScoreData() { score = score / 1000f, date = PolygonGame.curTime, map = Map.Name, demoid = curDemoID });
         LocalScores = LocalScores.OrderBy(x => x.score).ToList();
-        
-        if(LocalScores.Count > 10)
-            LocalScores.RemoveRange(10, LocalScores.Count-10);
+
+        if (LocalScores.Count > 10)
+            LocalScores.RemoveRange(10, LocalScores.Count - 10);
 
         var scores = FileSystem.Data.ReadJson<Dictionary<string, List<ScoreData>>>(filename);
         scores.Remove(Map.Name);
@@ -287,6 +295,25 @@ public partial class PolygonPlayer : PlayerBase
         FileSystem.Data.WriteJson(filename, scores);
     }
 
+    //TODO
+    public void tutorialStart()
+    {
+        /*tutorialCompleted = !FileSystem.Data.FileExists("tutorial.completed");
+        PolygonGame.findMapEntities();
+        new TutorialHUD();*/
+    }
+
+    //TODO
+    public void tutorialComplete()
+    {
+        /*if (!tutorialCompleted)
+        {
+            FileSystem.Data.WriteAllText("tutorial.completed","");
+            tutorialCompleted = true;
+            TutorialHUD.self.DeleteAll();
+        }*/
+    }
     public bool isNewHighRecord(float newscore) => LocalScores.Any(x => x.score == newscore);
+    public float worstRecord() => LocalScores.Count > 0 ? LocalScores.Last().score : PolygonGame.coolDown;
 
 }
