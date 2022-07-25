@@ -340,8 +340,22 @@ namespace Sandbox
 			var result = new Breakables.Result();
             result.CopyParamsFrom( LastDamage );
 
-            Breakables.Break( this, result );
-			OnBreak.Fire( LastDamage.Attacker );
+            if (this is ModelEntity modelEnt)
+            {
+                Breakables.Break(modelEnt.Model, modelEnt.Position, modelEnt.Rotation, modelEnt.Scale, EnemyTarget ? Color.Red : Color.Blue, result, modelEnt.PhysicsBody);
+            }
+
+            //Unfortunately, there is a problem which collision with player, they must be not collide,
+            //I can't fix now, and decided to nocollide everything, will be going to go under of the map
+            foreach (var gibs in result.Props)
+            {
+                gibs.Tags.Add("gib");
+                gibs.Tags.Remove("solid");
+                gibs.Tags.Remove("prop");
+                gibs.Tags.Remove("debris");
+            }
+
+            OnBreak.Fire( LastDamage.Attacker );
             PolygonPlayer.hitTarget(Position);
 
             base.OnKilled();

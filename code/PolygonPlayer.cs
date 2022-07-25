@@ -264,7 +264,8 @@ public partial class PolygonPlayer : PlayerBase
     [ClientRpc]
     public static void startSound(Entity ent)
     {
-        Sound.FromEntity("alarm_bell_trimmed", ent);
+        if(ent != null && ent.IsValid)
+            Sound.FromEntity("alarm_bell_trimmed", ent);
     }
 
     public void loadLocalScores()

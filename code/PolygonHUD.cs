@@ -370,7 +370,13 @@ public partial class PolygonHUD : Panel
         }
 
         if ( status )
+        {
             (Local.Pawn as PolygonPlayer).tutorialComplete();
+            _ = Timer(1000, () =>
+            {
+                _ = getGlobalRecord(true);
+            });
+        }
 
         var p = buildMenu(Local.Hud);
         var statuslabel = p.AddChild<Label>();
@@ -509,7 +515,7 @@ public partial class PolygonHUD : Panel
             if (counter == null)
                 timerPanelBuild();
 
-            var timeleft = PolygonGame.curTimeMS - (Local.Pawn as PolygonPlayer).polygonTime;
+            var timeleft = Math.Max(PolygonGame.curTimeMS - (Local.Pawn as PolygonPlayer).polygonTime,0);
             var fontscale = 68f * MathF.Abs(MathF.Cos(Time.Now*4)).Remap(0f,1f,0.95f, 1.05f);
 
             counter.Text = $"{DateTimeOffset.FromUnixTimeMilliseconds(timeleft).LocalDateTime.ToString("mm:ss:fff")}";
@@ -552,9 +558,9 @@ public partial class PolygonHUD : Panel
         await System.Threading.Tasks.Task.Delay(s);
         callback?.Invoke();
     }
-    async static Task getGlobalRecord()
+    async static Task getGlobalRecord(bool force = false)
     {
-        if (gettingRecordsCoolDown < PolygonGame.curTime ) {
+        if (force || gettingRecordsCoolDown < PolygonGame.curTime ) {
 
             gettingRecordsCoolDown = PolygonGame.curTime + 10;
             globalRecords = await GameServices.Leaderboard.Query("alphaceph.polygon");

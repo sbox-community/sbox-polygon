@@ -42,7 +42,9 @@
         "trigger": "Trigger",
         "ladder": "Ignore",
         "water": "Trigger",
-        "nocollide": "Ignore"
+        "nocollide": "Ignore",
+        "gib": "Ignore",
+        "player": "Collide"
       },
       "Pairs": [
         {
@@ -94,8 +96,89 @@
           "a": "solid",
           "b": "nocollide",
           "r": "Ignore"
+        },
+        {
+          "a": "gib",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "nocollide",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "water",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "ladder",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "solid",
+          "b": "gib",
+          "r": "Ignore"
+        },
+        {
+          "a": "solid",
+          "b": "player",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "player",
+          "r": "Collide"
+        },
+        {
+          "a": "ladder",
+          "b": "player",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "player",
+          "r": "Collide"
+        },
+        {
+          "a": "nocollide",
+          "b": "player",
+          "r": "Ignore"
+        },
+        {
+          "a": "gib",
+          "b": "player",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "player",
+          "r": "Collide"
         }
       ]
+    },
+    "GameCategory": "Shooter",
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "Physics": {
+      "SubSteps": 10,
+      "TimeScale": 1,
+      "Gravity": "0,0,-800",
+      "AirDensity": 1.2,
+      "SleepingEnabled": true,
+      "SimulationMode": "Continuous",
+      "PositionIterations": 4,
+      "VelocityIterations": 8,
+      "SoftBodyIterations": 1,
+      "SoftBodySubsteps": 1
     }
   }
 }

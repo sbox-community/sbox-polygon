@@ -8,6 +8,7 @@ using SWB_Base;
 using Sandbox.UI.Construct;
 using System.Threading;
 using System.Linq;
+using System.Text.Json;
 
 public partial class PolygonGame : Sandbox.Game
 {
@@ -30,7 +31,6 @@ public partial class PolygonGame : Sandbox.Game
     private static StandardOutputDelegate enemytargetcb = enemyTargetBreakCallback;
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
     [Net] public List<top10val> top10 { get; set; } = new();
-    public static Dictionary<long, Dictionary<string, List<PolygonPlayer.ScoreData>>> ServerScores = new();
     public record struct polygonData
     {
         public Entity polygonPlayer { get; init; }
@@ -73,13 +73,6 @@ public partial class PolygonGame : Sandbox.Game
         player.Respawn();
 
         client.Pawn = player;
-        loadServerScores(ref client);
-    }
-
-    public override void ClientDisconnect(Client client, NetworkDisconnectionReason reason)
-    {
-        ServerScores.Remove(client.PlayerId);
-        base.ClientDisconnect(client, reason);
     }
 
     private static ValueTask startButtonCallback(Entity activator, float delay)
@@ -284,89 +277,41 @@ public partial class PolygonGame : Sandbox.Game
         if(curTime > timeLeft)
             finishPolygon(polygonOwner.polygonPlayer, forcefailed: true);
     }
+
     public void initializeServerScores()
     {
-        if (!FileSystem.Data.DirectoryExists("server"))
-            FileSystem.Data.CreateDirectory("server");
-    }
-    public void loadServerScores(ref Client cl)
-    {
-        var filename = $"server/{cl.PlayerId}.dat";
-        var scores = new Dictionary<string, List<PolygonPlayer.ScoreData>>();
+        var scores = new Dictionary<string, List<top10val>>();
 
-        if (!FileSystem.Data.FileExists(filename))
-            FileSystem.Data.WriteJson(filename, scores);
+        if (!FileSystem.Data.FileExists("server/top10.dat"))
+            FileSystem.Data.WriteJson("server/top10.dat", scores);
+        else
+            scores = FileSystem.Data.ReadJson<Dictionary<string, List<top10val>>>("server/top10.dat");
 
-        scores = FileSystem.Data.ReadJson<Dictionary<string, List<PolygonPlayer.ScoreData>>>(filename);
-
-        var data = new List<PolygonPlayer.ScoreData>();
-        
-        if(scores.TryGetValue(Map.Name,out var val))
-        {
+        if (scores.TryGetValue(Map.Name, out var val))
             foreach(var value in val)
-            {
-                if (value.map == Map.Name)
-                    data.Add(value);
-            }
-        }
-
-        scores.Clear();
-        scores.Add(Map.Name, data);
-
-        ServerScores.Add(cl.PlayerId, scores);
-        computeTop10();
+                top10.Add(new top10val { score = value.score, date = value.date, name = value.name });
     }
-
     public static void recordServerScore(Client cl, float score)
     {
-        var filename = $"server/{Local.PlayerId}.dat";
+        var scores = FileSystem.Data.ReadJson<Dictionary<string, List<top10val>>>("server/top10.dat");
 
-        var data = ServerScores[cl.PlayerId][Map.Name];
-        data.Add(new PolygonPlayer.ScoreData() { score = score / 1000f, date = curTime, map = Map.Name });
-         
-        data = data.OrderBy(x => x.score).ToList();
+        if (!scores.TryGetValue(Map.Name, out var val))
+            scores.Add(Map.Name, new());
 
-        if (data.Count > 10)
-            data.RemoveRange(10, data.Count - 10);
+        scores[Map.Name].Add(new top10val { score = score / 1000f, date = curTime, name = cl.Name});
 
-        ServerScores[cl.PlayerId][Map.Name] = data;
+        scores[Map.Name] = scores[Map.Name].OrderBy(x => x.score).ToList();
 
-        var scores = FileSystem.Data.ReadJson<Dictionary<string, List<PolygonPlayer.ScoreData>>>(filename);
-        scores.Remove(Map.Name);
-        scores.Add(Map.Name, data);
-        FileSystem.Data.WriteJson(filename, scores);
-        (Current as PolygonGame).computeTop10();
-    }
+        if (scores[Map.Name].Count > 10)
+            scores[Map.Name].RemoveRange(10, scores[Map.Name].Count - 10);
 
-    private static Client clientFromSteamID64(long sid64)
-    {
-        return Client.All.FirstOrDefault(cl => cl.PlayerId == sid64, null);
-    }
-    public void computeTop10()
-    {
-        var allscores = new List<top10val>();
-        foreach(var ply in ServerScores )
-        {
-            foreach (var maps in ply.Value)
-            {
-                if (maps.Key != Map.Name)
-                    continue;
+        (Current as PolygonGame).top10.Clear();
 
-                foreach(var score in maps.Value)
-                {
-                    allscores.Add(new top10val() { name = clientFromSteamID64(ply.Key).Name,date = score.date,score = score.score });
-                }
-            }
-        }
-        allscores = allscores.OrderBy(x => x.score).ToList();
-        if (allscores.Count > 10)
-            allscores.RemoveRange(10, allscores.Count - 10);
+        if (scores.TryGetValue(Map.Name, out var data))
+            foreach (var value in data)
+                (Current as PolygonGame).top10.Add(new top10val { score = value.score, date = value.date, name = value.name });
 
-        top10.Clear();
-        
-        foreach(var values in allscores)
-            top10.Add(new top10val() { name = values.name, date = values.date, score = values.score});
-        
+        FileSystem.Data.WriteJson("server/top10.dat", scores);
     }
 
     [ConCmd.Server]
@@ -384,7 +329,6 @@ public partial class PolygonGame : Sandbox.Game
         {
             checkCheat();
             checkTimeLeft();
-
         }
     }
 }
