@@ -309,6 +309,7 @@ public partial class PolygonGame : Sandbox.Game
             scores[Map.Name].RemoveRange(10, scores[Map.Name].Count - 10);
 
         (Current as PolygonGame).top10.Clear();
+        (Current as PolygonGame).top10 = new();
 
         if (scores.TryGetValue(Map.Name, out var data))
             foreach (var value in data)
