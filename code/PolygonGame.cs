@@ -282,6 +282,9 @@ public partial class PolygonGame : Sandbox.Game
     {
         var scores = new Dictionary<string, List<top10val>>();
 
+        if (!FileSystem.Data.DirectoryExists("server"))
+            FileSystem.Data.CreateDirectory("server");
+
         if (!FileSystem.Data.FileExists("server/top10.dat"))
             FileSystem.Data.WriteJson("server/top10.dat", scores);
         else

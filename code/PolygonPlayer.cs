@@ -82,6 +82,14 @@ public partial class PolygonPlayer : PlayerBase
         Clothing.LoadFromClient(client);
     }
 
+
+    public override void Spawn()
+    {
+        EnableLagCompensation = true;
+        base.Spawn();
+    }
+
+
     public override void Respawn()
     {
         base.Respawn();
@@ -97,6 +105,7 @@ public partial class PolygonPlayer : PlayerBase
         EnableDrawing = true;
         EnableHideInFirstPerson = true;
         EnableShadowInFirstPerson = true;
+        EnableLagCompensation = true;
 
         Health = 100;
     }
