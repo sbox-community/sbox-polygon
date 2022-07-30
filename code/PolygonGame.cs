@@ -269,7 +269,7 @@ public partial class PolygonGame : Sandbox.Game
     private void checkCheat()
     {
         //temporarily..
-        if (polygonOwner.polygonPlayer.Position.z > 180f)
+        if (polygonOwner.polygonPlayer.Position.z > 180f || Global.TimeScale != 1)
             polygonOwner.cheated = true;
     }
     private void checkTimeLeft()
@@ -309,7 +309,7 @@ public partial class PolygonGame : Sandbox.Game
             scores[Map.Name].RemoveRange(10, scores[Map.Name].Count - 10);
 
         (Current as PolygonGame).top10.Clear();
-        (Current as PolygonGame).top10 = new();
+        (Current as PolygonGame).top10 = new List<top10val>();
 
         if (scores.TryGetValue(Map.Name, out var data))
             foreach (var value in data)

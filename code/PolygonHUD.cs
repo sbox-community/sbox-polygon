@@ -24,14 +24,18 @@ public partial class PolygonHUD : Panel
         welcomeMenu();
         _ = getGlobalRecord();
     }
-
-    public static Panel buildMenu(Panel root, int width = 15, int height = 20, bool enable_closebutton = true)
+    public static void removePanel()
     {
-        if(activeMenu!=null)
+        if (activeMenu != null)
         {
             activeMenu.Delete();
             activeMenu = null;
         }
+    }
+
+    public static Panel buildMenu(Panel root, int width = 15, int height = 20, bool enable_closebutton = true)
+    {
+        removePanel();
 
         var background = root.Add.Panel();
         activeMenu = background;
@@ -447,6 +451,12 @@ public partial class PolygonHUD : Panel
     }
     public static void startInfoPanelBuild()
     {
+        if(startInfoPanel != null)
+        {
+            startInfoPanel.Delete();
+            startInfoPanel = null;
+        }
+
         startInfoPanel = Local.Hud.AddChild<Label>();
         startInfoPanel.Style.Top = Length.Percent(5);
         startInfoPanel.Style.Left = Length.Percent(48);
@@ -467,6 +477,12 @@ public partial class PolygonHUD : Panel
     }
     public static void timerPanelBuild()
     {
+        if (counter != null)
+        {
+            counter.Delete();
+            counter = null;
+        }
+
         counter = Local.Hud.AddChild<Label>();
         counter.Style.FlexGrow = 1;
         counter.Style.TextAlign = TextAlign.Center;
@@ -553,7 +569,7 @@ public partial class PolygonHUD : Panel
         }
 
     }
-    async static Task Timer(int s, Action callback)
+    async public static Task Timer(int s, Action callback)
     {
         await System.Threading.Tasks.Task.Delay(s);
         callback?.Invoke();

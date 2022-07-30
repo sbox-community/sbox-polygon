@@ -260,9 +260,12 @@ public partial class PolygonPlayer : PlayerBase
         ConsoleSystem.Run($"demo {curDemoID}");
 
         stopSounds();
+
         PolygonHUD.startInfoPanelBuild();
 
         PolygonHUD.startInfoActive = PolygonGame.curTime + freezetime;
+
+        PolygonHUD.removePanel();
     }
 
     [ClientRpc]
