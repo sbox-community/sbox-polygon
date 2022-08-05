@@ -212,6 +212,12 @@ public partial class PolygonGame : Sandbox.Game
 
         ply.Tags.Set("nocollide", true);
 
+        if (ply.ActiveChild is WeaponBase)
+        {
+            var wep = ply.ActiveChild as WeaponBase;
+            wep.Primary.Ammo = wep.BulletCocking ? wep.Primary.ClipSize + 1 : wep.Primary.ClipSize;
+        }
+
         _ = ply.playerWaitUntilStartPolygon(freezetime);
 
         if (startPos is Vector3 pos)
