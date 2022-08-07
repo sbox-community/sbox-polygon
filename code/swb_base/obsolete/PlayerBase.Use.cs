@@ -86,7 +86,8 @@ namespace SWB_Base
         protected virtual Entity FindUsable()
         {
             // First try a direct 0 width line
-            var tr = Trace.Ray(EyePosition, EyePosition + EyeRotation.Forward * 85)
+            var tr = Trace.Sphere(100,EyePosition, EyePosition + EyeRotation.Forward * 85)
+                .WithoutTags("trigger")
                 .Ignore(this)
                 .Run();
 
@@ -100,8 +101,9 @@ namespace SWB_Base
             // Nothing found, try a wider search
             if (!IsValidUseEntity(ent))
             {
-                tr = Trace.Ray(EyePosition, EyePosition + EyeRotation.Forward * 85)
-                .Radius(2)
+                tr = Trace.Sphere(100, EyePosition, EyePosition + EyeRotation.Forward *85)
+                .WithoutTags("trigger")
+                .Size(30)
                 .Ignore(this)
                 .Run();
 
@@ -115,7 +117,6 @@ namespace SWB_Base
 
             // Still no good? Bail.
             if (!IsValidUseEntity(ent)) return null;
-
             return ent;
         }
     }
