@@ -153,8 +153,7 @@ namespace SWB_Base
         /// </summary>
         public virtual void CreateHull()
         {
-            CollisionGroup = CollisionGroup.Player;
-            AddCollisionLayer(CollisionLayer.Player);
+            Tags.Add("player");
             SetupPhysicsFromAABB(PhysicsMotionType.Keyframed, new Vector3(-16, -16, 0), new Vector3(16, 16, 72));
 
             //var capsule = new Capsule( new Vector3( 0, 0, 16 ), new Vector3( 0, 0, 72 - 16 ), 32 );
@@ -251,12 +250,6 @@ namespace SWB_Base
         {
             if (IsClient) return;
 
-            if (other is PickupBase)
-            {
-                StartTouch(other.Parent);
-                return;
-            }
-
             Inventory?.Add(other, Inventory.Active == null);
         }
 
@@ -309,9 +302,6 @@ namespace SWB_Base
         public virtual void TakeDamageBase(DamageInfo info)
         {
             if (LifeState == LifeState.Dead)
-                return;
-
-            if (Tags.Has("nocollide"))
                 return;
 
             base.TakeDamage(info);

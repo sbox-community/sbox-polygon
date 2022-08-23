@@ -15,6 +15,7 @@ public partial class PolygonGame : Sandbox.Game
     public static polygonData polygonOwner = new();
     public static bool polygonIsInUse { get { return polygonOwner.active; } }
     public static long timeLeft = 0;
+    public const int freezetime = 4;
     public static int coolDown = 180; //3min cooldown, it should be calculated for per map 
     public static long curTime => DateTimeOffset.Now.ToUnixTimeSeconds();
     public static long curTimeMS => DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -198,8 +199,6 @@ public partial class PolygonGame : Sandbox.Game
             ply.information(To.Single(activator), "You can not start polygon without a weapon.");
             return;
         }
-        
-        var freezetime = 4;
 
         RespawnEntities();
         findTargets(activator);
@@ -212,11 +211,8 @@ public partial class PolygonGame : Sandbox.Game
 
         ply.Tags.Set("nocollide", true);
 
-        if (ply.ActiveChild is WeaponBase)
-        {
-            var wep = ply.ActiveChild as WeaponBase;
+        if (ply.ActiveChild is WeaponBase wep)
             wep.Primary.Ammo = wep.BulletCocking ? wep.Primary.ClipSize + 1 : wep.Primary.ClipSize;
-        }
 
         _ = ply.playerWaitUntilStartPolygon(freezetime);
 

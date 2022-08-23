@@ -321,9 +321,12 @@ namespace Sandbox
             // TODO: Add damage type as argument? Or should it be the new health value?
             OnDamaged.Fire( this );
 			if ( !Breakable ) return;
-            LastDamage = info ;//because of lack of base.TakeDamage is like await
+            LastDamage = info;//because of lack of base.TakeDamage is like await
 			base.TakeDamage( info );
             LastDamage = info;
+
+            //var particle = Particles.Create("particles/impact.metal.vpcf", info.Position);
+            //particle.SetPosition(0, Transform.PointToLocal(info.Position) );
 		}
 
 		/// <summary>

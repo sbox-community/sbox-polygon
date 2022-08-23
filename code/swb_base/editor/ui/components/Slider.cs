@@ -122,8 +122,8 @@ namespace SWB_Base.Editor
         public virtual float ScreenPosToValue(Vector2 pos)
         {
             var localPos = ScreenPositionToPanelPosition(pos);
-            var thumbSize = Thumb.Box.Rect.width * 0.5f;
-            var normalized = MathX.LerpInverse(localPos.x, thumbSize, (Box.Rect.width - thumbSize), true);
+            var thumbSize = Thumb.Box.Rect.Width * 0.5f;
+            var normalized = MathX.LerpInverse(localPos.x, thumbSize, (Box.Rect.Width - thumbSize), true);
             var scaled = MathX.LerpTo(MinValue, MaxValue, normalized, true);
             return Step > 0 ? scaled.SnapToGrid(Step) : scaled;
         }

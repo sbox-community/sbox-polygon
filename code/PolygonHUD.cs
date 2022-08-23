@@ -10,7 +10,7 @@ public partial class PolygonHUD : Panel
 {
     private static Label counter;
     private static Panel activeMenu;
-    private static Panel? scoreboard;
+    private static Panel scoreboard;
     public static long startInfoActive = 0;
     public static Label startInfoPanel;
     private string startingTimer = "";
@@ -47,7 +47,7 @@ public partial class PolygonHUD : Panel
         background.Style.AlignContent = Align.Center;
         background.Style.JustifyContent = Justify.Center;
         background.Style.AlignItems= Align.Center;
-        background.Style.PointerEvents = "all";
+        background.Style.PointerEvents = PointerEvents.All;
 
         var p = background.Add.Panel();
         p.Style.Position = PositionMode.Absolute;

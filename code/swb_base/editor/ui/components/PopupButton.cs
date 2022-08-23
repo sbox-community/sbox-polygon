@@ -38,7 +38,7 @@ namespace SWB_Base.Editor
 
             if (Popup != null)
             {
-                Popup.Style.Width = Box.Rect.width;
+                Popup.Style.Width = Box.Rect.Width;
             }
         }
     }
