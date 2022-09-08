@@ -323,7 +323,7 @@ public partial class PolygonPlayer : PlayerBase
         {
             FileSystem.Data.WriteAllText("tutorial.completed","");
             tutorialCompleted = true;
-            TutorialHUD.self.DeleteAll();
+            TutorialHUD.scoreboardPanel.DeleteAll();
         }*/
     }
     public bool isNewHighRecord(float newscore) => LocalScores.Any(x => x.score == newscore);

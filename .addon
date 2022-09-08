@@ -1,7 +1,7 @@
 {
   "Title": "Polygon",
   "Type": "game",
-  "Org": "alphaceph",
+  "Org": "local",
   "Ident": "polygon",
   "Schema": 1,
   "HasAssets": true,

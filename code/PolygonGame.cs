@@ -137,7 +137,7 @@ public partial class PolygonGame : Sandbox.Game
 
         if(startbutton == null || stopbutton == null || startPos == null)
         { 
-            Log.Error("This map is not supported!");
+            Log.Error($"This map is not supported! {(startbutton == null ? "Start button" : (stopbutton == null ? "Stop button" : (startPos == null ?  "Start Position" : "Something?")))} is not found..");
             return;
         }
         
@@ -246,7 +246,7 @@ public partial class PolygonGame : Sandbox.Game
 
                     if(succeed)
                     {
-                        _ = GameServices.SubmitScore(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f);
+                        _ = GameServices.UpdateLeaderboard(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f);
                         recordServerScore(polygonOwner.polygonPlayer.Client, score);
                     }
 
@@ -271,7 +271,7 @@ public partial class PolygonGame : Sandbox.Game
     private void checkCheat()
     {
         //temporarily..
-        if (polygonOwner.polygonPlayer.Position.z > 180f || Global.TimeScale != 1)
+        if ((polygonOwner.polygonPlayer.IsValid() && polygonOwner.polygonPlayer.Position.z > 180f) || Global.TimeScale != 1)
             polygonOwner.cheated = true;
     }
     private void checkTimeLeft()

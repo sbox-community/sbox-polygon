@@ -16,7 +16,7 @@ public partial class PolygonHUD : Panel
     private string startingTimer = "";
     private static Label highRecord;
     private static float worstRecord = 0;
-    private static LeaderboardResult globalRecords = new();
+    public static LeaderboardResult globalRecords = new();
     private static float gettingRecordsCoolDown = 0;
 
     public PolygonHUD()
@@ -584,6 +584,8 @@ public partial class PolygonHUD : Panel
 
             if (globalRecords.Entries.Count > 10)
                 globalRecords.Entries.RemoveRange(10, globalRecords.Entries.Count - 10);
+
+            PolygonScoreboard.refreshScores();
         }
     }
 }
