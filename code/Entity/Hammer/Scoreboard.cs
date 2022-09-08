@@ -60,14 +60,16 @@ namespace Sandbox
 
             var header = scoreboardChildMainPanel.Add.Panel();
             header.Style.Width = Length.Fraction(1f);
-            header.Style.Height = Length.Fraction(0.07f);
+            header.Style.Height = Length.Fraction(0.062f);
             header.Style.BackgroundColor = Color.Magenta;
+            header.Style.JustifyContent = Justify.Center;
 
             var headertext = header.AddChild<Label>();
             headertext.Text = "GLOBAL RECORDS";
-            header.Style.JustifyContent = Justify.Center;
+            headertext.Style.TextStrokeWidth = Length.Pixels(3f);
+            headertext.Style.TextStrokeColor = Color.Black;
 
-            headertext.Style.FontSize = Length.Pixels(64);
+            headertext.Style.FontSize = Length.Pixels(68);
             headertext.Style.FontColor = Color.White;
 
             headertext.Style.FontFamily = "Roboto";

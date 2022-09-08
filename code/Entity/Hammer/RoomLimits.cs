@@ -22,5 +22,5 @@ namespace Sandbox
     //[Model( Archetypes = ModelArchetype.animated_model )]
     [VisGroup(VisGroup.Dynamic)]//RenderFields,
     [Title("Polygon Min. Height"), Category("Gameplay"), Icon("door_front")]
-    public partial class PolygonMinxHeight : ModelEntity {}
+    public partial class PolygonMinHeight : ModelEntity {}
 }
