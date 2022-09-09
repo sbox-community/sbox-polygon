@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Sandbox;
 
 /* Result from Pain Day 4, this will be here temporarily until it is clear how templates work */
@@ -250,6 +251,7 @@ namespace SWB_Base
                 DebugOverlay.ScreenText($"    GroundEntity: {GroundEntity} [{GroundEntity?.Velocity}]", lineOffset + 3);
                 DebugOverlay.ScreenText($" SurfaceFriction: {SurfaceFriction}", lineOffset + 4);
                 DebugOverlay.ScreenText($"    WishVelocity: {WishVelocity}", lineOffset + 5);
+                DebugOverlay.ScreenText($"    Speed: {Velocity.Length}", lineOffset + 6);
             }
 
         }
@@ -318,6 +320,7 @@ namespace SWB_Base
             }
 
             StayOnGround();
+            Velocity = Velocity.Normal * MathF.Min(Velocity.Length, GetWishSpeed());
         }
 
         public virtual void StepMove()

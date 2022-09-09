@@ -1,7 +1,7 @@
 {
   "Title": "Polygon",
   "Type": "game",
-  "Org": "local",
+  "Org": "alphaceph",
   "Ident": "polygon",
   "Schema": 1,
   "HasAssets": true,
@@ -26,7 +26,8 @@
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Official",
     "MapList": [
-      "alphaceph.oldfactory"
+      "alphaceph.oldfactory",
+      "alphaceph.shooting_range"
     ],
     "RankType": "Best",
     "PerMapRanking": true,
@@ -179,6 +180,7 @@
       "VelocityIterations": 8,
       "SoftBodyIterations": 1,
       "SoftBodySubsteps": 1
-    }
+    },
+    "DefaultLeaderboards": []
   }
 }

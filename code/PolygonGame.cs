@@ -19,6 +19,7 @@ public partial class PolygonGame : Sandbox.Game
     public static int coolDown = 180; //3min cooldown, it should be calculated for per map 
     public static long curTime => DateTimeOffset.Now.ToUnixTimeSeconds();
     public static long curTimeMS => DateTimeOffset.Now.ToUnixTimeMilliseconds();
+    public static bool notSupported = false;
 
     public static Entity startbutton;
     public static Entity stopbutton;
@@ -26,12 +27,15 @@ public partial class PolygonGame : Sandbox.Game
     public static List<Entity> friendTargets = new();
     public static List<Entity> startDoors = new();
     public static List<Entity> finishDoors = new();
+    public static float maxHeight = 0f;
+    public static float minHeight = 0f;
     public static Vector3? startPos;
     private static StandardOutputDelegate sbcall = startButtonCallback;
     private static StandardOutputDelegate stbcall = stopButtonCallback;
     private static StandardOutputDelegate enemytargetcb = enemyTargetBreakCallback;
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
     [Net] public List<top10val> top10 { get; set; } = new();
+    [Net] public string startMusic { get; set; } //clients can't get the entities value of the map?
     public record struct polygonData
     {
         public Entity polygonPlayer { get; init; }
@@ -127,7 +131,15 @@ public partial class PolygonGame : Sandbox.Game
             if (ent.Name == "polygon_startpos")
                 startPos = ent.Position;
 
-            
+            if (ent.ClassName == "ent_polygon_music")
+                (Current as PolygonGame).startMusic = (ent as PolygonMusic).Music;
+
+            if (ent.ClassName == "ent_polygon_minheight")
+                minHeight = ent.Position.z;
+
+            if (ent.ClassName == "ent_polygon_maxheight")
+                maxHeight = ent.Position.z;
+
             if (ent.Name == "polygon_start_door") //optional
                 startDoors.Add(ent);
 
@@ -135,9 +147,10 @@ public partial class PolygonGame : Sandbox.Game
                 finishDoors.Add(ent);
         }
 
-        if(startbutton == null || stopbutton == null || startPos == null)
+        if(startbutton == null || stopbutton == null || startPos == null || string.IsNullOrEmpty((Current as PolygonGame).startMusic) || minHeight == 0f || maxHeight == 0f)
         { 
-            Log.Error($"This map is not supported! {(startbutton == null ? "Start button" : (stopbutton == null ? "Stop button" : (startPos == null ?  "Start Position" : "Something?")))} is not found..");
+            notSupported = true;
+            Log.Error($"This map is not supported! {(startbutton == null ? "Start button" : (stopbutton == null ? "Stop button" : (startPos == null ?  "Start Position" : (string.IsNullOrEmpty((Current as PolygonGame).startMusic) ? "Start Music Entity" : (minHeight == 0f ? "Min. Height Entity" : (maxHeight == 0f ? "Max. Height Entity" : "Something?"))))))} is not found..");
             return;
         }
         
@@ -185,8 +198,13 @@ public partial class PolygonGame : Sandbox.Game
     }
     private static void startPolygon(ref Entity activator)
     {
-
         var ply = activator.Client.Pawn as PolygonPlayer;
+
+        if (notSupported)
+        {
+            ply.information(To.Single(activator), "Map is not supported.");
+            return;
+        }
 
         if (polygonIsInUse)
         {
@@ -225,10 +243,16 @@ public partial class PolygonGame : Sandbox.Game
 
     public static void finishPolygon(Entity activator = null, bool forcefailed = false)
     {
+        var ply = activator.Client.Pawn as PolygonPlayer;
+
+        if (notSupported)
+        {
+            ply.information(To.Single(activator), "Map is not supported.");
+            return;
+        }
+
         if ( polygonIsInUse )
         {
-            var ply = activator.Client.Pawn as PolygonPlayer;
-            
             if ( activator != null )
             {
                 if(polygonOwner.polygonPlayer != activator)
@@ -246,7 +270,8 @@ public partial class PolygonGame : Sandbox.Game
 
                     if(succeed)
                     {
-                        _ = GameServices.UpdateLeaderboard(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f);
+                        //TODO: obsolete
+                        _ = GameServices.UpdateLeaderboard(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f, boardName: Global.MapName);
                         recordServerScore(polygonOwner.polygonPlayer.Client, score);
                     }
 
@@ -270,8 +295,7 @@ public partial class PolygonGame : Sandbox.Game
     }
     private void checkCheat()
     {
-        //temporarily..
-        if ((polygonOwner.polygonPlayer.IsValid() && polygonOwner.polygonPlayer.Position.z > 180f) || Global.TimeScale != 1)
+        if ((polygonOwner.polygonPlayer.IsValid() && (polygonOwner.polygonPlayer.Position.z > maxHeight || polygonOwner.polygonPlayer.Position.z < minHeight) ) || Global.TimeScale != 1)
             polygonOwner.cheated = true;
     }
     private void checkTimeLeft()

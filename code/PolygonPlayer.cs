@@ -194,6 +194,10 @@ public partial class PolygonPlayer : PlayerBase
 
         EnableAllCollisions = false;
         EnableDrawing = false;
+
+        var polygonply = PolygonGame.polygonOwner.polygonPlayer;
+        if (polygonply != null && polygonply.IsValid() && polygonply.Client == Client)
+            PolygonGame.finishPolygon(polygonply, forcefailed: true);
     }
 
     public void SwitchToBestWeapon()
@@ -211,7 +215,8 @@ public partial class PolygonPlayer : PlayerBase
     {
         Freeze = true;
         await Task.Delay(freezetime*1000);
-        if (this != null && Client != null)
+
+        if (this != null && Client != null) //TODO: check if player dead..
         {
             polygonTime = PolygonGame.curTimeMS;
             PolygonGame.polygonOwner.timeStart = polygonTime;

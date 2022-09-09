@@ -496,7 +496,8 @@ public partial class PolygonHUD : Panel
         counter.Style.FontColor = Color.White;
         counter.Style.Set("text-shadow: 0px 0px 3px #000b;");
 
-        (Local.Pawn as PolygonPlayer).PolygonMusic = (Local.Pawn as PolygonPlayer).PlaySound("mw2ostcliffhanger");//.SetVolume(0.2f);
+        if(!string.IsNullOrEmpty((Game.Current as PolygonGame).startMusic))
+            (Local.Pawn as PolygonPlayer).PolygonMusic = (Local.Pawn as PolygonPlayer).PlaySound((Game.Current as PolygonGame).startMusic);//.SetVolume(0.2f);
 
         worstRecord = (Local.Pawn as PolygonPlayer).worstRecord();
     }
@@ -579,7 +580,9 @@ public partial class PolygonHUD : Panel
         if (force || gettingRecordsCoolDown < PolygonGame.curTime ) {
 
             gettingRecordsCoolDown = PolygonGame.curTime + 10;
-            globalRecords = await GameServices.Leaderboard.Query("alphaceph.polygon");
+
+            //TODO: obsolete
+            globalRecords = await GameServices.Leaderboard.Query("alphaceph.polygon",bucket:Global.MapName);
             globalRecords.Entries = globalRecords.Entries.OrderBy(x => x.Rating).ToList();
 
             if (globalRecords.Entries.Count > 10)

@@ -30,14 +30,11 @@ namespace SWB_Base
                 maxs = maxs.WithZ(maxs.z - liftFeet);
             }
 
-            //pFilter->m_attr.SetCollisionGroup( collisionGroup ); // COLLISION_GROUP_PLAYER_MOVEMENT
-            // pFilter->m_attr.SetHitSolidRequiresGenerateContacts( true );
-
-            var tr = Trace.Ray(start + TraceOffset, end + TraceOffset)
-                        .Size(mins, maxs)
-                        .WithAnyTags("solid", "player", "npc", "window", "player_clip", "grate")
-                        .Ignore(Pawn)
-                        .Run();
+     			var tr = Trace.Ray( start + TraceOffset, end + TraceOffset )
+						.Size( mins, maxs )
+						.WithAnyTags( "solid", "playerclip", "passbullets", "player" )
+						.Ignore( Pawn )
+						.Run();
 
             tr.EndPosition -= TraceOffset;
             return tr;

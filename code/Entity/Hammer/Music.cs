@@ -11,7 +11,7 @@ namespace Sandbox
     [Library("ent_polygon_music")]
     [HammerEntity]
     [Title("Polygon Music"), Category("Gameplay"), Icon("door_front")]
-    public partial class PolygonMusic : Entity {
+    public partial class PolygonMusic : ModelEntity {
         /// <summary>
         /// The music when starts the polygon race.
         /// </summary>
