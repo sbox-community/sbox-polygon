@@ -3,7 +3,7 @@
   "Type": "game",
   "Org": "alphaceph",
   "Ident": "polygon",
-  "Tags": "",
+  "Tags": "polygon,shooting,range,practice",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -16,7 +16,9 @@
     "/code/swb_base/ui/*",
     "/code/swb_base/editor/*",
     "/sounds/*",
-    "/particles/*"
+    "/particles/*",
+    "/code/swb_weapons/textures/*",
+    "/models/*"
   ],
   "HasCode": true,
   "CodePath": "/code/",
