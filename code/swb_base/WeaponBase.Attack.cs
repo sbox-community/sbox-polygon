@@ -17,6 +17,27 @@ namespace SWB_Base
         {
             if (IsAnimating || InBoltBack) return false;
             if (clipInfo == null || !Owner.IsValid() || !Input.Down(inputButton)) return false;
+
+            if (!HasAmmo())
+            {
+                if (Input.Pressed(inputButton))
+                {
+                    if (IsClient)
+                        PlaySound(clipInfo.DryFireSound);
+
+                    // Check for auto reloading
+                    if (AutoReloadSV > 0)
+                    {
+                        TimeSincePrimaryAttack = 999;
+                        TimeSinceSecondaryAttack = 999;
+                        timeSinceFired = 999;
+                        Reload();
+                    }
+                }
+
+                return false;
+            }
+
             if (clipInfo.FiringType == FiringType.semi && !Input.Pressed(inputButton)) return false;
             if (clipInfo.FiringType == FiringType.burst)
             {
@@ -65,7 +86,7 @@ namespace SWB_Base
             TimeSinceSecondaryAttack = 0;
             timeSinceFired = 0;
 
-            if (!TakeAmmo(1))
+            if (!TakeAmmo())
             {
                 SendWeaponSound(clipInfo.DryFireSound);
 
@@ -173,7 +194,7 @@ namespace SWB_Base
             if (!IsAsyncValid(activeWeapon, instanceID)) return;
 
             // Take ammo
-            TakeAmmo(1);
+            TakeAmmo();
 
             // Shoot effects
             if (IsLocalPawn)

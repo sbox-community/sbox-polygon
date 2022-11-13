@@ -41,10 +41,9 @@ namespace Sandbox
 		public override void Spawn()
 		{
 			base.Spawn();
-
             SetModel(WeaponWordModels[((int)WeaponType)]);
-            SetupPhysicsFromModel( PhysicsMotionType.Static );
-
+            SetupPhysicsFromModel( PhysicsMotionType.Dynamic, true ); //the Static has a problem
+            PhysicsBody.MotionEnabled = false;
         }
         private long dontspam = 0;
         public bool OnUse(Entity user)
@@ -74,11 +73,11 @@ namespace Sandbox
                 ply.Inventory.Add(new SWB_WEAPONS.FAL(), true);
 
 
-            ply.GiveAmmo(AmmoType.SMG, 100);
-            ply.GiveAmmo(AmmoType.Pistol, 60);
-            ply.GiveAmmo(AmmoType.Revolver, 60);
-            ply.GiveAmmo(AmmoType.Rifle, 60);
-            ply.GiveAmmo(AmmoType.Shotgun, 60);
+            ply.GiveAmmo(AmmoTypes.SMG, 100);
+            ply.GiveAmmo(AmmoTypes.Pistol, 60);
+            ply.GiveAmmo(AmmoTypes.Revolver, 60);
+            ply.GiveAmmo(AmmoTypes.Rifle, 60);
+            ply.GiveAmmo(AmmoTypes.Shotgun, 60);
 
 
             return false;

@@ -179,7 +179,7 @@ namespace Sandbox
 				PositionA = LocalPosition;
 
 				// Get the direction we want to move in
-				var dir = MoveDir.Direction;
+				var dir = MoveDir.Forward;
 
 				// Active position is the size of the bbox in the direction minus the lip size
 				var boundSize = CollisionBounds.Size;
@@ -286,10 +286,10 @@ namespace Sandbox
 		{
 			base.OnNewModel( model );
 
-			// When a model is reloaded, all entities get set to NULL model first
-			if ( model.IsError ) return;
+            // When a model is reloaded, all entities get set to NULL model first
+            if ( model == null || model.IsError ) return;
 
-			if ( IsServer )
+            if ( IsServer )
 			{
 				if ( model.TryGetData( out ModelPropData propInfo ) )
 				{
@@ -349,7 +349,7 @@ namespace Sandbox
             }
 
             //Unfortunately, there is a problem which collision with player, they must be not collide,
-            //I can't fix now, and decided to nocollide everything, will be going to go under of the map
+            //I can't fix for now, and decided to nocollide everything, will be going to go under of the map
             foreach (var gibs in result.Props)
             {
                 gibs.Tags.Add("gib");
@@ -357,6 +357,7 @@ namespace Sandbox
                 gibs.Tags.Remove("prop");
                 gibs.Tags.Remove("debris");
             }
+            Particles.Create("particles/polygon/impact_effect_metal.vpcf", LastDamage.Position); // Not working?
 
             OnBreak.Fire( LastDamage.Attacker );
             PolygonPlayer.hitTarget(Position);

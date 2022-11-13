@@ -3,6 +3,7 @@ using Sandbox.UI.Construct;
 using Sandbox;
 using System.Linq;
 
+// TODO: change color according to global rank
 
 /// <summary>
 /// When a player is within radius of the camera we add this to their entity.

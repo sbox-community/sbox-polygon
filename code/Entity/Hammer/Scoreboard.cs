@@ -104,13 +104,23 @@ namespace Sandbox
         }
         public void refreshScores()
         {
-            if (PolygonHUD.globalRecords.Entries == null)
+            scoresPanel.DeleteChildren();
+
+            if (PolygonHUD.globalRecords == null)
             {
                 _ = PolygonHUD.Timer(1000, () => refreshScores());
+
+                var norecord = scoresPanel.AddChild<Label>();
+                norecord.Style.MarginTop = Length.Percent(35);
+                norecord.Text = "No Records Found";
+                norecord.Style.FontFamily = "Roboto";
+                norecord.Style.FontColor = new Color(1, 1, 1, 0.35f);
+                norecord.Style.FontSize = Length.Pixels(80);
+                norecord.Style.TextAlign = TextAlign.Center;
+                norecord.Style.Set("text-shadow: 0 0 2px #000000;");
+
                 return;
             }
-
-            scoresPanel.DeleteChildren();
 
             var i = 0;
 
@@ -147,7 +157,7 @@ namespace Sandbox
             rowpanelinfoscore.Style.Set("text-shadow: 0 0 8px #000000;");
 
 
-            foreach (var data in PolygonHUD.globalRecords.Entries)
+            foreach (var data in PolygonHUD.globalRecords)
             {
 
                 var rowpanel = scoresPanel.Add.Panel();
@@ -157,8 +167,7 @@ namespace Sandbox
                 rowpanel.Style.MarginLeft = Length.Pixels(70f);
                 rowpanel.Style.MarginRight = Length.Pixels(70f);
 
-
-                var color = i == 0 ? new Color(1f ,0f,0f, 0.7f) : i == 1 ? new Color(255f / 255f, 140f / 255f, 0f, 0.7f) : i == 2 ? new Color(1f, 1f, 0f, 0.7f) : new Color(1, 1, 1, 0.7f);
+                var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.7f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
 
                 var order = rowpanel.AddChild<Label>();
                 order.Text = $"##{i+1}";
@@ -169,7 +178,7 @@ namespace Sandbox
                 order.Style.Set("text-shadow: 0 0 8px #000000;");
 
                 var name = rowpanel.AddChild<Label>();
-                name.Text = $"{data.DisplayName}";
+                name.Text = $"{data.Name}";
                 name.Style.FontColor = color;
                 name.Style.FontSize = Length.Pixels(68);
                 name.Style.FontFamily = "Roboto";
@@ -177,7 +186,7 @@ namespace Sandbox
                 name.Style.Set("text-shadow: 0 0 8px #000000;");
 
                 var score = rowpanel.AddChild<Label>();
-                score.Text = $"{data.Rating} sec";
+                score.Text = $"{data.Score/1000f} sec";
                 score.Style.FontColor = color;
                 score.Style.FontSize = Length.Pixels(68);
                 score.Style.FontFamily = "Roboto";
@@ -187,10 +196,10 @@ namespace Sandbox
                 i++;
             }
 
-            if (PolygonHUD.globalRecords.Entries.Count == 0)
+            if (PolygonHUD.globalRecords.Length == 0)
             {
                 var norecord = scoresPanel.AddChild<Label>();
-                norecord.Style.MarginTop = Length.Percent(25);
+                norecord.Style.MarginTop = Length.Percent(35);
                 norecord.Text = "No Records Found";
                 norecord.Style.FontFamily = "Roboto";
                 norecord.Style.FontColor = new Color(1, 1, 1, 0.35f);

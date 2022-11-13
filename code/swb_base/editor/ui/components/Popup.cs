@@ -1,9 +1,7 @@
-﻿using Sandbox;
+﻿using System;
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SWB_Base.Editor
 {
@@ -122,19 +120,19 @@ namespace SWB_Base.Editor
         public Panel AddOption(string text, Action action = null)
         {
             return Add.Button(text, () =>
-            {
-                CloseAll();
-                action?.Invoke();
-            });
+           {
+               CloseAll();
+               action?.Invoke();
+           });
         }
 
         public Panel AddOption(string text, string icon, Action action = null)
         {
             return Add.ButtonWithIcon(text, icon, null, () =>
-            {
-                CloseAll();
-                action?.Invoke();
-            });
+           {
+               CloseAll();
+               action?.Invoke();
+           });
         }
 
         public void MoveSelection(int dir)
@@ -162,16 +160,16 @@ namespace SWB_Base.Editor
             var h = Screen.Height - padding;
             var w = Screen.Width - padding;
 
-            if (layoutRect.bottom > h)
+            if (layoutRect.Bottom > h)
             {
-                layoutRect.top -= layoutRect.bottom - h;
-                layoutRect.bottom -= layoutRect.bottom - h;
+                layoutRect.Top -= layoutRect.Bottom - h;
+                layoutRect.Bottom -= layoutRect.Bottom - h;
             }
 
-            if (layoutRect.right > w)
+            if (layoutRect.Right > w)
             {
-                layoutRect.left -= layoutRect.right - w;
-                layoutRect.right -= layoutRect.right - w;
+                layoutRect.Left -= layoutRect.Right - w;
+                layoutRect.Right -= layoutRect.Right - w;
             }
         }
 
@@ -185,31 +183,31 @@ namespace SWB_Base.Editor
             {
                 case PositionMode.AboveLeft:
                     {
-                        Style.Left = rect.left;
-                        Style.Bottom = Parent.Box.Rect.Height - rect.top + PopupSourceOffset;
+                        Style.Left = rect.Left;
+                        Style.Bottom = Parent.Box.Rect.Height - rect.Top + PopupSourceOffset;
                         Style.BackgroundColor = Color.Red;
                         break;
                     }
 
                 case PositionMode.BelowLeft:
                     {
-                        Style.Left = rect.left;
-                        Style.Top = rect.bottom + PopupSourceOffset;
+                        Style.Left = rect.Left;
+                        Style.Top = rect.Bottom + PopupSourceOffset;
                         break;
                     }
 
                 case PositionMode.BelowCenter:
                     {
                         Style.Left = rect.Center.x; // centering is done via styles
-                        Style.Top = rect.bottom + PopupSourceOffset;
+                        Style.Top = rect.Bottom + PopupSourceOffset;
                         break;
                     }
 
                 case PositionMode.BelowStretch:
                     {
-                        Style.Left = rect.left;
+                        Style.Left = rect.Left;
                         Style.Width = rect.Width;
-                        Style.Top = rect.bottom + PopupSourceOffset;
+                        Style.Top = rect.Bottom + PopupSourceOffset;
                         break;
                     }
             }

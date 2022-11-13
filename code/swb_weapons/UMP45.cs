@@ -14,7 +14,7 @@ namespace SWB_WEAPONS
         public override string HandsModelPath => "weapons/swb/hands/police/v_hands_police.vmdl";
         public override string ViewModelPath => "weapons/swb/smgs/ump45/v_ump45.vmdl";
         public override string WorldModelPath => "weapons/swb/smgs/ump45/w_ump45.vmdl";
-        public override string Icon => "/swb_weapons/textures/ump45.png";
+        public override string Icon => "code/swb_weapons/textures/ump45.png";
         public override int FOV => 75;
         public override float WalkAnimationSpeedMod => 1f;
 
@@ -30,13 +30,14 @@ namespace SWB_WEAPONS
             Primary = new ClipInfo
             {
                 Ammo = 25,
-                AmmoType = AmmoType.SMG,
+                AmmoType = AmmoTypes.SMG,
                 ClipSize = 25,
 
                 BulletSize = 2f,
                 BulletType = new SMGBullet(),
                 Damage = 15f,
                 Force = 3f,
+                HitFlinch = 1.25f,
                 Spread = 0.08f,
                 Recoil = 0.35f,
                 RPM = 600,

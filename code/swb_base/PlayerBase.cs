@@ -13,15 +13,61 @@ namespace SWB_Base
         private TimeSince timeSinceShake;
         private float nextShake;
 
+        private bool isLoweringFlinch;
+        private float currFlinch;
+        private float targetFlinch;
+        private float flinchSpeed;
+
         public override void Simulate(Client client)
         {
             SimulateBase(client);
             BulletSimulator.Simulate();
         }
 
+        [Event.BuildInput]
+        public virtual void ProcessClientInput(InputBuilder input)
+        {
+            if (!Alive())
+            {
+                targetFlinch = 0;
+                isLoweringFlinch = false;
+                return;
+            }
+
+            if (currFlinch == targetFlinch)
+            {
+                targetFlinch = 0;
+                isLoweringFlinch = true;
+            }
+            else
+            {
+                currFlinch = currFlinch.Approach(targetFlinch, flinchSpeed);
+            }
+
+            if (currFlinch > 0)
+            {
+                var flinchAngles = new Angles(isLoweringFlinch ? currFlinch : -currFlinch, 0, 0);
+                input.ViewAngles += flinchAngles;
+            }
+        }
+
+        [ClientRpc]
+        public virtual void DoHitFlinch(float amount)
+        {
+            isLoweringFlinch = false;
+            flinchSpeed = amount / 4f;
+            targetFlinch = amount;
+        }
+
         public override void TakeDamage(DamageInfo info)
         {
             LastDamage = info;
+
+            var weapon = info.Weapon as WeaponBase;
+
+            // Hit flinch
+            if (weapon != null && weapon.Primary.HitFlinch > 0)
+                DoHitFlinch(To.Single(this), weapon.Primary.HitFlinch);
 
             // Headshot double damage
             if (GetHitboxGroup(info.HitboxIndex) == 1)
@@ -37,12 +83,9 @@ namespace SWB_Base
                 attacker.DidDamage(To.Single(attacker), info.Position, info.Damage, Health, ((float)Health).LerpInverse(100, 0));
 
                 // Hitmarker
-                var weapon = info.Weapon as WeaponBase;
                 var uiSettings = weapon.UISettings;
                 if (weapon != null && uiSettings.ShowHitmarker && !uiSettings.HideAll)
                     attacker.ShowHitmarker(To.Single(attacker), !Alive(), uiSettings.PlayHitmarkerSound);
-
-                TookDamage(To.Single(this), info.Weapon.IsValid() ? info.Weapon.Position : info.Attacker.Position);
             }
         }
 
@@ -67,6 +110,7 @@ namespace SWB_Base
             nextShake = 0;
         }
 
+
         public virtual bool Alive()
         {
             return Health > 0;
@@ -77,14 +121,6 @@ namespace SWB_Base
         {
             Sound.FromScreen("dm.ui_attacker")
                 .SetPitch(1 + healthinv * 1);
-        }
-
-        [ClientRpc]
-        public virtual void TookDamage(Vector3 pos)
-        {
-            //DebugOverlay.Sphere( pos, 5.0f, Color.Red, false, 50.0f );
-
-            //DamageIndicator.Current?.OnHit(pos);
         }
 
         [ClientRpc]

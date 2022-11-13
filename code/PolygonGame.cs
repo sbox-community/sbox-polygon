@@ -1,15 +1,10 @@
-﻿using Sandbox;
-using System.Threading.Tasks;
+﻿using System;
 using System.Collections.Generic;
-using SandboxEditor;
-using System;
-using System.ComponentModel;
-using SWB_Base;
-using Sandbox.UI.Construct;
-using System.Threading;
+using System.IO;
 using System.Linq;
-using System.Text.Json;
-
+using System.Threading.Tasks;
+using Sandbox;
+using SWB_Base;
 public partial class PolygonGame : Sandbox.Game
 {
     public static polygonData polygonOwner = new();
@@ -34,7 +29,7 @@ public partial class PolygonGame : Sandbox.Game
     private static StandardOutputDelegate stbcall = stopButtonCallback;
     private static StandardOutputDelegate enemytargetcb = enemyTargetBreakCallback;
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
-    [Net] public List<top10val> top10 { get; set; } = new();
+    public List<top10val> top10 = new();
     [Net] public string startMusic { get; set; } //clients can't get the entities value of the map?
     public record struct polygonData
     {
@@ -50,9 +45,9 @@ public partial class PolygonGame : Sandbox.Game
 
     public partial class top10val : BaseNetworkable
     {
-        [Net] public string name { get; set; }
-        [Net] public long date { get; set; }
-        [Net] public float score { get; set; }
+        public string name { get; set; }
+        public long date { get; set; }
+        public float score { get; set; }
     }
 
     public PolygonGame()
@@ -78,6 +73,16 @@ public partial class PolygonGame : Sandbox.Game
         player.Respawn();
 
         client.Pawn = player;
+
+        sendTop10Data(client);
+    }
+
+    public override void ClientDisconnect(Client client, NetworkDisconnectionReason reason)
+    {
+        finishPolygon(client.Pawn, true);
+
+        base.ClientDisconnect(client, reason);
+
     }
 
     private static ValueTask startButtonCallback(Entity activator, float delay)
@@ -94,7 +99,7 @@ public partial class PolygonGame : Sandbox.Game
 
     private static ValueTask enemyTargetBreakCallback(Entity activator, float delay)
     {
-        if(polygonIsInUse)
+        if (polygonIsInUse)
         {
             if (activator != null && polygonOwner.polygonPlayer == activator)
                 polygonOwner.shootedEnemyTargets += 1;
@@ -147,16 +152,16 @@ public partial class PolygonGame : Sandbox.Game
                 finishDoors.Add(ent);
         }
 
-        if(startbutton == null || stopbutton == null || startPos == null || string.IsNullOrEmpty((Current as PolygonGame).startMusic) || minHeight == 0f || maxHeight == 0f)
-        { 
+        if (startbutton == null || stopbutton == null || startPos == null || string.IsNullOrEmpty((Current as PolygonGame).startMusic) || minHeight == 0f || maxHeight == 0f)
+        {
             notSupported = true;
-            Log.Error($"This map is not supported! {(startbutton == null ? "Start button" : (stopbutton == null ? "Stop button" : (startPos == null ?  "Start Position" : (string.IsNullOrEmpty((Current as PolygonGame).startMusic) ? "Start Music Entity" : (minHeight == 0f ? "Min. Height Entity" : (maxHeight == 0f ? "Max. Height Entity" : "Something?"))))))} is not found..");
+            Log.Error($"This map is not supported! {(startbutton == null ? "Start button" : (stopbutton == null ? "Stop button" : (startPos == null ? "Start Position" : (string.IsNullOrEmpty((Current as PolygonGame).startMusic) ? "Start Music Entity" : (minHeight == 0f ? "Min. Height Entity" : (maxHeight == 0f ? "Max. Height Entity" : "Something?"))))))} is not found..");
             return;
         }
-        
+
         startbutton.AddOutputEvent("OnPressed", sbcall);
         stopbutton.AddOutputEvent("OnPressed", stbcall);
-        
+
     }
 
     public static void findTargets(Entity owner = null)
@@ -212,7 +217,7 @@ public partial class PolygonGame : Sandbox.Game
             return;
         }
 
-        if(ply.ActiveChild == null)
+        if (ply.ActiveChild == null)
         {
             ply.information(To.Single(activator), "You can not start polygon without a weapon.");
             return;
@@ -221,9 +226,9 @@ public partial class PolygonGame : Sandbox.Game
         RespawnEntities();
         findTargets(activator);
 
-        polygonOwner = new polygonData() { active = true, polygonPlayer = activator, initialEnemyTargets = enemyTargets.Count, initialFriendlyTargets= friendTargets.Count,cheated = false, timeStart = 0, shootedEnemyTargets = 0, shootedFriendlyTargets = 0};
+        polygonOwner = new polygonData() { active = true, polygonPlayer = activator, initialEnemyTargets = enemyTargets.Count, initialFriendlyTargets = friendTargets.Count, cheated = false, timeStart = 0, shootedEnemyTargets = 0, shootedFriendlyTargets = 0 };
 
-        timeLeft = curTime + coolDown; 
+        timeLeft = curTime + coolDown;
 
         ply.startInfo(To.Single(activator), freezetime);
 
@@ -251,11 +256,11 @@ public partial class PolygonGame : Sandbox.Game
             return;
         }
 
-        if ( polygonIsInUse )
+        if (polygonIsInUse)
         {
-            if ( activator != null )
+            if (activator != null)
             {
-                if(polygonOwner.polygonPlayer != activator)
+                if (polygonOwner.polygonPlayer != activator)
                 {
                     ply.information(To.Single(activator), "Polygon is in use.");
                     return;
@@ -268,10 +273,9 @@ public partial class PolygonGame : Sandbox.Game
                     var score = curTimeMS - polygonOwner.timeStart;
                     ply.statistics(To.Single(activator), succeed, polygonOwner.cheated, score, $"{polygonOwner.shootedEnemyTargets}/{polygonOwner.initialEnemyTargets}", $"{polygonOwner.shootedFriendlyTargets}/{polygonOwner.initialFriendlyTargets}");
 
-                    if(succeed)
+                    if (succeed)
                     {
-                        //TODO: obsolete
-                        _ = GameServices.UpdateLeaderboard(polygonOwner.polygonPlayer.Client.PlayerId, score / 1000f, boardName: Global.MapName);
+                        _ = SubmitGlobalScore(polygonOwner.polygonPlayer.Client, Convert.ToInt32(score));
                         recordServerScore(polygonOwner.polygonPlayer.Client, score);
                     }
 
@@ -288,19 +292,37 @@ public partial class PolygonGame : Sandbox.Game
             polygonOwner = new();
         }
     }
+    public static string getMapIdent()
+    {
+
+        string mapIdent = Map.Name.Substring(Map.Name.IndexOf(".") + 1);
+        return $"{char.ToUpper(mapIdent[0])}{mapIdent.Substring(1)}";
+    }
+    private static async Task SubmitGlobalScore(Client cl, int score)
+    {
+        if (await Leaderboard.FindOrCreate(getMapIdent(), false) is { } mapLb) //is there bug about comparing the last score as ascending? that is happen after submitting
+        {
+            if (await mapLb.GetScore(cl.PlayerId) is { } clScores)
+                if (clScores.Score < score)
+                    return;
+
+            Log.Info($"[Polygon] Submitted {cl.Name} ({cl.PlayerId})'s '{score / 1000}' score for '{getMapIdent()}': {await mapLb.Submit(cl, score, true)}"); //false, TODO: Celebrate that..
+        }
+    }
     private static void RespawnEntities()
     {
         Map.Reset(DefaultCleanupFilter);
         findMapEntities();
+        temporaryFixForOldFactory();
     }
     private void checkCheat()
     {
-        if ((polygonOwner.polygonPlayer.IsValid() && (polygonOwner.polygonPlayer.Position.z > maxHeight || polygonOwner.polygonPlayer.Position.z < minHeight) ) || Global.TimeScale != 1)
+        if ((polygonOwner.polygonPlayer.IsValid() && (polygonOwner.polygonPlayer.Position.z > maxHeight || polygonOwner.polygonPlayer.Position.z < minHeight)) || Global.TimeScale != 1)
             polygonOwner.cheated = true;
     }
     private void checkTimeLeft()
     {
-        if(curTime > timeLeft)
+        if (curTime > timeLeft)
             finishPolygon(polygonOwner.polygonPlayer, forcefailed: true);
     }
 
@@ -317,8 +339,10 @@ public partial class PolygonGame : Sandbox.Game
             scores = FileSystem.Data.ReadJson<Dictionary<string, List<top10val>>>("server/top10.dat");
 
         if (scores.TryGetValue(Map.Name, out var val))
-            foreach(var value in val)
+            foreach (var value in val)
                 top10.Add(new top10val { score = value.score, date = value.date, name = value.name });
+
+        sendTop10Data();
     }
     public static void recordServerScore(Client cl, float score)
     {
@@ -327,7 +351,7 @@ public partial class PolygonGame : Sandbox.Game
         if (!scores.TryGetValue(Map.Name, out var val))
             scores.Add(Map.Name, new());
 
-        scores[Map.Name].Add(new top10val { score = score / 1000f, date = curTime, name = cl.Name});
+        scores[Map.Name].Add(new top10val { score = score / 1000f, date = curTime, name = cl.Name });
 
         scores[Map.Name] = scores[Map.Name].OrderBy(x => x.score).ToList();
 
@@ -342,6 +366,8 @@ public partial class PolygonGame : Sandbox.Game
                 (Current as PolygonGame).top10.Add(new top10val { score = value.score, date = value.date, name = value.name });
 
         FileSystem.Data.WriteJson("server/top10.dat", scores);
+
+        (Current as PolygonGame).sendTop10Data();
     }
 
     [ConCmd.Server]
@@ -349,7 +375,7 @@ public partial class PolygonGame : Sandbox.Game
     {
         var client = ConsoleSystem.Caller;
 
-        finishPolygon(activator: client.Pawn, forcefailed:true);
+        finishPolygon(activator: client.Pawn, forcefailed: true);
     }
 
     [Event.Tick.Server]
@@ -360,5 +386,58 @@ public partial class PolygonGame : Sandbox.Game
             checkCheat();
             checkTimeLeft();
         }
+    }
+
+    private void sendTop10Data(Client cl = null)
+    {
+        var count = top10.Count;
+
+        using (var stream = new MemoryStream())
+        {
+            using (var writer = new BinaryWriter(stream))
+            {
+                writer.Write(top10.Count);
+                for (var i = 0; i < count; i++)
+                {
+                    writer.Write(top10[i].name);
+                    writer.Write(top10[i].date);
+                    writer.Write(top10[i].score.ToString());
+                }
+                receiveTop10Data(cl is null ? To.Everyone : To.Single(cl), stream.ToArray());
+            }
+        }
+
+    }
+
+    [ClientRpc]
+    public static void receiveTop10Data(byte[] data)
+    {
+        var game = (Current as PolygonGame);
+
+        if (game == null)
+            return;
+
+        game.top10.Clear();
+
+        using (var stream = new MemoryStream(data))
+        using (var reader = new BinaryReader(stream))
+        {
+            var count = reader.ReadInt32();
+
+            for (var i = 0; i < count; i++)
+                game.top10.Add(new top10val { name = reader.ReadString(), date = reader.ReadInt64(), score = float.Parse(reader.ReadString()) });
+        }
+    }
+
+    [ConCmd.Server("qqqw")]
+    public static void temporaryFixForOldFactory()
+    {
+        foreach (var ent in Prop.All)
+            if (ent is Prop prop && prop.GetModelName() == "models/rust_props/fuel_tank/fuel_tank_a_600.vmdl")
+            {
+                prop.PhysicsClear();
+                break;
+            }
+
     }
 }

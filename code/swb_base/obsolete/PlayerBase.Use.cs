@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using static Sandbox.ButtonEntity;
 
 /* Result from Pain Day 4, this will be here temporarily until it is clear how templates work */
 
@@ -29,13 +30,12 @@ namespace SWB_Base
                         return;
                     }
                 }
-
+                //Log.Info(Using);
                 if (!Input.Down(InputButton.Use))
                 {
                     StopUsing();
                     return;
                 }
-
                 if (!Using.IsValid())
                     return;
 
@@ -45,9 +45,11 @@ namespace SWB_Base
                 // If use returns true then we can keep using it
                 //
                 if (Using is IUse use && use.OnUse(this))
+                {
                     return;
+                }
 
-                StopUsing();
+                StopUsing();        
             }
         }
 
@@ -86,7 +88,7 @@ namespace SWB_Base
         protected virtual Entity FindUsable()
         {
             // First try a direct 0 width line
-            var tr = Trace.Sphere(10,EyePosition, EyePosition + EyeRotation.Forward * 85)
+            var tr = Trace.Sphere(10, EyePosition, EyePosition + EyeRotation.Forward * 85)
                 .WithoutTags("trigger")
                 .Ignore(this)
                 .Run();
@@ -117,6 +119,7 @@ namespace SWB_Base
 
             // Still no good? Bail.
             if (!IsValidUseEntity(ent)) return null;
+
             return ent;
         }
     }

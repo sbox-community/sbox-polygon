@@ -10,19 +10,20 @@ public partial class DeathmatchHud : HudEntity<RootPanel>
         if (!IsClient)
             return;
   
-            RootPanel.StyleSheet.Load("deathmatch_dep/ui/DeathmatchHud.scss");
+        RootPanel.StyleSheet.Load("deathmatch_dep/ui/DeathmatchHud.scss");
 
-            //RootPanel.AddChild<DamageIndicator>();
-            RootPanel.AddChild<InventoryBar>();
-            RootPanel.AddChild<PickupFeed>();
+        //RootPanel.AddChild<DamageIndicator>();
+        RootPanel.AddChild<InventoryBar>();
+        RootPanel.AddChild<PickupFeed>();
 
-            RootPanel.AddChild<ChatBox>();
-            //RootPanel.AddChild<KillFeed>();
-            //RootPanel.AddChild<Scoreboard>();
-            RootPanel.AddChild<VoiceList>();
+        RootPanel.AddChild<ChatBox>();
+        //RootPanel.AddChild<KillFeed>();
+        //RootPanel.AddChild<Scoreboard>();
+        RootPanel.AddChild<VoiceList>();
         
-
         RootPanel.AddChild<PolygonHUD>();
+
+        //TODO: add chatbox
 
     }
 

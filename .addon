@@ -3,6 +3,7 @@
   "Type": "game",
   "Org": "alphaceph",
   "Ident": "polygon",
+  "Tags": "",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
@@ -181,6 +182,7 @@
       "SoftBodyIterations": 1,
       "SoftBodySubsteps": 1
     },
-    "DefaultLeaderboards": []
+    "DefaultLeaderboards": [],
+    "ParentPackage": ""
   }
 }

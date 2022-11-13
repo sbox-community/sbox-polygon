@@ -19,7 +19,7 @@ namespace SWB_WEAPONS
             Pos = new Vector3(-5, 0, 0)
         };
         public override string WorldModelPath => "weapons/swb/rifles/fal/w_fal.vmdl";
-        public override string Icon => "/swb_weapons/textures/fal.png";
+        public override string Icon => "code/swb_weapons/textures/fal.png";
         public override int FOV => 75;
         public override float WalkAnimationSpeedMod => 0.85f;
 
@@ -35,13 +35,14 @@ namespace SWB_WEAPONS
             Primary = new ClipInfo
             {
                 Ammo = 20,
-                AmmoType = AmmoType.Rifle,
+                AmmoType = AmmoTypes.Rifle,
                 ClipSize = 20,
 
                 BulletSize = 3f,
                 BulletType = new RifleBullet(),
                 Damage = 20f,
                 Force = 3f,
+                HitFlinch = 2f,
                 Spread = 0.1f,
                 Recoil = 0.5f,
                 RPM = 600,

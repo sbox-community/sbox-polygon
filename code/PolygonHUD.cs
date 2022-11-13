@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
 using Sandbox.UI;
@@ -16,7 +14,7 @@ public partial class PolygonHUD : Panel
     private string startingTimer = "";
     private static Label highRecord;
     private static float worstRecord = 0;
-    public static LeaderboardResult globalRecords = new();
+    public static LeaderboardEntry[] globalRecords;
     private static float gettingRecordsCoolDown = 0;
 
     public PolygonHUD()
@@ -33,7 +31,7 @@ public partial class PolygonHUD : Panel
         }
     }
 
-    public static Panel buildMenu(Panel root, int width = 15, int height = 20, bool enable_closebutton = true)
+    public static Panel buildMenu(Panel root, int width = 15, int height = 20, bool enable_closebutton = true, bool startMiniTutorial = false, bool suppressOpeningSound = false)
     {
         removePanel();
 
@@ -46,7 +44,7 @@ public partial class PolygonHUD : Panel
         background.Style.BackdropFilterBlur = Length.Pixels(5);
         background.Style.AlignContent = Align.Center;
         background.Style.JustifyContent = Justify.Center;
-        background.Style.AlignItems= Align.Center;
+        background.Style.AlignItems = Align.Center;
         background.Style.PointerEvents = PointerEvents.All;
 
         var p = background.Add.Panel();
@@ -61,13 +59,17 @@ public partial class PolygonHUD : Panel
         p.Style.Set("background: linear-gradient(to bottom, rgba(20,20,20,1) 0%, rgba(56,56,56,1) 100%);box-shadow: 0px 0px 20px 0px rgb(0, 0, 0);transition: all 0.1s ease-out;transform: scale(0.9);");
 
         //animation
-        _ = Timer(1, () => {
-            if(activeMenu != null && p != null)
+        _ = Timer(1, () =>
+        {
+            if (activeMenu != null && p != null)
                 p.Style.Set("transition: all 0.1s ease-out;transform: scale(1);");
         });
 
         if (enable_closebutton)
-        { 
+        {
+            if (!suppressOpeningSound && Local.Pawn != null)
+                Local.Pawn.PlaySound("confirmation_001").SetVolume(0.3f).SetPitch(0.8f);
+
             var b = p.AddChild<Button>();
             b.Style.AlignItems = Align.Center;
             b.Style.JustifyContent = Justify.Center;
@@ -83,7 +85,7 @@ public partial class PolygonHUD : Panel
             b.Style.FlexShrink = 0;
             b.Style.Order = 999;
             b.Style.Set("background: linear-gradient(to bottom, rgba(20,20,20,1) 0%, rgba(56,56,56,1) 100%);text-shadow: 0 0 2px #000000;");
-            b.AddEventListener("onclick", () => { p.Style.Set("transition: all 0.1s ease-out;transform: scale(0);"); _ = Timer(50, () =>{if (activeMenu != null){ activeMenu.Delete(); }});(Local.Pawn as PolygonPlayer).PlaySound("swb_hitmarker").SetVolume(0.1f).SetPitch(1.3f); });
+            b.AddEventListener("onclick", () => { p.Style.Set("transition: all 0.1s ease-out;transform: scale(0);"); _ = Timer(50, () => { if (activeMenu != null) { activeMenu.Delete(); } }); Local.Pawn.PlaySound("confirmation_001").SetVolume(0.2f).SetPitch(4.2f); if (startMiniTutorial) { new ButtonIndicator(); } });
         }
 
         return p;
@@ -95,7 +97,7 @@ public partial class PolygonHUD : Panel
 
         var infolabel = p.AddChild<Label>();
         infolabel.Text = info;
-        infolabel.Style.FontColor = new Color(1,1,1,0.7f);
+        infolabel.Style.FontColor = new Color(1, 1, 1, 0.7f);
         infolabel.Style.FontSize = Length.Pixels(14);
         infolabel.Style.Margin = Length.Percent(5);
         infolabel.Style.FontFamily = "Roboto";
@@ -107,7 +109,7 @@ public partial class PolygonHUD : Panel
 
     public static void welcomeMenu()
     {
-        var p = buildMenu(Local.Hud, width:20);
+        var p = buildMenu(Local.Hud, width: 20, startMiniTutorial: true);
 
         var label = p.AddChild<Label>();
         label.Text = "Welcome to Polygon Gamemode!\n\nAll you have to do is take a weapon and press 'E' the start button!";
@@ -150,7 +152,7 @@ public partial class PolygonHUD : Panel
 
         var i = 0;
 
-        foreach(var data in (Local.Pawn as PolygonPlayer).LocalScores)
+        foreach (var data in (Local.Pawn as PolygonPlayer).LocalScores)
         {
             var rowpanel = localscores.Add.Panel();
             rowpanel.Style.JustifyContent = Justify.SpaceBetween;
@@ -183,7 +185,7 @@ public partial class PolygonHUD : Panel
 
         }
 
-        if((Local.Pawn as PolygonPlayer).LocalScores.Count == 0)
+        if ((Local.Pawn as PolygonPlayer).LocalScores.Count == 0)
         {
             var norecord = localscores.AddChild<Label>();
             norecord.Style.Margin = Length.Percent(20);
@@ -303,37 +305,8 @@ public partial class PolygonHUD : Panel
 
         i = 0;
 
-        foreach (var data in globalRecords.Entries)
-        {
-            var rowpanel = globalscores.Add.Panel();
-            rowpanel.Style.JustifyContent = Justify.SpaceBetween;
-            rowpanel.Style.Width = Length.Percent(100);
-            rowpanel.Style.Margin = Length.Percent(0.5f);
-            rowpanel.Style.FlexShrink = 0;
 
-            var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.7f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
-            var score = rowpanel.AddChild<Label>();
-            score.Text = $"{data.Rating} sec";
-            score.Style.FontColor = color;
-            score.Style.FontSize = Length.Pixels(18);
-            score.Style.FontFamily = "Roboto";
-            score.Style.TextAlign = TextAlign.Center;
-            score.Style.Set("text-shadow: 0 0 2px #000000;");
-            score.Style.Top = Length.Percent(-45);
-
-            var name = rowpanel.AddChild<Label>();
-            name.Text = $"{data.DisplayName}";
-            name.Style.FontColor = color;
-            name.Style.FontSize = Length.Pixels(14);
-            name.Style.FontFamily = "Roboto";
-            name.Style.TextAlign = TextAlign.Center;
-            name.Style.Set("text-shadow: 0 0 2px #000000;");
-            name.Style.Top = Length.Percent(-45);
-
-            i++;
-        }
-
-        if (globalRecords.Entries.Count == 0)
+        if (globalRecords == null)
         {
             var norecord = globalscores.AddChild<Label>();
             norecord.Style.Margin = Length.Percent(20);
@@ -344,6 +317,50 @@ public partial class PolygonHUD : Panel
             norecord.Style.TextAlign = TextAlign.Center;
             norecord.Style.Set("text-shadow: 0 0 2px #000000;");
         }
+        else
+        {
+            foreach (var data in globalRecords)
+            {
+                var rowpanel = globalscores.Add.Panel();
+                rowpanel.Style.JustifyContent = Justify.SpaceBetween;
+                rowpanel.Style.Width = Length.Percent(100);
+                rowpanel.Style.Margin = Length.Percent(0.5f);
+                rowpanel.Style.FlexShrink = 0;
+
+                var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.7f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
+                var score = rowpanel.AddChild<Label>();
+                score.Text = $"{data.Score / 1000f} sec";
+                score.Style.FontColor = color;
+                score.Style.FontSize = Length.Pixels(18);
+                score.Style.FontFamily = "Roboto";
+                score.Style.TextAlign = TextAlign.Center;
+                score.Style.Set("text-shadow: 0 0 2px #000000;");
+                score.Style.Top = Length.Percent(-45);
+
+                var name = rowpanel.AddChild<Label>();
+                name.Text = $"{data.Name}";
+                name.Style.FontColor = color;
+                name.Style.FontSize = Length.Pixels(14);
+                name.Style.FontFamily = "Roboto";
+                name.Style.TextAlign = TextAlign.Center;
+                name.Style.Set("text-shadow: 0 0 2px #000000;");
+                name.Style.Top = Length.Percent(-45);
+
+                i++;
+            }
+
+            if (globalRecords.Count() == 0)
+            {
+                var norecord = globalscores.AddChild<Label>();
+                norecord.Style.Margin = Length.Percent(20);
+                norecord.Text = "No Records Found";
+                norecord.Style.FontFamily = "Roboto";
+                norecord.Style.FontColor = new Color(1, 1, 1, 0.2f);
+                norecord.Style.FontSize = Length.Pixels(18);
+                norecord.Style.TextAlign = TextAlign.Center;
+                norecord.Style.Set("text-shadow: 0 0 2px #000000;");
+            }
+        }
 
     }
     public static void scoreboardRemove()
@@ -353,36 +370,36 @@ public partial class PolygonHUD : Panel
             //animation
             scoreboard.Style.Set("transition: all 0.1s ease-out;transform: scale(0);");
 
-            _ = Timer(10, () => {
+            _ = Timer(10, () =>
+            {
                 if (scoreboard != null)
                 {
                     if (scoreboard.Parent != null)
                         scoreboard.Parent.Delete();
                     scoreboard.Delete();
                     scoreboard = null;
-                }  
+                }
             });
         }
     }
 
-    public static void resultMenu(ref bool status,ref bool cheat, ref long time, ref string enemytarget, ref string friendlytarget)
+    public static void resultMenu(ref bool status, ref bool cheat, ref long time, ref string enemytarget, ref string friendlytarget)
     {
-        if(highRecord != null)
+        if (highRecord != null)
         {
             highRecord.Delete();
             highRecord = null;
         }
 
-        if ( status )
+        if (status)
         {
-            (Local.Pawn as PolygonPlayer).tutorialComplete();
             _ = Timer(1000, () =>
             {
                 _ = getGlobalRecord(true);
             });
         }
 
-        var p = buildMenu(Local.Hud);
+        var p = buildMenu(Local.Hud, suppressOpeningSound: true);
         var statuslabel = p.AddChild<Label>();
         statuslabel.Text = status ? "Succeed" : "Failed";
         statuslabel.Style.TextAlign = TextAlign.Center;
@@ -448,10 +465,13 @@ public partial class PolygonHUD : Panel
         cheatlabel.Style.FontSize = Length.Pixels(12);
         cheatlabel.Style.FontFamily = "Roboto";
 
+        if (!(Local.Pawn as PolygonPlayer).PolygonMusic.Finished)
+            (Local.Pawn as PolygonPlayer).PolygonMusic.Stop();
+
     }
     public static void startInfoPanelBuild()
     {
-        if(startInfoPanel != null)
+        if (startInfoPanel != null)
         {
             startInfoPanel.Delete();
             startInfoPanel = null;
@@ -496,8 +516,8 @@ public partial class PolygonHUD : Panel
         counter.Style.FontColor = Color.White;
         counter.Style.Set("text-shadow: 0px 0px 3px #000b;");
 
-        if(!string.IsNullOrEmpty((Game.Current as PolygonGame).startMusic))
-            (Local.Pawn as PolygonPlayer).PolygonMusic = (Local.Pawn as PolygonPlayer).PlaySound((Game.Current as PolygonGame).startMusic);//.SetVolume(0.2f);
+        if (!string.IsNullOrEmpty((Game.Current as PolygonGame).startMusic))
+            (Local.Pawn as PolygonPlayer).PolygonMusic = Local.Pawn.PlaySound((Game.Current as PolygonGame).startMusic);//.SetVolume(0.2f);
 
         worstRecord = (Local.Pawn as PolygonPlayer).worstRecord();
     }
@@ -505,15 +525,15 @@ public partial class PolygonHUD : Panel
     public override void Tick()
     {
         base.Tick();
-        if( startInfoActive != 0 )
+        if (startInfoActive != 0)
         {
             float timeleft = startInfoActive - PolygonGame.curTime;
             var timeleftSTR = timeleft.ToString();
             startInfoPanel.Text = timeleftSTR;
-            if(startingTimer != timeleftSTR)
+            if (startingTimer != timeleftSTR)
             {
                 startingTimer = timeleftSTR;
-                if(startingTimer == "0")
+                if (startingTimer == "0")
                     Local.Pawn.PlaySound("counterclick_last").SetVolume(4f);
                 else
                     Local.Pawn.PlaySound("counterclick").SetVolume(1.5f);
@@ -525,19 +545,19 @@ public partial class PolygonHUD : Panel
                 startInfoPanel.Delete();
                 timerPanelBuild();
             }
-            
+
         }
-        else if((Local.Pawn as PolygonPlayer).polygonTime != 0)
+        else if ((Local.Pawn as PolygonPlayer).polygonTime != 0)
         {
             if (counter == null)
                 timerPanelBuild();
 
-            var timeleft = Math.Max(PolygonGame.curTimeMS - (Local.Pawn as PolygonPlayer).polygonTime,0);
-            var fontscale = 68f * MathF.Abs(MathF.Cos(Time.Now*4)).Remap(0f,1f,0.95f, 1.05f);
+            var timeleft = Math.Max(PolygonGame.curTimeMS - (Local.Pawn as PolygonPlayer).polygonTime, 0);
+            var fontscale = 68f * MathF.Abs(MathF.Cos(Time.Now * 4)).Remap(0f, 1f, 0.95f, 1.05f);
 
             counter.Text = $"{DateTimeOffset.FromUnixTimeMilliseconds(timeleft).LocalDateTime.ToString("mm:ss:fff")}";
 
-            if( timeleft / 1000 > worstRecord )
+            if (timeleft / 1000 > worstRecord)
                 counter.Style.Set("text-shadow: 0px 0px 20px #f20a;mix-blend-mode: lighten;");
 
             counter.Style.FontSize = Length.Pixels((float)fontscale);
@@ -545,30 +565,31 @@ public partial class PolygonHUD : Panel
         }
         else
         {
-            if (counter!= null)
+            if (counter != null)
             {
                 counter.Delete();
                 counter = null;
 
-                if(!(Local.Pawn as PolygonPlayer).PolygonMusic.Finished)
+                if (!(Local.Pawn as PolygonPlayer).PolygonMusic.Finished)
                     (Local.Pawn as PolygonPlayer).PolygonMusic.Stop();
             }
         }
 
-        if(Input.Down(InputButton.Score) && scoreboard is null)
+        if (Input.Down(InputButton.Score) && scoreboard is null)
             scoreboardBuild();
-        else if(scoreboard is not null && !Input.Down(InputButton.Score))
+        else if (scoreboard is not null && !Input.Down(InputButton.Score))
             scoreboardRemove();
 
         if (Input.Pressed(InputButton.Drop))
             PolygonGame.forceFinish();
 
-        if (highRecord!=null)
+        if (highRecord != null)
         {
             var fontscale = 10f * MathF.Abs(MathF.Cos(Time.Now * 4)).Remap(0f, 1f, 0.95f, 1.05f);
-            highRecord.Style.FontSize = fontscale; 
+            highRecord.Style.FontSize = fontscale;
         }
 
+        ButtonIndicator.Think();
     }
     async public static Task Timer(int s, Action callback)
     {
@@ -577,16 +598,12 @@ public partial class PolygonHUD : Panel
     }
     async static Task getGlobalRecord(bool force = false)
     {
-        if (force || gettingRecordsCoolDown < PolygonGame.curTime ) {
+        if (force || gettingRecordsCoolDown < PolygonGame.curTime)
+        {
 
             gettingRecordsCoolDown = PolygonGame.curTime + 10;
-
-            //TODO: obsolete
-            globalRecords = await GameServices.Leaderboard.Query("alphaceph.polygon",bucket:Global.MapName);
-            globalRecords.Entries = globalRecords.Entries.OrderBy(x => x.Rating).ToList();
-
-            if (globalRecords.Entries.Count > 10)
-                globalRecords.Entries.RemoveRange(10, globalRecords.Entries.Count - 10);
+            if (await Leaderboard.Find(PolygonGame.getMapIdent()) is { } Lb)
+                globalRecords = await Lb.GetGlobalScores(10);
 
             PolygonScoreboard.refreshScores();
         }

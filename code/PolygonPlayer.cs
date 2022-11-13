@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Sandbox;
 using SWB_Base;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using Sandbox.Component;
 
 public partial class PolygonPlayer : PlayerBase
 {
@@ -12,7 +12,8 @@ public partial class PolygonPlayer : PlayerBase
     [Net, Local] public bool Freeze { get; set; } = false;
     public Sound PolygonMusic = new();
     public Sound PolygonFinalSound = new();
-    
+    private Entity GlowedEnt { get; set; }
+
     //cl only
     public List<ScoreData> LocalScores = new();
     private long curDemoID=0;
@@ -70,10 +71,7 @@ public partial class PolygonPlayer : PlayerBase
         Inventory = new PolygonInventory(this);
 
         if (IsClient)
-        {
             loadLocalScores();
-            tutorialStart();
-        }
     }
 
     public PolygonPlayer(Client client) : this()
@@ -133,6 +131,9 @@ public partial class PolygonPlayer : PlayerBase
             return;
 
         TickPlayerUse();
+        
+        if( IsClient )
+            TickGlow();
 
         if (Input.Pressed(InputButton.View))
         {
@@ -187,7 +188,7 @@ public partial class PolygonPlayer : PlayerBase
        //Inventory.DropActive();
         Inventory.DeleteContents();
 
-        BecomeRagdollOnClient( Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, GetHitboxBone(LastDamage.HitboxIndex ) );
+        BecomeRagdollOnClient( Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex);
 
         Controller = null;
         CameraMode = new SpectateRagdollCamera();
@@ -313,25 +314,39 @@ public partial class PolygonPlayer : PlayerBase
         FileSystem.Data.WriteJson(filename, scores);
     }
 
-    //TODO
-    public void tutorialStart()
+    public bool isNewHighRecord(float newscore) => LocalScores.Any(x => x.score == newscore);
+    public float worstRecord() => LocalScores.Count > 0 ? LocalScores.Last().score : PolygonGame.coolDown; 
+
+    private void TickGlow()
     {
-        /*tutorialCompleted = !FileSystem.Data.FileExists("tutorial.completed");
-        PolygonGame.findMapEntities();
-        new TutorialHUD();*/
+
+        var Ent = FindUsable();
+      
+        if (GlowedEnt != null && !GlowedEnt.Equals(Ent) && (GlowedEnt.Components.TryGet(out Glow glowed)))
+        {
+            ButtonIndicator.Check(GlowedEnt);
+            glowed.Enabled = false;
+            GlowedEnt = null;
+        }
+
+        if (Ent == null)
+        {
+            GlowedEnt = null;
+            return;
+
+        }
+        if (GlowedEnt == null)
+        { 
+            var glow = Ent.Components.GetOrCreate<Glow>();
+            glow.Enabled = true;
+            glow.Width = 0.15f;
+            glow.Color = new Color(255f, 0.0f, 255.0f, 0.5f) ;
+            glow.ObscuredColor = new Color(255f, 0.0f, 255.0f, 0.0005f);
+            GlowedEnt = Ent;
+        }
+
     }
 
-    //TODO
-    public void tutorialComplete()
-    {
-        /*if (!tutorialCompleted)
-        {
-            FileSystem.Data.WriteAllText("tutorial.completed","");
-            tutorialCompleted = true;
-            TutorialHUD.scoreboardPanel.DeleteAll();
-        }*/
-    }
-    public bool isNewHighRecord(float newscore) => LocalScores.Any(x => x.score == newscore);
-    public float worstRecord() => LocalScores.Count > 0 ? LocalScores.Last().score : PolygonGame.coolDown;
 
 }
+

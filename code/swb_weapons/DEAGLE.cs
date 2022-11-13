@@ -19,7 +19,7 @@ namespace SWB_WEAPONS
             Pos = new Vector3(-5, 0, 0)
         };
         public override string WorldModelPath => "weapons/swb/pistols/deagle/w_deagle.vmdl";
-        public override string Icon => "/swb_weapons/textures/deagle.png";
+        public override string Icon => "code/swb_weapons/textures/deagle.png";
         public override int FOV => 75;
 
         public DEAGLE()
@@ -34,13 +34,14 @@ namespace SWB_WEAPONS
             Primary = new ClipInfo
             {
                 Ammo = 7,
-                AmmoType = AmmoType.Revolver,
+                AmmoType = AmmoTypes.Revolver,
                 ClipSize = 7,
 
                 BulletSize = 4f,
                 BulletType = new DeagleBullet(),
                 Damage = 50f,
                 Force = 5f,
+                HitFlinch = 3f,
                 Spread = 0.06f,
                 Recoil = 1f,
                 RPM = 300,

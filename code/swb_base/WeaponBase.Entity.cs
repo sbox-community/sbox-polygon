@@ -107,11 +107,7 @@ namespace SWB_Base
             TimeSincePrimaryAttack = 0;
             TimeSinceSecondaryAttack = 0;
 
-            if (!TakeAmmo(1))
-            {
-                SendWeaponSound(clipInfo.DryFireSound);
-                return;
-            }
+            TakeAmmo();
 
             // Player anim
             (Owner as AnimatedEntity).SetAnimParameter("b_attack", true);
@@ -158,7 +154,7 @@ namespace SWB_Base
             if (!IsAsyncValid(activeWeapon, instanceID)) return;
 
             // Take ammo
-            TakeAmmo(1);
+            TakeAmmo();
 
             // Shoot effects
             if (IsLocalPawn)

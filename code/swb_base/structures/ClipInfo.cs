@@ -20,7 +20,7 @@ namespace SWB_Base
 
         /// <summary>Type of ammo</summary>
         [Net]
-        public AmmoType AmmoType { get; set; } = AmmoType.Pistol;
+        public AmmoType AmmoType { get; set; } = AmmoTypes.Pistol;
 
         /// <summary>Size of the clip</summary>
         [Net]
@@ -47,6 +47,10 @@ namespace SWB_Base
         /// <summary>Bullet impact force</summary>
         [Net]
         public float Force { get; set; } = 0.1f;
+
+        /// <summary>Bullet hit flinch</summary>
+        [Net]
+        public float HitFlinch { get; set; } = 1.25f;
 
         /// <summary>Weapon spread</summary>
         [Net]
