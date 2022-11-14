@@ -167,7 +167,7 @@ namespace Sandbox
                 rowpanel.Style.MarginLeft = Length.Pixels(70f);
                 rowpanel.Style.MarginRight = Length.Pixels(70f);
 
-                var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.7f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
+                var color = i == 0 ? new Color(245f / 255f, 230f / 255f, 66f / 255f, 0.7f) : i == 1 ? new Color(186f / 255f, 186f / 255f, 186f / 255f, 0.4f) : i == 2 ? new Color(195f / 255f, 115f / 255f, 54f / 255f, 0.7f) : new Color(1, 1, 1, 0.7f);
 
                 var order = rowpanel.AddChild<Label>();
                 order.Text = $"##{i+1}";

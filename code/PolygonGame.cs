@@ -300,7 +300,7 @@ public partial class PolygonGame : Sandbox.Game
     }
     private static async Task SubmitGlobalScore(Client cl, int score)
     {
-        if (await Leaderboard.FindOrCreate(getMapIdent(), false) is { } mapLb) //is there bug about comparing the last score as ascending? that is happen after submitting
+        if (await Leaderboard.FindOrCreate(getMapIdent(), true) is { } mapLb) //is there bug about comparing the last score as ascending? that is happen after submitting
         {
             if (await mapLb.GetScore(cl.PlayerId) is { } clScores)
                 if (clScores.Score < score)
