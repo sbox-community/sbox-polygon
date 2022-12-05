@@ -185,6 +185,9 @@
       "SoftBodySubsteps": 1
     },
     "DefaultLeaderboards": [],
-    "ParentPackage": ""
+    "ParentPackage": "",
+    "Summary": "Shoot down the enemy target while racing against time",
+    "Description": "Still WIP\n\nShoot down the enemy target while racing against time\n\nIn order to start polygon, take a weapon from the wall and press \u0027E\u0027 to the map button, when you reach the end, again press \u0027E\u0027 the finish button of the map.\n\nMap based score system, local saving, server side saving your and the player\u0027s records.\n\nThere are two map adapted to gamemode which is named \u0022Old Factory\u0022 and \u0022Shooting Range\u0022, play with them\n\nKeys:\n-Scoreboard (TAB)\n-Force Finish (G)\n-Weapon Attachments (Q)\n\nhttps://github.com/sbox-community/sbox-polygon\n\nCredits: \n-Simple Weapon Base (https://github.com/timmybo5/simple-weapon-base/)\n",
+    "Public": true
   }
 }

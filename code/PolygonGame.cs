@@ -15,7 +15,6 @@ public partial class PolygonGame : Sandbox.Game
     public static long curTime => DateTimeOffset.Now.ToUnixTimeSeconds();
     public static long curTimeMS => DateTimeOffset.Now.ToUnixTimeMilliseconds();
     public static bool notSupported = false;
-
     public static Entity startbutton;
     public static Entity stopbutton;
     public static List<Entity> enemyTargets = new();
@@ -31,7 +30,8 @@ public partial class PolygonGame : Sandbox.Game
     private static StandardOutputDelegate friendtargetcb = friendTargetBreakCallback;
     public List<top10val> top10 = new();
     [Net] public string startMusic { get; set; } //clients can't get the entities value of the map?
-    public record struct polygonData
+
+    public struct polygonData
     {
         public Entity polygonPlayer { get; init; }
         public long timeStart { get; set; }
@@ -43,7 +43,8 @@ public partial class PolygonGame : Sandbox.Game
         public bool active { get; init; }
     }
 
-    public partial class top10val : BaseNetworkable
+    [Serializable]
+    public record struct top10val
     {
         public string name { get; set; }
         public long date { get; set; }
@@ -161,12 +162,10 @@ public partial class PolygonGame : Sandbox.Game
 
         startbutton.AddOutputEvent("OnPressed", sbcall);
         stopbutton.AddOutputEvent("OnPressed", stbcall);
-
     }
 
     public static void findTargets(Entity owner = null)
     {
-
         enemyTargets.Clear();
         friendTargets.Clear();
 
@@ -294,12 +293,12 @@ public partial class PolygonGame : Sandbox.Game
     }
     public static string getMapIdent()
     {
-
         string mapIdent = Map.Name.Substring(Map.Name.IndexOf(".") + 1);
         return $"{char.ToUpper(mapIdent[0])}{mapIdent.Substring(1)}";
     }
     private static async Task SubmitGlobalScore(Client cl, int score)
     {
+        //if there is any map with the same name, there will be conflict
         if (await Leaderboard.FindOrCreate(getMapIdent(), true) is { } mapLb) //is there bug about comparing the last score as ascending? that is happen after submitting
         {
             if (await mapLb.GetScore(cl.PlayerId) is { } clScores)
@@ -406,7 +405,6 @@ public partial class PolygonGame : Sandbox.Game
                 receiveTop10Data(cl is null ? To.Everyone : To.Single(cl), stream.ToArray());
             }
         }
-
     }
 
     [ClientRpc]
@@ -429,7 +427,6 @@ public partial class PolygonGame : Sandbox.Game
         }
     }
 
-    [ConCmd.Server("qqqw")]
     public static void temporaryFixForOldFactory()
     {
         foreach (var ent in Prop.All)
@@ -438,6 +435,5 @@ public partial class PolygonGame : Sandbox.Game
                 prop.PhysicsClear();
                 break;
             }
-
     }
 }

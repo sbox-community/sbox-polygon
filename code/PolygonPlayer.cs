@@ -147,21 +147,6 @@ public partial class PolygonPlayer : PlayerBase
             }
         }
 
-        /*if (Input.Pressed(InputButton.Drop))
-        {
-            var dropped = Inventory.DropActive();
-            if (dropped != null)
-            {
-                if (dropped.PhysicsGroup != null)
-                {
-                    dropped.PhysicsGroup.Velocity = Velocity + (EyeRotation.Forward + EyeRotation.Up) * 300;
-                }
-
-                timeSinceDropped = 0;
-                SwitchToBestWeapon();
-            }
-        }*/
-
         SimulateActiveChild(cl, ActiveChild);
 
         //
@@ -174,18 +159,10 @@ public partial class PolygonPlayer : PlayerBase
         }
     }
 
-    /*public override void StartTouch(Entity other)
-    {
-        if (timeSinceDropped < 1) return;
-
-        base.StartTouch(other);
-    }*/
-
     public override void OnKilled()
     {
         base.OnKilled();
 
-       //Inventory.DropActive();
         Inventory.DeleteContents();
 
         BecomeRagdollOnClient( Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex);
@@ -319,7 +296,6 @@ public partial class PolygonPlayer : PlayerBase
 
     private void TickGlow()
     {
-
         var Ent = FindUsable();
       
         if (GlowedEnt != null && !GlowedEnt.Equals(Ent) && (GlowedEnt.Components.TryGet(out Glow glowed)))
@@ -328,7 +304,6 @@ public partial class PolygonPlayer : PlayerBase
             glowed.Enabled = false;
             GlowedEnt = null;
         }
-
         if (Ent == null)
         {
             GlowedEnt = null;
@@ -344,9 +319,6 @@ public partial class PolygonPlayer : PlayerBase
             glow.ObscuredColor = new Color(255f, 0.0f, 255.0f, 0.0005f);
             GlowedEnt = Ent;
         }
-
     }
-
-
 }
 
