@@ -598,6 +598,7 @@ public partial class PolygonHUD : Panel
     }
     async static Task getGlobalRecord(bool force = false)
     {
+        Log.Info(PolygonGame.getMapIdent());
         if (force || gettingRecordsCoolDown < PolygonGame.curTime)
         {
 

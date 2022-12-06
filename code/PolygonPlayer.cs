@@ -87,7 +87,6 @@ public partial class PolygonPlayer : PlayerBase
         base.Spawn();
     }
 
-
     public override void Respawn()
     {
         base.Respawn();
@@ -108,25 +107,21 @@ public partial class PolygonPlayer : PlayerBase
         Health = 100;
     }
 
-    //TODO: build freeze as serverside 
-    public override void BuildInput(InputBuilder input)
+    public override void BuildInput()
     {
         if (Freeze)
-            input.Clear();
+        {
+            Input.ClearButtons();
+            Input.AnalogMove = Vector3.Zero;
+        }
 
-        base.BuildInput(input);
+        base.BuildInput();
     }
 
     public override void Simulate(Client cl)
     {
         base.Simulate(cl);
-
-        // Input requested a weapon switch
-        if (Input.ActiveChild != null)
-        {
-            ActiveChild = Input.ActiveChild;
-        }
-
+        
         if (LifeState != LifeState.Alive)
             return;
 
@@ -153,10 +148,8 @@ public partial class PolygonPlayer : PlayerBase
         // If the current weapon is out of ammo and we last fired it over half a second ago
         // lets try to switch to a better wepaon
         //
-        if (ActiveChild is WeaponBase weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f)
-        {
+        if (ActiveChild == null || (ActiveChild is WeaponBase weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f))
             SwitchToBestWeapon();
-        }
     }
 
     public override void OnKilled()
@@ -186,6 +179,9 @@ public partial class PolygonPlayer : PlayerBase
             .FirstOrDefault();
 
         if (best == null) return;
+
+        if(IsClient)
+            ActiveChildInput = best;
 
         ActiveChild = best;
     }

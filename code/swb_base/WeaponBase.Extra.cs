@@ -20,7 +20,7 @@ namespace SWB_Base
             var pos = player.EyePosition;
             var forward = Owner.EyeRotation.Forward;
             var trace = Trace.Ray(pos, pos + forward * TuckRange)
-				.WithTag("solid")
+                .WithTag("solid")
                 .Ignore(this)
                 .Ignore(player)
                 .Run();

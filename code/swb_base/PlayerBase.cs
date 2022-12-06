@@ -25,7 +25,7 @@ namespace SWB_Base
         }
 
         [Event.BuildInput]
-        public virtual void ProcessClientInput(InputBuilder input)
+        public virtual void ProcessClientInput()
         {
             if (!Alive())
             {
@@ -47,7 +47,7 @@ namespace SWB_Base
             if (currFlinch > 0)
             {
                 var flinchAngles = new Angles(isLoweringFlinch ? currFlinch : -currFlinch, 0, 0);
-                input.ViewAngles += flinchAngles;
+                ViewAngles += flinchAngles;
             }
         }
 
@@ -70,7 +70,7 @@ namespace SWB_Base
                 DoHitFlinch(To.Single(this), weapon.Primary.HitFlinch);
 
             // Headshot double damage
-            if (GetHitboxGroup(info.HitboxIndex) == 1)
+            if (info.Hitbox.HasTag("head"))
             {
                 info.Damage *= 2.0f;
             }

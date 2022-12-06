@@ -107,6 +107,7 @@ namespace SWB_Base
             TimeSincePrimaryAttack = 0;
             TimeSinceSecondaryAttack = 0;
 
+            // Take ammo
             TakeAmmo();
 
             // Player anim

@@ -48,8 +48,8 @@ public class InventoryBar : Panel
     /// IClientInput implementation, calls during the client input build.
     /// You can both read and write to input, to affect what happens down the line.
     /// </summary>
-    [Event.BuildInput]
-    public void ProcessClientInput(InputBuilder input)
+    /*[Event.BuildInput]
+    public void ProcessClientInput()
     {
         var player = Local.Pawn as PlayerBase;
         if (player == null) return;
@@ -58,13 +58,13 @@ public class InventoryBar : Panel
 
         // If we're not open, maybe this input has something that will 
         // make us want to start being open?
-        wantOpen = wantOpen || input.MouseWheel != 0;
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot1);
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot2);
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot3);
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot4);
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot5);
-        wantOpen = wantOpen || input.Pressed(InputButton.Slot6);
+        wantOpen = wantOpen || Input.MouseWheel != 0;
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot1);
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot2);
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot3);
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot4);
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot5);
+        wantOpen = wantOpen || Input.Pressed(InputButton.Slot6);
 
         if (Weapons.Count == 0)
         {
@@ -85,49 +85,49 @@ public class InventoryBar : Panel
         //
         // Fire pressed when we're open - select the weapon and close.
         //
-        if (input.Down(InputButton.PrimaryAttack))
-        {
-            input.SuppressButton(InputButton.PrimaryAttack);
-            input.ActiveChild = SelectedWeapon;
-            IsOpen = false;
-            Sound.FromScreen("dm.ui_select");
-            return;
-        }
+         if (Input.Down(InputButton.PrimaryAttack))
+         {
+             Input.SuppressButton(InputButton.PrimaryAttack);
+             player.ActiveChildInput = SelectedWeapon;
+             IsOpen = false;
+             Sound.FromScreen("dm.ui_select");
+             return;
+         }
 
-        // get our current index
-        var oldSelected = SelectedWeapon;
-        int SelectedIndex = Weapons.IndexOf(SelectedWeapon);
-        SelectedIndex = SlotPressInput(input, SelectedIndex);
+         // get our current index
+         var oldSelected = SelectedWeapon;
+         int SelectedIndex = Weapons.IndexOf(SelectedWeapon);
+         SelectedIndex = SlotPressInput(SelectedIndex);
 
-        // forward if mouse wheel was pressed
-        SelectedIndex += input.MouseWheel;
-        SelectedIndex = SelectedIndex.UnsignedMod(Weapons.Count);
+         // forward if mouse wheel was pressed
+         SelectedIndex += Input.MouseWheel;
+         SelectedIndex = SelectedIndex.UnsignedMod(Weapons.Count);
 
-        SelectedWeapon = Weapons[SelectedIndex];
+         SelectedWeapon = Weapons[SelectedIndex];
 
-        /*for (int i = 0; i < 6; i++)
-        {
-            columns[i].TickSelection(SelectedWeapon);
-        }*/
+         for (int i = 0; i < 6; i++)
+         {
+             columns[i].TickSelection(SelectedWeapon);
+         }
 
-        input.MouseWheel = 0;
+         Input.MouseWheel = 0;
 
-        if (oldSelected != SelectedWeapon)
-        {
-            Sound.FromScreen("dm.ui_tap");
-        }
-    }
+         if (oldSelected != SelectedWeapon)
+         {
+             Sound.FromScreen("dm.ui_tap");
+         }
+    }*/
 
-    int SlotPressInput(InputBuilder input, int SelectedIndex)
+    int SlotPressInput(int SelectedIndex)
     {
         var columninput = -1;
 
-        if (input.Pressed(InputButton.Slot1)) columninput = 0;
-        if (input.Pressed(InputButton.Slot2)) columninput = 1;
-        if (input.Pressed(InputButton.Slot3)) columninput = 2;
-        if (input.Pressed(InputButton.Slot4)) columninput = 3;
-        if (input.Pressed(InputButton.Slot5)) columninput = 4;
-        if (input.Pressed(InputButton.Slot6)) columninput = 5;
+        if (Input.Pressed(InputButton.Slot1)) columninput = 0;
+        if (Input.Pressed(InputButton.Slot2)) columninput = 1;
+        if (Input.Pressed(InputButton.Slot3)) columninput = 2;
+        if (Input.Pressed(InputButton.Slot4)) columninput = 3;
+        if (Input.Pressed(InputButton.Slot5)) columninput = 4;
+        if (Input.Pressed(InputButton.Slot6)) columninput = 5;
 
         if (columninput == -1) return SelectedIndex;
 

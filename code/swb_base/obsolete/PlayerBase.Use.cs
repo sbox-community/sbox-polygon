@@ -30,12 +30,13 @@ namespace SWB_Base
                         return;
                     }
                 }
-                //Log.Info(Using);
+
                 if (!Input.Down(InputButton.Use))
                 {
                     StopUsing();
                     return;
                 }
+
                 if (!Using.IsValid())
                     return;
 
@@ -45,11 +46,9 @@ namespace SWB_Base
                 // If use returns true then we can keep using it
                 //
                 if (Using is IUse use && use.OnUse(this))
-                {
                     return;
-                }
 
-                StopUsing();        
+                StopUsing();
             }
         }
 

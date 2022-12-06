@@ -5,6 +5,9 @@ using System.Text.Json.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SWB_Base;
+using System.Linq;
+using Sandbox;
+using Sandbox.UI;
 
 namespace Sandbox
 {
@@ -64,7 +67,7 @@ namespace Sandbox
             ply.ClearAmmo();
             ply.Inventory.DeleteContents();
             if (WeaponType == Weapons.Deagle)
-                ply.Inventory.Add(new SWB_WEAPONS.DEAGLE(),true);
+                ply.Inventory.Add(new SWB_WEAPONS.DEAGLE(), true);
             else if (WeaponType == Weapons.Spas12)
                 ply.Inventory.Add(new SWB_WEAPONS.SPAS12(), true);
             else if (WeaponType == Weapons.Ump45)
@@ -79,6 +82,10 @@ namespace Sandbox
             ply.GiveAmmo(AmmoTypes.Rifle, 60);
             ply.GiveAmmo(AmmoTypes.Shotgun, 60);
 
+            ply.ActiveChildInput = ply.Children.Select(x => x as WeaponBase).Where(x => x.IsValid() && x.IsUsable()).FirstOrDefault();
+            Log.Info(ply.Children.Select(x => x as WeaponBase).Where(x => x.IsValid() && x.IsUsable()).FirstOrDefault());
+            ply.ActiveChild = ply.Children.Select(x => x as WeaponBase).Where(x => x.IsValid() && x.IsUsable()).FirstOrDefault();
+  
 
             return false;
         }
