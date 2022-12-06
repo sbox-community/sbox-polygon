@@ -296,7 +296,7 @@ public partial class PolygonGame : Sandbox.Game
         //Must be unique
         string mapIdent = Map.Name.Substring(Map.Name.IndexOf(".") + 1);
         string orgIdent = Map.Name.Substring(0, mapIdent.Length - 1);
-        return $"{char.ToUpper(mapIdent[0])}{mapIdent.Substring(1)}({char.ToUpper(orgIdent[0])}{orgIdent.Substring(1)})";
+        return $"{char.ToUpper(mapIdent[0])}{mapIdent.Substring(1)}-{char.ToUpper(orgIdent[0])}{orgIdent.Substring(1)}";
     }
     private static async Task SubmitGlobalScore(Client cl, int score)
     {
