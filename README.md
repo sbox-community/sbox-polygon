@@ -1,5 +1,5 @@
 # Polygon Gamemode
-<br>Race against time..
+Race against time..
 
 [Polygon on sbox.game](https://sbox.game/sboxcommunity/polygon)
 
