@@ -1,0 +1,113 @@
+{
+  "RootObject": {
+    "__guid": "1ddbe3ad-0b00-4af4-b325-23a49f92e9db",
+    "__version": 2,
+    "Flags": 0,
+    "Name": "game",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
+    "Enabled": true,
+    "NetworkMode": 1,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
+    "Components": [
+      {
+        "__type": "PolygonGame",
+        "__guid": "3292fe4c-060f-4105-bcf0-64165d0f53c5",
+        "__enabled": true,
+        "Flags": 0,
+        "coolDown": 180,
+        "freezetime": 4,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "PlayerPrefab": {
+          "_type": "gameobject",
+          "prefab": "polygonplayer.prefab"
+        },
+        "PolygonFailedSound": "sounds/polygon/musics/failed/failed.sound",
+        "PolygonMusic": "sounds/polygon/musics/gameplay/gameplay.sound",
+        "PolygonStartSound": null,
+        "PolygonSucceedHighRecordSound": "sounds/polygon/musics/success_highrecord/success_highrecord.sound",
+        "PolygonSucceedSound": "sounds/polygon/musics/success/success.sound",
+        "PolygonSucceedWorldRecordSound": "sounds/polygon/musics/success_worldrecord/success_worldrecord.sound"
+      },
+      {
+        "__type": "Sandbox.ScreenPanel",
+        "__guid": "3814a966-1ca0-4d55-9b2e-db079604d566",
+        "__enabled": true,
+        "Flags": 0,
+        "AutoScreenScale": true,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Opacity": 1,
+        "Scale": 1,
+        "ScaleStrategy": "ConsistentHeight",
+        "TargetCamera": null,
+        "ZIndex": 100
+      },
+      {
+        "__type": "Sandbox.PolygonHUD",
+        "__guid": "a1a4779a-ca00-4740-81eb-e7a949d3ee0f",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      },
+      {
+        "__type": "Sandbox.PolygonScoreboard",
+        "__guid": "604c6e3e-700c-43f9-973d-c85c8225fa17",
+        "__enabled": true,
+        "Flags": 0,
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null
+      }
+    ],
+    "Children": [],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
+    "__variables": []
+  },
+  "ResourceVersion": 2,
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "__references": [],
+  "__version": 2
+}

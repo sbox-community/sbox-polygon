@@ -1,0 +1,209 @@
+@mixin text($font-size) {
+	/*backdrop-filter: blur(0px);*/
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	font-size: $font-size;
+	font-family: Share Tech Mono;
+	color: #fff;
+	justify-content: center;
+	text-align: center;
+	opacity: 0.7;
+	transition: all 1s ease-out;
+
+	&:intro {
+		opacity: 0;
+	}
+
+	&:outro {
+		opacity: 0;
+	}
+
+	text-shadow: 3px 3px black, -6px -5px rgba(0,255,0,0.45),-6px 5px rgba(0,255,0,0.5), 5px 5px rgba(0,255,0,0.55), 10px 5px rgba(0,255,0,0.35);
+	transform-origin: 50% 50%;
+}
+PolygonScoreboard {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	/*pointer-events:all;*/
+
+	.scoreboard {
+		position: absolute;
+		box-shadow: 0px 0px 20px 0px rgb(0, 0, 0);
+		transition: all 0.1s ease-out;
+		transform: scale(1);
+		background-image: url("materials/polygon/topology.vtex");
+		background-size: 138% 130%;
+		background-repeat: no-repeat;
+		width: 50%;
+		height: 90%;
+
+		&:intro {
+			transform: scale( 0.9 );
+		}
+
+		&:outro {
+			transform: scale( 0 );
+		}
+	}
+
+	.scoreboardframe {
+		width: 100%;
+		height: 100.2%;
+		align-content: center;
+		justify-content: center;
+		flex-direction: column;
+		transition: all 0.1s ease-out;
+		background: linear-gradient(to bottom, rgba(20,20,20,0.1) 0%, rgba(20,20,20,1) 10%);
+	}
+
+	.scoreboardtopplayers {
+		@include text(42);
+		margin-top: 30px;
+		height: 10%;
+		width: 100%;
+	}
+
+	.entrylist {
+		flex-grow: 0;
+		width: 100%;
+		height: 100%;
+		margin: 2%;
+		align-content: center;
+		align-items: center;
+		flex-direction: column;
+		padding: 50px;
+	}
+
+	.entryrowfirst {
+		color: rgba(245,230,66,0.7);
+		width: 100%;
+		height: 5%;
+		justify-content: space-between;
+		background: linear-gradient(to bottom, rgba(50,50,50,1) 0%, rgba(245,230,66,0.1) 100%);
+		margin: 1px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.entryrowsecond {
+		color: rgba(186,186,186,0.7);
+		width: 100%;
+		height: 5%;
+		justify-content: space-between;
+		background: linear-gradient(to bottom, rgba(80,80,80,1) 0%, rgba(186,186,186,0.2) 100%);
+		margin: 1px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.entryrowthird {
+		color: rgba(195,115,54,0.7);
+		width: 100%;
+		height: 5%;
+		justify-content: space-between;
+		background: linear-gradient(to bottom, rgba(70,50,50,1) 0%, rgba(195,115,54,0.15) 100%);
+		margin: 1px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.entryrow {
+		color: rgba(255,255,255,0.7);
+		width: 100%;
+		height: 5%;
+		justify-content: space-between;
+		background: linear-gradient(to bottom, rgba(50,50,50,1) 0%, rgba(40,40,40,1) 100%);
+		margin: 1px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
+	.rowscorefirst {
+		font-size: 16px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 100px;
+		/*justify-content: center;*/
+		align-items: center;
+		color: rgba(245,230,66,0.5);
+	}
+
+	.rowscoresecond {
+		font-size: 16px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 100px;
+		/*justify-content: center;*/
+		align-items: center;
+		color: rgba(186,186,186,0.7);
+	}
+
+	.rowscorethird {
+		font-size: 16px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 100px;
+		/*justify-content: center;*/
+		align-items: center;
+		color: rgba(195,115,54,0.7);
+	}
+
+	.rowscore {
+		font-size: 14px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 100px;
+		/*justify-content: left;*/
+		align-items: center;
+		color: rgba(255,255,255,0.35);
+	}
+
+	.rowflag {
+		width: 30px;
+		height: 16px;
+		background-repeat: no-repeat;
+		background-size: 22px 16px;
+	}
+
+	.rowtime {
+		font-size: 18px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 220px;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.rowtimealt {
+		opacity: 0.6;
+		font-size: 18px;
+		font-family: roboto;
+		text-align: center;
+		text-shadow: 0 0 2px #000000;
+		width: 220px;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.rownick {
+		font-size: 18px;
+		font-family: roboto;
+		/*text-align: center;*/
+		text-shadow: 0 0 2px #000000;
+		/*width: 100%;*/
+		justify-content: center;
+		align-items: center;
+		flex: 1;
+		text-align: right;
+		justify-content: flex-end;
+	}
+}

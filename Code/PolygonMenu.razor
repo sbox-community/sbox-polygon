@@ -1,0 +1,117 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+	<div class="menu">
+        <div class="menuframe">
+        @if(infoMenu)
+        {
+            <div class="info">
+            @infoMenuText
+            </div>
+        }
+        @if(resultMenu)
+        {
+            <div class="resultframe">
+                <div class="status" style="color: @(resultMenuStatusInfo ? "green" : "red")">
+                @(resultMenuStatusInfo ? "Succeed" : "Failed" )
+                @if(worldRecord)
+                {
+                    <div class="worldrecord">
+                        World Record!
+                    </div>
+                }else if(highRecord)
+                {
+                    <div class="highrecord">
+                        High Record!
+                    </div>
+                }
+                </div>
+                <div class="time">
+                    @(($"Time: {DateTimeOffset.FromUnixTimeMilliseconds(resultMenuTimeInfo).LocalDateTime.ToString("mm:ss:fff")}"))
+                </div>
+                <div class="enemytargets">
+                    @($"Enemy Targets: {resultMenuEnemyTargetInfo}")
+                </div>
+                <div class="friendlytargets">
+                    @($"Friendly Targets: {resultMenuFriendlyTargetInfo}")
+                </div>
+                <div class="cheat" style="color: @(resultMenuCheatInfo ? "red" : "white")">
+                    @(resultMenuCheatInfo ? "Cheat: Found" : "Cheat: Clear")
+                </div>
+            </div>
+        }
+
+        @if(enableCloseButton)
+        {
+            <div class="closebutton" @onclick=@(()=> Panel.Delete())>OK</div>
+        }
+        </div>
+    </div>
+</root>
+
+@code
+{
+    public int Width = 25;
+    public int Height = 30;
+
+    public bool enableCloseButton = false;
+
+    public bool infoMenu = false;
+    public string infoMenuText = "";
+
+    public bool resultMenu = false;
+    public bool resultMenuStatusInfo = false;
+    public bool resultMenuCheatInfo = false;
+    public bool highRecord = false;
+    public bool worldRecord = false;
+    public long resultMenuTimeInfo = 0;
+    public string resultMenuEnemyTargetInfo = "";
+    public string resultMenuFriendlyTargetInfo = "";
+  
+    public Panel GetMenu() => Panel.Children.FirstOrDefault();
+
+    private static PolygonMenu CreateMenu(int width = 25, int height = 30, bool enable_closebutton = true, bool suppressOpeningSound = false)
+    {
+        var menu = PolygonGame.GameInstance.AddComponent<PolygonMenu>();
+        menu.enableCloseButton = enable_closebutton;
+        menu.Width = width;
+        menu.Height = height;
+        menu.StateHasChanged();
+
+        return menu;
+    }
+    
+    public static void Info(string info)
+    {
+        var menu = CreateMenu();
+        menu.infoMenu = true;
+        menu.infoMenuText = info;
+        menu.StateHasChanged();
+    }
+
+    public static void Result(bool status, bool cheat, long time, string enemyTarget, string friendlyTarget, bool highRecord, bool worldRecord){
+        var menu = CreateMenu();
+        menu.resultMenu = true;
+        menu.resultMenuStatusInfo = status;
+        menu.resultMenuCheatInfo = cheat;
+        menu.resultMenuTimeInfo = time;
+        menu.resultMenuEnemyTargetInfo = enemyTarget;
+        menu.resultMenuFriendlyTargetInfo = friendlyTarget;
+        menu.highRecord = highRecord;
+        menu.worldRecord = worldRecord;
+        menu.StateHasChanged();
+    }
+
+  	protected override void OnTreeFirstBuilt()
+	{
+		base.OnTreeFirstBuilt();
+        GetMenu().Style.Width = Length.Percent(Width);
+        GetMenu().Style.Height = Length.Percent(Height);
+		
+	}
+	protected override int BuildHash() => System.HashCode.Combine( enableCloseButton );
+}

@@ -1,0 +1,36 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+@namespace Sandbox
+
+
+<root>
+   <div class="scoreboard">
+       <div class="scoreboardframe">
+           <div class="scoreboardtopplayers">TOP 15 LEADERBOARD</div>
+           <div class="entrylist">
+            @foreach(var entry in PolygonScoreboard.leaderBoard.Entries)
+		    {
+                <div class="@($"entryrow{(entry.Rank == 1 ? "first" : entry.Rank == 2 ? "second" : entry.Rank == 3 ? "third" : "" )}")">
+                    <div class="rowcountry"><div class="rowflag" style="background-image:url('Materials/polygon/famfamfam-flags/@(entry.CountryCode).png')"></div></div>
+                    <div class="rowtime">@DateTimeOffset.FromUnixTimeMilliseconds((long)entry.Value).LocalDateTime.ToString("mm:ss:fff")</div>
+                    <div class="rownick">@entry.DisplayName</div>
+                </div>
+		    }
+           </div>
+        </div>
+    </div>
+</root>
+@code
+{
+    public static PolygonScoreboardWall scoreboardInstance; 
+
+    protected override void OnStart(){
+        base.OnStart();
+        scoreboardInstance = this;
+    }
+    protected override void OnUpdate(){
+        base.OnUpdate();
+    }
+}

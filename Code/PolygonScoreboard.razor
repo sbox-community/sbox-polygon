@@ -1,0 +1,59 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@using System.Threading;
+@using System.Threading.Tasks;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    @if(!enable) return;
+   <div class="scoreboard">
+       <div class="scoreboardframe">
+           <div class="scoreboardtopplayers">TOP 15 LEADERBOARD</div>
+           <div class="entrylist">
+            @foreach(var entry in leaderBoard.Entries)
+		    {
+                <div class="@($"entryrow{(entry.Rank == 1 ? "first" : entry.Rank == 2 ? "second" : entry.Rank == 3 ? "third" : "" )}")">
+                    <div class="@($"rowscore{(entry.Rank == 1 ? "first" : entry.Rank == 2 ? "second" : entry.Rank == 3 ? "third" : "" )}")">@entry.Rank</div>
+                    <div class="rowtime">@DateTimeOffset.FromUnixTimeMilliseconds((long)entry.Value).LocalDateTime.ToString("mm:ss:fff")</div>
+                    <div class="rownick"><div class="rowflag" style="background-image:url('Materials/polygon/famfamfam-flags/@(entry.CountryCode).png')"></div>@entry.DisplayName</div>
+                </div>
+		    }
+           </div>
+        </div>
+    </div>
+</root>
+@code
+{
+    public static bool enable = false;
+    public static Sandbox.Services.Leaderboards.Board2 leaderBoard;
+    public static PolygonScoreboard scoreboardInstance;
+
+    protected override void OnStart(){
+        base.OnStart();
+
+        scoreboardInstance = this;
+        leaderBoard = Sandbox.Services.Leaderboards.GetFromStat( "sboxcommunity.polygon",  Game.ActiveScene.Name.ToLower() );
+        leaderBoard.SetAggregationMin(); // select the lowest value from each player
+        leaderBoard.SetSortAscending(); // order by the lowest value first
+        // leaderBoard.FilterByMonth(); // only show results from this month
+        // leaderBoard.CenterOnMe(); // offset so I'm in the middle of the results
+        leaderBoard.MaxEntries = 15; 
+        RefreshScores();
+    }
+
+    public static async Task RefreshScores(){
+        await leaderBoard.Refresh();
+        MainThread.Queue(()=>{
+            scoreboardInstance.StateHasChanged();
+            PolygonScoreboardWall.scoreboardInstance.StateHasChanged();
+        });
+    }
+
+    protected override void OnUpdate(){
+        base.OnUpdate();
+        enable = Input.Down("score");
+    }
+	protected override int BuildHash() => System.HashCode.Combine( enable, leaderBoard );
+}

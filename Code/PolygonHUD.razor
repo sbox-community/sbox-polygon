@@ -1,0 +1,131 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    @if(InPolygon)
+    {
+    	<div class="counter" style="transform: scale(@counterScale)">
+            @if(Freeze)
+            {
+                <span>@counter</span>
+            }
+            else {
+                <span>@counter</span>
+                @* <span2>Enemies killed: 13/24</span2>
+                <span2>Civilians killed: 0/11</span2> *@
+            }
+        </div>
+
+        @if(Freeze)
+        {
+            <div class="interruptpolygon">
+                @interruptKey
+            </div>
+        }
+        
+
+        <div class="ammo">
+            @((PolygonPlayer.LocalPolygonPlayer.ActiveWeapon as BaseWeapon)?.ClipContents ?? 0)
+        </div>
+    }
+</root>
+
+@code
+{
+	public bool InPolygon = false;
+    public string counter = "";
+    public float counterScale = 1f;
+    private bool tickSoundPlayed = false;
+    private int TickSoundTickNumber = 0;
+    public Panel counterPanel;
+    private bool Freeze = true;
+    private string interruptKeyBase = "";
+    private string interruptKey = "";
+    private int charIndex = 0;
+    private float timer = 0f;
+
+    protected override void OnStart(){
+        base.OnStart();
+        interruptKeyBase = $"Press '{(Input.GetButtonOrigin("Drop").ToUpper())}' to interrupt polygon";
+    }
+
+    protected override void OnUpdate(){
+        base.OnUpdate();
+
+        InPolygon = PolygonGame.AmIPolygonOwner();
+
+        if(InPolygon)
+        {
+            if( counterPanel == null )
+                counterPanel = Panel.Children.Where( x => x.Class.Any( y => y == "counter" ) ).FirstOrDefault();
+
+            Freeze = PolygonPlayer.LocalPolygonPlayer.Freeze;
+            var timeleft = ( Freeze ? (1 + PolygonGame.GameInstance.PolygonInfo.timeStart) - PolygonGame.CurTime() : PolygonGame.CurTimeMS() - PolygonGame.GameInstance.PolygonInfo.timeStart);
+
+            counter = Freeze ? timeleft.ToString() : $"Your time: {DateTimeOffset.FromUnixTimeMilliseconds(timeleft).LocalDateTime.ToString("m:ss.f")}";
+
+            // Tick sound logic
+            {
+                if(Freeze)
+                {
+                    if(!tickSoundPlayed)
+                    {
+                        if( timeleft - PolygonGame.GameInstance.freezetime != 1 )
+                        {
+                            Sound.Play( "counterclick");
+                            tickSoundPlayed = true;
+                        }
+                    }
+                    
+                    if (TickSoundTickNumber != timeleft % 2) 
+                    {
+                        tickSoundPlayed = false;
+                        TickSoundTickNumber = (int)(timeleft % 2);
+                    }
+                }
+                else
+                {
+                    if(tickSoundPlayed)
+                    {
+                        Sound.Play( "counterclick_last");
+                        tickSoundPlayed= false;
+                    }
+                }
+            }
+
+            //Interrupt text typewriter effect, onfixedupdate
+            if(Freeze && !(charIndex >= interruptKeyBase.Length))
+            {
+                timer += Time.Delta;
+                if (timer >= 0.01f)
+                {
+                    interruptKey += interruptKeyBase[charIndex];
+                    charIndex++;
+                    timer = 0f;
+                }
+                Sound.Play("ui.drag.start");
+            }
+
+            // Counter font and size logic
+            // if( !Freeze && counterPanel != null)
+            // {
+            //     counterScale = MathF.Abs(MathF.Cos(Time.Now * 4)).Remap(0f, 1f, 0.95f, 1.09f);
+            // }
+
+            if(Input.Pressed("drop"))
+            {
+                PolygonGame.ForceFinish(PolygonPlayer.LocalPlayer);
+            }
+        }
+        else
+        {
+            interruptKey = "";
+            timer = 0;
+            charIndex = 0;
+        }
+    }
+	protected override int BuildHash() => System.HashCode.Combine( InPolygon, counter, counterScale, interruptKey );
+}

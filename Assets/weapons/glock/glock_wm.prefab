@@ -1,0 +1,579 @@
+{
+  "RootObject": {
+    "__guid": "628ec5b7-a64d-490e-a218-1cdfc17b67df",
+    "__version": 2,
+    "Flags": 0,
+    "Name": "glock_wm",
+    "Position": "0,0,0",
+    "Rotation": "0,0,0,1",
+    "Scale": "1,1,1",
+    "Tags": "",
+    "Enabled": true,
+    "NetworkMode": 0,
+    "NetworkFlags": 0,
+    "NetworkOrphaned": 0,
+    "NetworkTransmit": true,
+    "OwnerTransfer": 1,
+    "Components": [
+      {
+        "__type": "WorldModel",
+        "__guid": "765ebd37-c91f-4058-8815-f4b7df6f24b0",
+        "__enabled": true,
+        "Flags": 0,
+        "EjectBrass": {
+          "_type": "gameobject",
+          "go": "7081340a-2ab5-43ba-bb0a-e56ad820c4e3"
+        },
+        "EjectTransform": {
+          "_type": "gameobject",
+          "go": "1d5347e0-820c-4015-96dc-4efd0679eca3"
+        },
+        "MuzzleEffect": {
+          "_type": "gameobject",
+          "go": "99fa9def-4df7-4967-926a-cb9be9b0cdfe"
+        },
+        "MuzzleTransform": {
+          "_type": "gameobject",
+          "go": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507"
+        },
+        "OnComponentDestroy": null,
+        "OnComponentDisabled": null,
+        "OnComponentEnabled": null,
+        "OnComponentFixedUpdate": null,
+        "OnComponentStart": null,
+        "OnComponentUpdate": null,
+        "Renderer": {
+          "_type": "component",
+          "component_id": "5d4a8b0d-2d3a-4cc4-b43d-081f56c3ee65",
+          "go": "0645b412-29e7-4af0-ab22-6dbf084daa4d",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "TracerEffect": null
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "0645b412-29e7-4af0-ab22-6dbf084daa4d",
+        "__version": 2,
+        "Flags": 0,
+        "Name": "w_usp",
+        "Position": "3.418695,-0.6192533,-5.397455",
+        "Rotation": "0,0,0,1",
+        "Scale": "2,2,2",
+        "Tags": "",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkFlags": 0,
+        "NetworkOrphaned": 0,
+        "NetworkTransmit": true,
+        "OwnerTransfer": 1,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "5d4a8b0d-2d3a-4cc4-b43d-081f56c3ee65",
+            "__enabled": true,
+            "Flags": 0,
+            "AnimationGraph": null,
+            "BodyGroups": 9513,
+            "BoneMergeTarget": null,
+            "CreateAttachments": true,
+            "CreateBoneObjects": true,
+            "LodOverride": null,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Materials": null,
+            "Model": "models/weapons/sbox_pistol_usp/w_usp.vmdl",
+            "Morphs": {},
+            "OnComponentDestroy": null,
+            "OnComponentDisabled": null,
+            "OnComponentEnabled": null,
+            "OnComponentFixedUpdate": null,
+            "OnComponentStart": null,
+            "OnComponentUpdate": null,
+            "Parameters": {
+              "bools": {},
+              "ints": {},
+              "floats": {},
+              "vectors": {},
+              "rotations": {}
+            },
+            "PlaybackRate": 1,
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Sequence": {
+              "Name": null,
+              "Looping": true,
+              "Blending": false
+            },
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "e4312b65-c2f9-4ab7-bdb5-2e6bc4b67507",
+            "__version": 2,
+            "Flags": 8,
+            "Name": "muzzle",
+            "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkFlags": 0,
+            "NetworkOrphaned": 0,
+            "NetworkTransmit": true,
+            "OwnerTransfer": 1,
+            "Components": [],
+            "Children": [
+              {
+                "__guid": "99fa9def-4df7-4967-926a-cb9be9b0cdfe",
+                "__version": 2,
+                "__Prefab": "prefabs/weapon_effects/pistol_muzzleflash.prefab",
+                "__PrefabInstancePatch": {
+                  "AddedObjects": [
+                    {
+                      "Id": {
+                        "Type": "Component",
+                        "IdValue": "d7a7934f-d1f2-484b-970d-4ff5c81408c6"
+                      },
+                      "Parent": {
+                        "Type": "GameObject",
+                        "IdValue": "9fa519fd-2513-4abb-abff-af55cabdc497"
+                      },
+                      "PreviousElement": {
+                        "Type": "Component",
+                        "IdValue": "8b36aff0-b6f2-43f8-9366-dc21def72315"
+                      },
+                      "ContainerProperty": "Components",
+                      "IsContainerArray": true,
+                      "Data": {
+                        "__type": "Sandbox.ParticleLightRenderer",
+                        "__guid": "d7a7934f-d1f2-484b-970d-4ff5c81408c6",
+                        "__enabled": false,
+                        "Flags": 0,
+                        "Attenuation": 1000,
+                        "Brightness": 1000,
+                        "CastShadows": false,
+                        "LightColor": {
+                          "Type": "Constant",
+                          "Evaluation": "Life",
+                          "GradientA": {
+                            "blend": "Linear",
+                            "color": [
+                              {
+                                "t": 0.5,
+                                "c": "1,1,1,1"
+                              }
+                            ],
+                            "alpha": []
+                          },
+                          "GradientB": {
+                            "blend": "Linear",
+                            "color": [
+                              {
+                                "t": 0.5,
+                                "c": "1,1,1,1"
+                              }
+                            ],
+                            "alpha": []
+                          },
+                          "ConstantA": "1,0.73209,0.33023,1",
+                          "ConstantB": "1,1,1,1"
+                        },
+                        "MaximumLights": 8,
+                        "OnComponentDestroy": null,
+                        "OnComponentDisabled": null,
+                        "OnComponentEnabled": null,
+                        "OnComponentFixedUpdate": null,
+                        "OnComponentStart": null,
+                        "OnComponentUpdate": null,
+                        "Ratio": 1,
+                        "Scale": 1024,
+                        "UseParticleColor": true
+                      }
+                    }
+                  ],
+                  "RemovedObjects": [],
+                  "PropertyOverrides": [
+                    {
+                      "Target": {
+                        "Type": "GameObject",
+                        "IdValue": "90c03c08-5d96-4296-ace1-c0fd50ed6a33"
+                      },
+                      "Property": "Position",
+                      "Value": "-5.563879,0.3096266,-52.2566"
+                    },
+                    {
+                      "Target": {
+                        "Type": "GameObject",
+                        "IdValue": "90c03c08-5d96-4296-ace1-c0fd50ed6a33"
+                      },
+                      "Property": "Scale",
+                      "Value": "0.5,0.5,0.5"
+                    },
+                    {
+                      "Target": {
+                        "Type": "Component",
+                        "IdValue": "fe270aad-5635-4199-8df5-62617e429312"
+                      },
+                      "Property": "Alpha",
+                      "Value": {
+                        "Type": "Curve",
+                        "Evaluation": "Life",
+                        "CurveA": [
+                          {
+                            "x": 0,
+                            "y": 0,
+                            "in": -4.0000024,
+                            "out": 4.0000024,
+                            "mode": "Mirrored"
+                          },
+                          {
+                            "x": 0.028068565,
+                            "y": 0.64255315,
+                            "in": -0.7624077,
+                            "out": 0.7624077,
+                            "mode": "Mirrored"
+                          },
+                          {
+                            "x": 0.19791667,
+                            "y": 0,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          }
+                        ],
+                        "CurveB": [
+                          {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "Target": {
+                        "Type": "Component",
+                        "IdValue": "be57153b-1cb0-4353-9f59-00d9f51b3b85"
+                      },
+                      "Property": "Alpha",
+                      "Value": {
+                        "Type": "Curve",
+                        "Evaluation": "Life",
+                        "CurveA": [
+                          {
+                            "x": 0,
+                            "y": 1,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          },
+                          {
+                            "x": 0.0997024,
+                            "y": 0,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          }
+                        ],
+                        "CurveB": [
+                          {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "Target": {
+                        "Type": "Component",
+                        "IdValue": "be57153b-1cb0-4353-9f59-00d9f51b3b85"
+                      },
+                      "Property": "Brightness",
+                      "Value": 10
+                    },
+                    {
+                      "Target": {
+                        "Type": "Component",
+                        "IdValue": "be57153b-1cb0-4353-9f59-00d9f51b3b85"
+                      },
+                      "Property": "Scale",
+                      "Value": {
+                        "Type": "Curve",
+                        "Evaluation": "Life",
+                        "CurveA": {
+                          "rangey": "0,0.4",
+                          "frames": [
+                            {
+                              "x": 0,
+                              "y": 0.60106385,
+                              "in": -9.333329,
+                              "out": 9.333329,
+                              "mode": "Mirrored"
+                            },
+                            {
+                              "x": 0.05408456,
+                              "y": 0.94414896,
+                              "in": 0.11040629,
+                              "out": -0.11040629,
+                              "mode": "Mirrored"
+                            },
+                            {
+                              "x": 1,
+                              "y": 0,
+                              "in": 2.9152544,
+                              "out": -2.9152544,
+                              "mode": "Mirrored"
+                            }
+                          ]
+                        },
+                        "CurveB": [
+                          {
+                            "x": 0.5,
+                            "y": 0.5,
+                            "in": 0,
+                            "out": 0,
+                            "mode": "Mirrored"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "MovedObjects": []
+                },
+                "__PrefabIdToInstanceId": {
+                  "90c03c08-5d96-4296-ace1-c0fd50ed6a33": "99fa9def-4df7-4967-926a-cb9be9b0cdfe",
+                  "9fa519fd-2513-4abb-abff-af55cabdc497": "dfd76247-cfda-433b-9ef2-cbe5f15fa294",
+                  "2ca89032-a214-4e6c-b61b-2418942be8c3": "d19df590-b72a-405b-a4d0-034e42edee58",
+                  "2785b8e2-6215-47d6-98f1-d967cf7430fd": "0456e55a-4698-4819-9733-992206c6e7c8",
+                  "8b36aff0-b6f2-43f8-9366-dc21def72315": "72fa8647-3301-417c-98ba-3a45558abef3",
+                  "a851b932-6412-44c9-bfa5-8afb8fcc6d47": "b4f5ae3b-745f-4ec4-94a0-35d5d6d81846",
+                  "36c30bc8-3d4b-47c3-80eb-340500d9447c": "5e161279-3de8-44cc-9e39-795aadde6f80",
+                  "4d447f0c-82bb-4949-930d-323a5ad778c9": "cc078fec-de78-444d-8ca6-f737118790d5",
+                  "1d7ed42e-bb61-4662-904c-cb1f65cdb822": "feabbe2a-fb1b-4e20-a16c-6608bbba9933",
+                  "06e6ca44-c795-425c-9ce5-31f80df5661d": "1e16bae4-ef6d-4334-bfe8-62f3349e7c0e",
+                  "774889dc-0bc1-43c1-b495-2f0f231187d1": "9f664410-0f4c-48e2-b26a-ea09d88c0446",
+                  "96db1a39-752c-403c-a3a5-efd5c2f251ab": "9f9b38e1-feea-45b3-b28e-3eae788ad7b1",
+                  "625783c3-37c4-4e82-a520-a37e7d3b2232": "6148dcdf-465b-4972-bc41-f2f69f2369d3",
+                  "deb81354-07c1-4fb2-b30b-5e9b04e28ad1": "31647630-89b7-4d7e-ad86-efb093f0ab63",
+                  "fe270aad-5635-4199-8df5-62617e429312": "3e2417fc-ef33-4a5c-a10a-44adcd494f51",
+                  "f4cb2e7d-c83c-4d91-83aa-fbc31294e19e": "cf737091-b975-4d4f-84a0-cb36aaa5910d",
+                  "d781dab4-757e-4a4f-afba-2d942b888ed4": "7fd87f64-6a6f-439b-8efc-735ef9d0e3b9",
+                  "d5c3b692-5c9f-4890-b10a-a96ea9a15b22": "34ff58d3-4c69-48ce-b9d8-5f745c461921",
+                  "be57153b-1cb0-4353-9f59-00d9f51b3b85": "4ac0ce74-ca29-457d-9131-d983b113bb1c",
+                  "78d16f6d-a0b9-4cc9-b2d7-f37e4cdd8304": "2eabb90a-248e-4120-8e5e-fa05e0c2b709",
+                  "44229f9c-b0b1-4d76-86ea-c1309d5262c7": "2eb16cd7-a751-4780-bd06-8592fde1c70e"
+                }
+              }
+            ]
+          },
+          {
+            "__guid": "1d5347e0-820c-4015-96dc-4efd0679eca3",
+            "__version": 2,
+            "Flags": 8,
+            "Name": "eject",
+            "Position": "0,0,0",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkFlags": 0,
+            "NetworkOrphaned": 0,
+            "NetworkTransmit": true,
+            "OwnerTransfer": 1,
+            "Components": [],
+            "Children": [
+              {
+                "__guid": "7081340a-2ab5-43ba-bb0a-e56ad820c4e3",
+                "__version": 2,
+                "Flags": 0,
+                "Name": "pistol_shell",
+                "Position": "-4.946712,0.2358513,0.7564124",
+                "Rotation": "0,0.7071068,0,0.7071068",
+                "Scale": "0.175,0.175,0.175",
+                "Tags": "",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "NetworkFlags": 0,
+                "NetworkOrphaned": 0,
+                "NetworkTransmit": true,
+                "OwnerTransfer": 1,
+                "Components": [
+                  {
+                    "__type": "Sandbox.Prop",
+                    "__guid": "39163c91-19d5-4dac-8d0f-ebb28ce84019",
+                    "__enabled": true,
+                    "Flags": 0,
+                    "BodyGroups": 18446744073709551615,
+                    "Health": 0,
+                    "IsStatic": false,
+                    "MaterialGroup": null,
+                    "Model": "weapons/shells/pistol_shell.vmdl",
+                    "OnComponentDestroy": null,
+                    "OnComponentDisabled": null,
+                    "OnComponentEnabled": null,
+                    "OnComponentFixedUpdate": null,
+                    "OnComponentStart": null,
+                    "OnComponentUpdate": null,
+                    "OnPropBreak": null,
+                    "OnPropTakeDamage": null,
+                    "StartAsleep": false,
+                    "Tint": "1,1,1,1"
+                  },
+                  {
+                    "__type": "Sandbox.ModelRenderer",
+                    "__guid": "9b63589f-6b46-4fa6-a1bf-9079083959a3",
+                    "__enabled": true,
+                    "Flags": 0,
+                    "BodyGroups": 18446744073709551615,
+                    "CreateAttachments": false,
+                    "LodOverride": null,
+                    "MaterialGroup": null,
+                    "MaterialOverride": null,
+                    "Materials": null,
+                    "Model": "weapons/shells/pistol_shell.vmdl",
+                    "OnComponentDestroy": null,
+                    "OnComponentDisabled": null,
+                    "OnComponentEnabled": null,
+                    "OnComponentFixedUpdate": null,
+                    "OnComponentStart": null,
+                    "OnComponentUpdate": null,
+                    "RenderOptions": {
+                      "GameLayer": true,
+                      "OverlayLayer": false,
+                      "BloomLayer": false,
+                      "AfterUILayer": false
+                    },
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  },
+                  {
+                    "__type": "Sandbox.ModelCollider",
+                    "__guid": "df3f6540-139d-4426-a82a-c03dd3882480",
+                    "__enabled": true,
+                    "Flags": 0,
+                    "ColliderFlags": 0,
+                    "Elasticity": null,
+                    "Friction": null,
+                    "IsTrigger": false,
+                    "Model": "weapons/shells/pistol_shell.vmdl",
+                    "OnComponentDestroy": null,
+                    "OnComponentDisabled": null,
+                    "OnComponentEnabled": null,
+                    "OnComponentFixedUpdate": null,
+                    "OnComponentStart": null,
+                    "OnComponentUpdate": null,
+                    "OnObjectTriggerEnter": null,
+                    "OnObjectTriggerExit": null,
+                    "OnTriggerEnter": null,
+                    "OnTriggerExit": null,
+                    "RollingResistance": null,
+                    "Static": false,
+                    "Surface": "surfaces/plastic.surface",
+                    "SurfaceVelocity": "0,0,0"
+                  },
+                  {
+                    "__type": "Sandbox.Rigidbody",
+                    "__guid": "45cd8be8-a0ca-4178-add1-15f505c0b113",
+                    "__enabled": true,
+                    "Flags": 0,
+                    "AngularDamping": 0,
+                    "EnableImpactDamage": true,
+                    "EnhancedCcd": false,
+                    "Gravity": true,
+                    "GravityScale": 1,
+                    "ImpactDamage": 0,
+                    "LinearDamping": 0,
+                    "Locking": {
+                      "X": false,
+                      "Y": false,
+                      "Z": false,
+                      "Pitch": false,
+                      "Yaw": false,
+                      "Roll": false
+                    },
+                    "MassCenterOverride": "0,0,0",
+                    "MassOverride": 0,
+                    "MinImpactDamageSpeed": 500,
+                    "MotionEnabled": true,
+                    "OnComponentDestroy": null,
+                    "OnComponentDisabled": null,
+                    "OnComponentEnabled": null,
+                    "OnComponentFixedUpdate": null,
+                    "OnComponentStart": null,
+                    "OnComponentUpdate": null,
+                    "OverrideMassCenter": false,
+                    "RigidbodyFlags": "DisableCollisionSounds",
+                    "StartAsleep": false
+                  }
+                ],
+                "Children": []
+              }
+            ]
+          },
+          {
+            "__guid": "8d74fc05-f7a5-4d25-b3cd-74aaae956572",
+            "__version": 2,
+            "Flags": 0,
+            "Name": "hold_R",
+            "Position": "-1.848641,0,3.195872",
+            "Rotation": "0,0,0,1",
+            "Scale": "1,1,1",
+            "Tags": "",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkFlags": 0,
+            "NetworkOrphaned": 0,
+            "NetworkTransmit": true,
+            "OwnerTransfer": 1,
+            "Components": [],
+            "Children": []
+          }
+        ]
+      }
+    ],
+    "__properties": {
+      "NetworkInterpolation": true,
+      "TimeScale": 1,
+      "WantsSystemScene": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    },
+    "__variables": []
+  },
+  "ResourceVersion": 2,
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "__references": [
+    "facepunch.pistol_muzzleflash#76089",
+    "rust.pistolshell#76225"
+  ],
+  "__version": 2
+}

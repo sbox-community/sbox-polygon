@@ -1,0 +1,2334 @@
+{
+  "__guid": "9ca3597b-f69e-4904-891d-91ef0c1e02e4",
+  "GameObjects": [
+    {
+      "__guid": "68c72354-6f01-4a98-a64d-23286288d344",
+      "__version": 2,
+      "__Prefab": "game.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "1ddbe3ad-0b00-4af4-b325-23a49f92e9db"
+            },
+            "Property": "Name",
+            "Value": "Game"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "1ddbe3ad-0b00-4af4-b325-23a49f92e9db": "68c72354-6f01-4a98-a64d-23286288d344",
+        "604c6e3e-700c-43f9-973d-c85c8225fa17": "1af6e7a1-b0ac-499c-b374-ed02ac84c033",
+        "3814a966-1ca0-4d55-9b2e-db079604d566": "e6983e8e-150f-46c5-b281-0b75064404f7",
+        "a1a4779a-ca00-4740-81eb-e7a949d3ee0f": "35f91d74-24d7-4ef4-bb55-1c11af5a732a",
+        "3292fe4c-060f-4105-bcf0-64165d0f53c5": "1f1b1c90-c410-4db8-8cb2-cb43b0d96893"
+      }
+    },
+    {
+      "__guid": "ce4f4312-a47b-4d05-b12f-5a80bcd12e0e",
+      "__version": 2,
+      "Flags": 0,
+      "Name": "Map",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkFlags": 0,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "957da266-4ef5-4ea6-826d-ee51ef8b3a82",
+          "__enabled": true,
+          "Flags": 0,
+          "__version": 1,
+          "EnableCollision": true,
+          "MapName": "sboxcommunity.oldfactorymap",
+          "NoOrigin": false,
+          "OnComponentDestroy": null,
+          "OnComponentDisabled": null,
+          "OnComponentEnabled": null,
+          "OnComponentFixedUpdate": null,
+          "OnComponentStart": null,
+          "OnComponentUpdate": null,
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "64fffdb2-9f65-4a6c-9dc5-b4d73d759926",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "468.4594,783.441,100.5507"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.3826835,0.9238797"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "64fffdb2-9f65-4a6c-9dc5-b4d73d759926",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "2ba53d75-9924-46be-beff-699d73af7248",
+        "9164fbf8-c445-443f-b155-821ad292889d": "f451caec-16d6-45f3-9947-ce7c6d5a3c66",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "40cc7d3a-47cd-4a39-bd92-794bc4f590ff",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "8d6955e4-2a51-40e6-9d15-a2f704519b26",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "c283f184-32a0-47a8-aa88-5ad064ed3d71"
+      }
+    },
+    {
+      "__guid": "259effec-50d5-44c6-a7ad-554e7dcec622",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (1)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "386.3511,1094.464,106.4136"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.9238798,-0.3826834"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "259effec-50d5-44c6-a7ad-554e7dcec622",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "f763cd97-2e90-40c7-a7a0-4afa7e214afb",
+        "9164fbf8-c445-443f-b155-821ad292889d": "68fb7ccf-cbef-4e17-aa36-9919c5d6d4fb",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "dbcf5361-6bc8-4be9-831f-d50ccb3ce37d",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "a494632f-89aa-4e56-b31b-07abad1068d3",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "6d6802fc-d38b-42ef-938b-7fcf0cc46e62"
+      }
+    },
+    {
+      "__guid": "05e7c08f-5ad9-4c00-81b0-51cf7cfb20e5",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (2)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-1070.482,1326.758,106.4136"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.9238797,0.3826836"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "05e7c08f-5ad9-4c00-81b0-51cf7cfb20e5",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "1537efe7-79a7-475f-a4aa-830efd9fe961",
+        "9164fbf8-c445-443f-b155-821ad292889d": "f598b942-e8c0-45ec-8ab2-73c0d45bfee7",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "d2e6b5d7-d8a8-4bef-b15c-d221271a1c98",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "1172be70-7c86-454a-97be-71ffce46bac6",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "97e3c4a7-09d7-474f-a125-a2293c39d6f2"
+      }
+    },
+    {
+      "__guid": "271cac23-1d3b-471f-a2ff-f692ddf7a442",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (4)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-403.7831,1302.815,106.4749"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,-0.2588191,0.9659259"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "271cac23-1d3b-471f-a2ff-f692ddf7a442",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "b68f0fb6-c7d7-4c4e-b554-2c6bb8087e70",
+        "9164fbf8-c445-443f-b155-821ad292889d": "ecb9516a-360b-44be-8426-b8c737969103",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "d54c823b-96f9-495a-acff-7363eebc3d61",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "728c0527-f159-4800-bd05-8f17489e680b",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "6be8b43c-ccfb-4955-bfeb-5966501a5326"
+      }
+    },
+    {
+      "__guid": "696f8834-7ebd-40af-ac5f-aa2e950b35db",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (5)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-112.9904,1593.285,106.4748"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.3826835,0.9238796"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "696f8834-7ebd-40af-ac5f-aa2e950b35db",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "803ffa39-7ff2-4ab2-9993-057243c27006",
+        "9164fbf8-c445-443f-b155-821ad292889d": "506cb750-09a1-46a4-b277-104817785869",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "35da6f50-100f-42cc-b446-1e430dfc87d6",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "0e9e62fe-1039-45d7-b4ae-1b4a420d7f08",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "fdfa621f-9fdf-41db-99f4-67de97f862a8"
+      }
+    },
+    {
+      "__guid": "645ba951-62d8-4c89-91fc-9a97a58ce6f2",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (7)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "439.7378,1681.915,106.4748"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.3826835,0.9238796"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "645ba951-62d8-4c89-91fc-9a97a58ce6f2",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "1cc919d8-6967-4855-926a-76084c6d772d",
+        "9164fbf8-c445-443f-b155-821ad292889d": "4e134732-a36b-4e44-9473-c04d3a007461",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "c50bef8b-ae9e-4d0b-b281-906bf9ed7b1b",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "128a66b3-d5cc-4373-b0d9-247b454f802f",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "bf3e74f9-df9b-49cb-be5f-178610b7e0db"
+      }
+    },
+    {
+      "__guid": "5563cadd-8a21-4161-bbb1-0a02b9b81146",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (8)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "811.1737,1646.874,238.8695"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.3826835,0.9238796"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "5563cadd-8a21-4161-bbb1-0a02b9b81146",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "f198e08a-233e-4606-ae61-f4e9caf8e17a",
+        "9164fbf8-c445-443f-b155-821ad292889d": "a587d234-ff2c-4902-84fe-83408f71da43",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "8f8315df-f4c1-42ab-9dcc-8ebdc1f470a3",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "7282c76f-4981-45a7-8ca3-a3a3c1dd27a1",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "df2c31ea-5a1a-491b-925d-0c03edc461d7"
+      }
+    },
+    {
+      "__guid": "4ee573e4-cc36-4df7-84a7-d26c68d2c29a",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (9)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "680.4629,562.1952,107.4655"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,-0.9238797,0.3826838"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "4ee573e4-cc36-4df7-84a7-d26c68d2c29a",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "8cb392d3-4589-4e62-8f0b-f146625d0af2",
+        "9164fbf8-c445-443f-b155-821ad292889d": "0818e6c4-130e-45ab-9bc9-19c2dd8976a2",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "90944472-c3cc-4918-a9c0-0acdb4d59559",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "17fc939e-3cf7-4710-9673-aadb66894854",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "18b37883-ab47-4082-9fa6-594803446d5a"
+      }
+    },
+    {
+      "__guid": "6529ccd7-2e58-400c-bd2f-8a58b2b67aa2",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget (6)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "0.6988831,1358.824,106.4748"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,-0.3826833,0.9238796"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "6529ccd7-2e58-400c-bd2f-8a58b2b67aa2",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "c697a7a2-208d-41af-8a20-96b572a2a855",
+        "9164fbf8-c445-443f-b155-821ad292889d": "05f18294-407f-47c1-9b7a-51c6320c5b2b",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "2c6028a6-8fd3-444b-8592-faae7d7a7a18",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "9517fda2-e6c3-46f9-bb75-422217acd34f",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "80696732-799d-4b5b-bef3-daf3d2e2b45b"
+      }
+    },
+    {
+      "__guid": "a1b25bef-b973-4f5c-be13-84bef7316a52",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "FriendlyTarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "147.4666,1605.673,106.4748"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,-0.9914448,0.1305263"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "friendlytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            },
+            "Property": "isEnemy",
+            "Value": false
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "friend"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "a1b25bef-b973-4f5c-be13-84bef7316a52",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "215dbcd5-8010-4719-9372-56639d3fe6e2",
+        "9164fbf8-c445-443f-b155-821ad292889d": "34d783ec-29db-4757-a758-179c31b17dba",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "f8ea04da-31cb-478f-97c9-b456bf43fd81",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "f8938881-3f71-4f37-ab3e-0d71acce0fdd",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "3b2a5a6f-8bbc-43c0-8d0c-ae578add5867"
+      }
+    },
+    {
+      "__guid": "b0a4bb91-d6c1-43f0-b358-01864345cbef",
+      "__version": 2,
+      "__Prefab": "enemytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "FriendlyTarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-792.9268,1592.016,106.4136"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.7071069,0.7071069"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "friendlytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            },
+            "Property": "isEnemy",
+            "Value": false
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "friend"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "b0a4bb91-d6c1-43f0-b358-01864345cbef",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "150096cf-17ac-4a47-98a5-1d8d597b5d2e",
+        "9164fbf8-c445-443f-b155-821ad292889d": "f5f7c6bb-a135-482d-9f68-ad2efdde5f0f",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "bf13d36a-d766-4efc-ba1a-f4553c3dd897",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "d06f3ad1-4f6b-4b42-a7d9-3184b892d89f",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "f2917137-1e69-46dd-8f24-dc5f49fb7c04"
+      }
+    },
+    {
+      "__guid": "ade76a70-5e4f-4b54-9eae-f025c306fddb",
+      "__version": 2,
+      "__Prefab": "finishtriggerbox.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "b2660a07-fa65-4f14-8243-0ab62386b338"
+            },
+            "Property": "Name",
+            "Value": "FinishTriggerBox"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "b2660a07-fa65-4f14-8243-0ab62386b338"
+            },
+            "Property": "Position",
+            "Value": "626.6401,339.5242,114.2678"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "dcaac0ec-6da9-4096-a601-57a9df7c4793"
+            },
+            "Property": "Center",
+            "Value": "-45.28576,14.18395,5.879593"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "dcaac0ec-6da9-4096-a601-57a9df7c4793"
+            },
+            "Property": "Scale",
+            "Value": "9.42849,111.3521,111.7592"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "b2660a07-fa65-4f14-8243-0ab62386b338": "ade76a70-5e4f-4b54-9eae-f025c306fddb",
+        "dcaac0ec-6da9-4096-a601-57a9df7c4793": "b6e2f808-1bfb-45bf-a163-1e49134c155e",
+        "d46f4bd8-d819-414f-8c39-434e42e7cd30": "aa76b0a0-4925-45ed-bea0-76b840282daf"
+      }
+    },
+    {
+      "__guid": "771189a2-8587-463c-88be-30cd81af236b",
+      "__version": 2,
+      "__Prefab": "safezonetriggerbox.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "325d43fd-8093-4a76-b00e-47b846966d91"
+            },
+            "Property": "Name",
+            "Value": "SafeZoneTriggerBox"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "325d43fd-8093-4a76-b00e-47b846966d91"
+            },
+            "Property": "Position",
+            "Value": "226.0846,550.1627,119.6324"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "e7af44eb-27be-4d75-bf70-5f95e800a42b"
+            },
+            "Property": "Center",
+            "Value": "-356.8303,443.3503,5.948868"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "e7af44eb-27be-4d75-bf70-5f95e800a42b"
+            },
+            "Property": "Scale",
+            "Value": "2033.839,1477.817,111.8977"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "325d43fd-8093-4a76-b00e-47b846966d91": "771189a2-8587-463c-88be-30cd81af236b",
+        "e7af44eb-27be-4d75-bf70-5f95e800a42b": "fc1a63b4-c301-4589-bfda-1cdd3dd74ff9",
+        "dd14f4fe-eef6-4b42-8978-786a786c57bd": "36e82289-3c86-4932-9556-bc39950a2ff8"
+      }
+    },
+    {
+      "__guid": "74331896-403d-4108-abbf-a191cd64910d",
+      "__version": 2,
+      "__Prefab": "spawnpoint.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "e6503314-6aeb-4e96-9aba-f89133d2fe4d"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "PolygonSpawnPoint",
+              "__guid": "e6503314-6aeb-4e96-9aba-f89133d2fe4d",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          }
+        ],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "Property": "Name",
+            "Value": "SpawnPoint"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "Property": "Position",
+            "Value": "-58.09195,78.24377,64.97041"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "1cd60255-2871-4662-8bb8-3c6f7e4e8aca"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "e6503314-6aeb-4e96-9aba-f89133d2fe4d"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "23c0abcd-efa2-4d7a-866c-51df0260b852": "74331896-403d-4108-abbf-a191cd64910d",
+        "1cd60255-2871-4662-8bb8-3c6f7e4e8aca": "43306d62-d640-46b2-8df9-0acf3f55d4b3"
+      }
+    },
+    {
+      "__guid": "792a685f-19cf-41cf-b3c3-b291af63abe3",
+      "__version": 2,
+      "__Prefab": "polygonstartbutton.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "85f8cc84-cffe-4602-af61-b04e9b8073e3"
+            },
+            "Property": "Name",
+            "Value": "PolygonStartButton"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "85f8cc84-cffe-4602-af61-b04e9b8073e3"
+            },
+            "Property": "Position",
+            "Value": "426.4357,504.004,131.375"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "85f8cc84-cffe-4602-af61-b04e9b8073e3"
+            },
+            "Property": "Rotation",
+            "Value": "0.5,-0.5,0.5,0.5"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "85f8cc84-cffe-4602-af61-b04e9b8073e3": "792a685f-19cf-41cf-b3c3-b291af63abe3",
+        "8c2218f0-cac1-47e7-965b-ee36ca1c16d5": "9c088305-e665-43da-9e74-ed9a71c1294d",
+        "f91f54de-6036-4046-896b-574ab24e4c07": "3615d465-0cac-4eab-bb05-f0f07a120ad8",
+        "e76330fc-efc3-4bca-b13d-ad30f9de1481": "e6421790-493e-46c1-87be-c3e8a24938b6",
+        "f778116a-debb-4403-928a-b72ab4888952": "eb746bd0-eacd-4d23-ae7f-b5288851fcee",
+        "f0fa30be-c7fb-412f-acbd-7419e76dad33": "84209971-52a9-468d-99dd-ae05077ab3eb",
+        "3e9ce82d-2114-4608-811e-1b73cae291c1": "4205a920-11e8-4ac2-88db-efae0991c07b"
+      }
+    },
+    {
+      "__guid": "a55168d1-8666-41d4-9450-7ba59700d32a",
+      "__version": 2,
+      "__Prefab": "startpoint.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "Property": "Position",
+            "Value": "382.876,470.152,69.44668"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "23c0abcd-efa2-4d7a-866c-51df0260b852"
+            },
+            "Property": "Rotation",
+            "Value": "-0.00008520484,0,0.7071494,0.7070642"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "23c0abcd-efa2-4d7a-866c-51df0260b852": "a55168d1-8666-41d4-9450-7ba59700d32a",
+        "26a19b37-bd67-4665-a743-d3c9b57b011c": "7453bb6e-046a-4af8-bfb4-07aaa78f5c21"
+      }
+    },
+    {
+      "__guid": "01778127-c580-44c7-850e-5240289eacfa",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "b5280c9a-7dcc-47a1-b7de-5a99aa23596b"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "b5280c9a-7dcc-47a1-b7de-5a99aa23596b",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "f3581a9c-424c-4fa4-8140-1de2ff1f9133"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "f3581a9c-424c-4fa4-8140-1de2ff1f9133",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "253.0855,-115.4687,11.5516",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "7fe0848f-c593-41d0-a8ce-81a6e52f98a4"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "f3581a9c-424c-4fa4-8140-1de2ff1f9133"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "7fe0848f-c593-41d0-a8ce-81a6e52f98a4",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-19.58083,1.823608,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "80.57755,136.0728,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "63d392d3-480b-4e34-8cc6-637d736b4787"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "f3581a9c-424c-4fa4-8140-1de2ff1f9133"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "7fe0848f-c593-41d0-a8ce-81a6e52f98a4"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "63d392d3-480b-4e34-8cc6-637d736b4787",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "131.4454,700.1512,112.5951"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "131.4454,700.1512,64.11856"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "enemy"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "b5280c9a-7dcc-47a1-b7de-5a99aa23596b"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "01778127-c580-44c7-850e-5240289eacfa",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "533b3e47-8315-4540-93f7-7e334cab8f66",
+        "9164fbf8-c445-443f-b155-821ad292889d": "cb20ae99-476f-47de-b2ff-9fe47bc7c988",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "85c34022-cc7c-4179-8ffd-393cade7954f",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "84d82996-54e9-4423-bf65-8bfde1ce8e8f",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "b6dda0ce-af88-4ce2-896b-c195990db997"
+      }
+    },
+    {
+      "__guid": "c29a24d3-e547-426a-b50a-0fac5f1942fd",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "a793b2b1-6688-4c0e-b955-7f822dcf8f65"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "a793b2b1-6688-4c0e-b955-7f822dcf8f65",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "cdbd71c6-21c6-42e7-b955-b411eb4f5455"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "cdbd71c6-21c6-42e7-b955-b411eb4f5455",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "147.2689,125.5533,11.5516",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "d7dfb2b5-b48b-4963-ac58-a77ebd38ca9e"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "cdbd71c6-21c6-42e7-b955-b411eb4f5455"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "d7dfb2b5-b48b-4963-ac58-a77ebd38ca9e",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-19.58083,-37.69454,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "80.57755,57.03648,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "ea0bb8fb-e36a-4c19-8974-e261cb410a88"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "cdbd71c6-21c6-42e7-b955-b411eb4f5455"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "d7dfb2b5-b48b-4963-ac58-a77ebd38ca9e"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "ea0bb8fb-e36a-4c19-8974-e261cb410a88",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "-41.55191,919.5484,104.3237"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-41.55191,919.5484,56.34322"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "a793b2b1-6688-4c0e-b955-7f822dcf8f65"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "c29a24d3-e547-426a-b50a-0fac5f1942fd",
+        "9164fbf8-c445-443f-b155-821ad292889d": "65affab7-1a49-4733-876b-c44c31899e22",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "57b59454-6d99-4bea-813d-a3a1ce03f848",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "d128e967-c920-4568-ac71-98a3e3f27a82",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "fff5456c-d307-4b25-b0f6-1a83e6461c3a",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "0c7b5de4-732e-43e5-a420-91e671b6b794"
+      }
+    },
+    {
+      "__guid": "e7279692-0df0-423c-b490-535b0c06d730",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "59588186-3876-4b09-8251-670fb00385a3"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "59588186-3876-4b09-8251-670fb00385a3",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "cdba6c0f-8089-401e-a727-7204ded4511e"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "cdba6c0f-8089-401e-a727-7204ded4511e",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "54.00031,-80.34454,-23.52218",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "20a33c96-fff3-44e6-b93b-906208172d64"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "cdba6c0f-8089-401e-a727-7204ded4511e"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "20a33c96-fff3-44e6-b93b-906208172d64",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-19.58083,-43.25779,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "80.57755,79.44273,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "599a0d53-5de1-4ece-924d-64e0d87451f4"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "cdba6c0f-8089-401e-a727-7204ded4511e"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "20a33c96-fff3-44e6-b93b-906208172d64"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "599a0d53-5de1-4ece-924d-64e0d87451f4",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "-672.853,1034.437,107.5963"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "friendlytarget (1)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-672.853,1103.756,107.5963"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "59588186-3876-4b09-8251-670fb00385a3"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "e7279692-0df0-423c-b490-535b0c06d730",
+        "9164fbf8-c445-443f-b155-821ad292889d": "593ed67b-64a5-4e61-87ae-af54dea31d9e",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "b051841d-228c-4ccf-9ea6-c43f7f3bc20d",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "3ed0f646-3ac8-4c51-871b-85eed6222095",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "05c18383-5be1-4b87-84e6-5d65ce863990",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "2d8e6040-133e-408d-a515-23adfc1d6afd"
+      }
+    },
+    {
+      "__guid": "cafdaff0-51c2-475e-9e2c-296fa04237eb",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "00350a46-79dd-4f9f-9e23-c10bca1f7be6"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "00350a46-79dd-4f9f-9e23-c10bca1f7be6",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": false,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "23fa5add-b1d1-4f1c-a3be-c45434d456f7"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "23fa5add-b1d1-4f1c-a3be-c45434d456f7",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "94.90881,-85.25595,-23.52216",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "fd630356-43bb-4902-81d3-65696a20c968"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "23fa5add-b1d1-4f1c-a3be-c45434d456f7"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "fd630356-43bb-4902-81d3-65696a20c968",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-98.96325,-59.65267,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "239.3424,112.2325,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "48fa017e-87b4-43d3-a406-1c0150a5c7d5"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "23fa5add-b1d1-4f1c-a3be-c45434d456f7"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "fd630356-43bb-4902-81d3-65696a20c968"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "48fa017e-87b4-43d3-a406-1c0150a5c7d5",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "380.6699,1486.698,107.5963"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "friendlytarget (2)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "380.6699,1413.802,107.5963"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,1,0.0000001947072"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "00350a46-79dd-4f9f-9e23-c10bca1f7be6"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "cafdaff0-51c2-475e-9e2c-296fa04237eb",
+        "9164fbf8-c445-443f-b155-821ad292889d": "7d4831d3-8647-495f-96d7-e3742e448cc0",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "22045ceb-66bf-4d88-8206-fa57b531e1a9",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "cf3a1cf7-b80f-4892-8c92-25f73e447c3a",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "d635ce4f-74c5-49d5-8857-992fbe2e4fb3",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "4916c149-8bc9-4f34-b3ae-15fd9db21a19"
+      }
+    },
+    {
+      "__guid": "ef7e960a-2db1-4a53-b233-d4c8ea9eaf5d",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "fa3fe0a9-ce71-425b-98ea-6ceb9569afc4"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "fa3fe0a9-ce71-425b-98ea-6ceb9569afc4",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "dd81bf89-9882-4531-b413-ba99e2567073"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "dd81bf89-9882-4531-b413-ba99e2567073",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "94.90875,154.675,-23.52214",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "f52b88ce-cedd-4f5c-90ec-c116cf8aa25f"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "dd81bf89-9882-4531-b413-ba99e2567073"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "f52b88ce-cedd-4f5c-90ec-c116cf8aa25f",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "67.57568,-43.25779,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "252.8951,79.44273,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "4a01baee-459c-4b17-acb9-f10081f672f4"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "dd81bf89-9882-4531-b413-ba99e2567073"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "f52b88ce-cedd-4f5c-90ec-c116cf8aa25f"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "4a01baee-459c-4b17-acb9-f10081f672f4",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "639.0309,1510.173,107.5963"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "EnemyTarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "639.0309,1640.384,107.5963"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,1,0.0000001947072"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "enemy"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "fa3fe0a9-ce71-425b-98ea-6ceb9569afc4"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "ef7e960a-2db1-4a53-b233-d4c8ea9eaf5d",
+        "9164fbf8-c445-443f-b155-821ad292889d": "b803b498-7867-4f0c-bffb-75dd104cfa41",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "1ae32860-75c0-428c-a218-dd7c25d0aa11",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "1d4eca47-5392-4381-9735-8aff94dd9ab2",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "ab223bf2-e617-44ae-a7be-f8c151e181dd",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "04e21bc8-2fc3-4b0f-a25f-198cad2e03c9"
+      }
+    },
+    {
+      "__guid": "5b02fdd0-9598-4c3c-8ac2-62113275858b",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "19f18db0-01fe-4039-8f42-dd72e96236f2"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "19f18db0-01fe-4039-8f42-dd72e96236f2",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "fdcd5757-0c38-4252-825e-b23399dc67ee"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "fdcd5757-0c38-4252-825e-b23399dc67ee",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "196.4315,-39.08716,11.5516",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "b020d5c9-9d87-4a78-ba9a-686260f1d635"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "fdcd5757-0c38-4252-825e-b23399dc67ee"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "b020d5c9-9d87-4a78-ba9a-686260f1d635",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-19.58083,-37.69454,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "80.57755,57.03648,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "0ac71d2f-2f5c-45fb-8dcd-9c2328f9e809"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "fdcd5757-0c38-4252-825e-b23399dc67ee"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "b020d5c9-9d87-4a78-ba9a-686260f1d635"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "0ac71d2f-2f5c-45fb-8dcd-9c2328f9e809",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "-230.2107,1072.697,116.3423"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-230.2107,1072.697,50.73656"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "enemy"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "19f18db0-01fe-4039-8f42-dd72e96236f2"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "5b02fdd0-9598-4c3c-8ac2-62113275858b",
+        "9164fbf8-c445-443f-b155-821ad292889d": "166c7ea3-2b6f-48db-9a1d-832237eea172",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "19ba1d9c-1101-4bff-8ce2-1df5edf4a72c",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "da5729fc-5dcd-4f03-beb8-32eb9df90f92",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "89830b35-e3e9-48a2-a0b2-6bab87d21281",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "4f4f4ad1-c597-4eec-af1b-63ab74df2674"
+      }
+    },
+    {
+      "__guid": "96331973-9839-46f4-95ea-35113a191bd8",
+      "__version": 2,
+      "__Prefab": "friendlytarget.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "0702c32f-5008-49b2-9e5f-bc2cd6009eb5"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Target",
+              "__guid": "0702c32f-5008-49b2-9e5f-bc2cd6009eb5",
+              "__enabled": true,
+              "Flags": 0,
+              "isEnemy": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null
+            }
+          },
+          {
+            "Id": {
+              "Type": "GameObject",
+              "IdValue": "91b282e3-b501-46d3-9eec-4fddbb23d85a"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Children",
+            "IsContainerArray": true,
+            "Data": {
+              "__guid": "91b282e3-b501-46d3-9eec-4fddbb23d85a",
+              "__version": 2,
+              "Flags": 0,
+              "Name": "TargetMovementTriggerBox",
+              "Position": "176.6188,102.1947,11.5516",
+              "Rotation": "0,0,0.7071068,0.7071068",
+              "Scale": "1,1,1",
+              "Tags": "",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "NetworkFlags": 0,
+              "NetworkOrphaned": 0,
+              "NetworkTransmit": true,
+              "OwnerTransfer": 1,
+              "Components": [],
+              "Children": []
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "403529f9-694f-45de-95f4-e327754c9637"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "91b282e3-b501-46d3-9eec-4fddbb23d85a"
+            },
+            "PreviousElement": null,
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "Sandbox.BoxCollider",
+              "__guid": "403529f9-694f-45de-95f4-e327754c9637",
+              "__enabled": true,
+              "Flags": 0,
+              "Center": "-19.58083,-37.69454,22.59465",
+              "ColliderFlags": 0,
+              "Elasticity": null,
+              "Friction": null,
+              "IsTrigger": true,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "OnObjectTriggerEnter": null,
+              "OnObjectTriggerExit": null,
+              "OnTriggerEnter": null,
+              "OnTriggerExit": null,
+              "RollingResistance": null,
+              "Scale": "80.57755,57.03648,78.32912",
+              "Static": false,
+              "Surface": null,
+              "SurfaceVelocity": "0,0,0"
+            }
+          },
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "a7b70f08-295d-4ab4-ac71-ed9ac9cb2de0"
+            },
+            "Parent": {
+              "Type": "GameObject",
+              "IdValue": "91b282e3-b501-46d3-9eec-4fddbb23d85a"
+            },
+            "PreviousElement": {
+              "Type": "Component",
+              "IdValue": "403529f9-694f-45de-95f4-e327754c9637"
+            },
+            "ContainerProperty": "Components",
+            "IsContainerArray": true,
+            "Data": {
+              "__type": "TargetMovementTrigger",
+              "__guid": "a7b70f08-295d-4ab4-ac71-ed9ac9cb2de0",
+              "__enabled": true,
+              "Flags": 0,
+              "OnComponentDestroy": null,
+              "OnComponentDisabled": null,
+              "OnComponentEnabled": null,
+              "OnComponentFixedUpdate": null,
+              "OnComponentStart": null,
+              "OnComponentUpdate": null,
+              "targetPos": "-480.9762,925.5718,107.5251"
+            }
+          }
+        ],
+        "RemovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "926d3bbb-3427-4eb1-b096-af0735f216ec"
+            }
+          }
+        ],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Name",
+            "Value": "enemytarget (1)"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Position",
+            "Value": "-480.9762,924.2811,45.81985"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "Property": "Tags",
+            "Value": "enemytarget"
+          },
+          {
+            "Target": {
+              "Type": "Component",
+              "IdValue": "bd39599d-c388-4770-a9b1-8108c9b767d7"
+            },
+            "Property": "MaterialGroup",
+            "Value": "enemy"
+          }
+        ],
+        "MovedObjects": [
+          {
+            "Id": {
+              "Type": "Component",
+              "IdValue": "9164fbf8-c445-443f-b155-821ad292889d"
+            },
+            "NewParent": {
+              "Type": "GameObject",
+              "IdValue": "c1444b9d-4c60-48b5-9c46-bad905fac29c"
+            },
+            "NewContainerProperty": "Components",
+            "IsNewContainerArray": true,
+            "NewPreviousElement": {
+              "Type": "Component",
+              "IdValue": "0702c32f-5008-49b2-9e5f-bc2cd6009eb5"
+            }
+          }
+        ]
+      },
+      "__PrefabIdToInstanceId": {
+        "c1444b9d-4c60-48b5-9c46-bad905fac29c": "96331973-9839-46f4-95ea-35113a191bd8",
+        "9164fbf8-c445-443f-b155-821ad292889d": "b1c5a968-68c5-4d2a-92cd-436cbf9be59e",
+        "bd39599d-c388-4770-a9b1-8108c9b767d7": "5432d861-e818-4e0c-9280-fa0d5e43bff1",
+        "5f9b54d5-61bf-460f-85db-f30ac4f659d1": "ba4370ac-11e6-417f-b237-26a53b4174ab",
+        "3486d266-e9db-4b76-a2c2-708be99778bf": "c788c269-1365-4a28-a107-3352d0df93dd",
+        "926d3bbb-3427-4eb1-b096-af0735f216ec": "84359d0d-b149-455a-9786-82c58c24fdc0"
+      }
+    },
+    {
+      "__guid": "fbf0be0d-66c3-4503-b86d-8f5629e3bb49",
+      "__version": 2,
+      "__Prefab": "finishdoor.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "36b87f52-6df6-4162-9edf-2ab5fe32ae53"
+            },
+            "Property": "Position",
+            "Value": "572.3553,356.1787,117.6881"
+          },
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "36b87f52-6df6-4162-9edf-2ab5fe32ae53"
+            },
+            "Property": "Rotation",
+            "Value": "0,0,0.7071068,0.7071068"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "36b87f52-6df6-4162-9edf-2ab5fe32ae53": "fbf0be0d-66c3-4503-b86d-8f5629e3bb49",
+        "38ed9654-750e-44ae-a2a8-0ec6107d4f7c": "df640f7d-2315-4f11-911e-e9b1b811f779",
+        "d08f60ca-d5b3-48a5-926c-5e43720bc72e": "21fb454f-4956-40a4-b4ab-505851027649",
+        "8f490a08-2dca-4900-b9c4-b940bc4063e8": "74107a92-2f50-4b04-9910-1f16475f7e61"
+      }
+    },
+    {
+      "__guid": "88b86abb-8635-4a61-b31f-63548e412f67",
+      "__version": 2,
+      "__Prefab": "startdoor.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "36b87f52-6df6-4162-9edf-2ab5fe32ae53"
+            },
+            "Property": "Position",
+            "Value": "384.1642,505.852,119.3005"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "36b87f52-6df6-4162-9edf-2ab5fe32ae53": "88b86abb-8635-4a61-b31f-63548e412f67",
+        "38ed9654-750e-44ae-a2a8-0ec6107d4f7c": "5a4ba610-5390-4f3b-93e9-da86d27b0fd4",
+        "d08f60ca-d5b3-48a5-926c-5e43720bc72e": "3106aa68-b6b6-46e0-b376-b91e991743f4",
+        "8f490a08-2dca-4900-b9c4-b940bc4063e8": "df8170fe-c90e-4287-a4ed-79894bb97e92"
+      }
+    },
+    {
+      "__guid": "860cd113-25f2-407c-b53f-8d1ca48cb9a9",
+      "__version": 2,
+      "__Prefab": "3dscoreboard.prefab",
+      "__PrefabInstancePatch": {
+        "AddedObjects": [],
+        "RemovedObjects": [],
+        "PropertyOverrides": [
+          {
+            "Target": {
+              "Type": "GameObject",
+              "IdValue": "449d897f-e7ce-4c27-a874-57f61bd13c57"
+            },
+            "Property": "Position",
+            "Value": "-91.73996,383.615,189.7792"
+          }
+        ],
+        "MovedObjects": []
+      },
+      "__PrefabIdToInstanceId": {
+        "449d897f-e7ce-4c27-a874-57f61bd13c57": "860cd113-25f2-407c-b53f-8d1ca48cb9a9",
+        "cb09327b-0575-4f82-a295-15e27dc4654e": "ecb7a4b3-9d5c-45e5-b58f-d329e01c2290",
+        "351ce050-7075-473c-a557-17674bbf5fa5": "6aa2da69-0bd0-4a7c-b860-16b908786bea"
+      }
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {},
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": null,
+  "Description": null,
+  "__references": [],
+  "__version": 3
+}

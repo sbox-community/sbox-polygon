@@ -1,0 +1,66 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System.Threading;
+@using System.Threading.Tasks;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    @if(enableBlackScreen)
+    {
+        <div class="blackscreen"></div>
+    }
+	<div class="title"></div>@* POLYGON  *@
+	<div class="mapselection"> 
+        <div class="info">- Select map -</div>
+	    <div class="map1" onclick="@(()=> {
+            enableBlackScreen=true;
+            Sound.Play("mainmenustartsound", GameObject.Parent.GetComponentInChildren<CameraComponent>().WorldPosition);
+            _ = ChangeScene();
+		
+        })"><div class="mapname">Old Factory</div><div class="recommended">★ Best</div></div>
+	    <div class="map2"><div class="mapname">Work In Progress</div></div>@* Shooting Range *@
+        </div>
+</root>
+
+@code
+{
+    private bool enableBlackScreen = false;
+    GameObject camera;
+    SoundHandle mainmenu;
+    SkinnedModelRenderer spine;
+    protected override void OnStart()
+    {
+        base.OnStart();
+        camera = GameObject.Parent.GetComponentInChildren<CameraComponent>().GameObject;
+        mainmenu = Sound.Play("mainmenu",camera.WorldPosition);
+        spine = GameObject.Parent.GetComponentInChildren<SkinnedModelRenderer>();
+		spine.GetBoneObject( "spine_0" ).Flags |= GameObjectFlags.ProceduralBone ;
+    }
+    protected override void OnUpdate(){
+        base.OnUpdate();
+
+        if(spine != null && spine.IsValid())
+        {
+            var rot = spine.GetBoneObject( "spine_0" ).WorldRotation;
+    		spine.GetBoneObject( "spine_0" ).LocalRotation = Rotation.From(new Angles(0,  (Mouse.Position.y - (Screen.Height / 2f))/30f, (Mouse.Position.x - (Screen.Width / 2f))/30f));
+            camera.WorldPosition += new Vector3(-1 * Mouse.Delta.x/500f, 0, -1* Mouse.Delta.y/500f);
+            camera.LocalRotation = Rotation.From(new Angles((Mouse.Position.y - (Screen.Height / 2f))/1000f, -1* (Mouse.Position.x - (Screen.Width / 2f))/1000f,  0));
+        }
+
+        if(enableBlackScreen)
+            camera.WorldPosition -= new Vector3(0.15f,1f,-0.01f);
+
+    }
+    private async Task ChangeScene(){
+        if(mainmenu != null)
+            mainmenu.Stop();
+
+        await Task.Delay(3000);
+        var slo = new SceneLoadOptions();
+        SceneFile sf = ResourceLibrary.Get<SceneFile>( "scenes/oldfactory.scene" );
+		slo.SetScene( sf );
+		Game.ChangeScene( slo );
+    } 
+	protected override int BuildHash() => System.HashCode.Combine( enableBlackScreen );
+}

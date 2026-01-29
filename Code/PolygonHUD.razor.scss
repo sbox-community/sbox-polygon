@@ -1,0 +1,54 @@
+@mixin text($font-size) {
+	/*backdrop-filter: blur(0px);*/
+	font-size: $font-size;
+	font-family: Share Tech Mono;
+	text-shadow: 3px 3px black, -4px -3px rgba(0,255,0,0.45),-4px 3px rgba(0,255,0,0.5), 3px 3px rgba(0,255,0,0.55), 8px 3px rgba(0,255,0,0.35);
+	color: #fff;
+
+}
+
+@mixin textwithbackground($font-size) {
+	@include text($font-size);
+	background-image: url("materials/polygon/scanlines.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+PolygonHUD {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	justify-content: center;
+
+	.counter {
+		position: absolute;
+		right: 15%;
+		top: 15%;
+		flex-direction: column;
+		/*white-space: pre;*/
+	}
+
+	.counter span {
+		@include textwithbackground(40);
+	}
+
+	.counter span2 {
+		@include text(40);
+	}
+
+	.interruptpolygon {
+		position: absolute;
+		@include text(26);
+		top: 5%;
+		left: 5%;
+	}
+
+	.ammo {
+		position: absolute;
+		@include text(46);
+		top: 90%;
+		left: 93%;
+	}
+}

@@ -1,0 +1,52 @@
+@using Sandbox;
+@using Sandbox.UI;
+@using System;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+	<div style="width:100%;height:100%;background-size:cover;background-repeat: no-repeat;background-image:url('materials/polygon/indicator_pointer.vtex')"></div>
+</root>
+
+@code
+{
+    private bool indicatorSoundPlayed = false;
+    protected override void OnUpdate(){
+        base.OnUpdate();
+
+        var screenpos = PolygonPlayer.LocalCamera.PointToScreenNormal(GameObject.WorldPosition).Clamp(0f, 0.97f);
+
+        Vector3 toTarget = (GameObject.WorldPosition - PolygonPlayer.LocalCamera.WorldPosition).Normal; // When GO is behind, this need to be inverted as negative, so I use dot product to determine if it's behind
+
+        float dot = Vector3.Dot( PolygonPlayer.LocalCamera.WorldRotation.Forward, toTarget );
+        float dotLeft = Vector3.Dot( PolygonPlayer.LocalCamera.WorldRotation.Left, toTarget );
+
+        bool behind = dot <= 0f;
+        bool behindButLeftSide = behind && dotLeft < 1f && dotLeft > 0f;
+
+        Panel.Style.Left = Length.Fraction(behind ? behindButLeftSide ? 0f : 0.97f: screenpos.x);
+        Panel.Style.Top = Length.Fraction(screenpos.y);
+        Panel.Style.FilterBrightness = MathF.Abs(MathF.Sin(Time.Now * 6f));
+        Panel.Style.BackgroundSizeX = Length.Fraction(MathF.Abs(MathF.Sin(Time.Now * 3f)).Clamp(0.9f, 1f));
+        Panel.Style.BackgroundSizeY = Length.Fraction(MathF.Abs(MathF.Sin(Time.Now * 3f)).Clamp(0.9f, 1f));
+
+        StateHasChanged();
+
+        if(PolygonGame.CurTime() % 10 < 1 )
+        {
+            if(!indicatorSoundPlayed )
+                Sound.Play("confirmation_001", GameObject.WorldPosition);
+
+            indicatorSoundPlayed = true;
+        }
+        else
+        indicatorSoundPlayed = false;
+
+        if(PolygonPlayer.LocalPlayer.WorldPosition.DistanceSquared( GameObject.WorldPosition ) < 150*150)
+        {
+            Sound.Play("confirmation_001_1", GameObject.WorldPosition);
+            GameObject.GetComponent<HighlightOutline>().Destroy();
+            GameObject.GetComponent<ButtonIndicator>().Destroy();
+        }
+    }
+}

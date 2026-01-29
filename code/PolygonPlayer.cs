@@ -1,320 +1,194 @@
-﻿using System.Linq;
-using Sandbox;
-using SWB_Base;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using Sandbox.Services;
 using System;
-using Sandbox.Component;
+using System.Numerics;
+using System.Threading;
+using System.Threading.Tasks;
 
-public partial class PolygonPlayer : PlayerBase
+public sealed partial class PolygonPlayer : Component
 {
-    [Net, Local] public long polygonTime { get; set; } = 0;
-    [Net, Local] public bool Freeze { get; set; } = false;
-    public Sound PolygonMusic = new();
-    public Sound PolygonFinalSound = new();
-    private Entity GlowedEnt { get; set; }
+	[Sync] public bool Freeze { get; set; } = false;
+	private GameObject Player => GameObject;
+	public static GameObject LocalPlayer;
+	public static PolygonPlayer LocalPolygonPlayer;
+	public static CameraComponent LocalCamera;
+	public static SoundPointComponent PolygonMusic;
+	public bool videoStarted = false;
+	protected override void OnStart()
+	{
+		if ( !IsProxy )
+		{
+			LocalPlayer = GameObject;
+			LocalPolygonPlayer = this;
+			LocalCamera = GameObject.GetComponentInChildren<CameraComponent>();
+		}
 
-    //cl only
-    public List<ScoreData> LocalScores = new();
-    private long curDemoID=0;
-    public bool tutorialCompleted = false;
+		_ = RefreshScore();
 
-    //from cs:z deleted scenes
-    private static List<string> SucceedSoundList = new()
-    {
-        "alamo_success",
-        "brecon_success",
-        "downed_success",
-        "hank_success",
-        "hr_success",
-        "jungle_success",
-        "lost_success",
-        "miami_success",
-        "motor_success",
-        "pipe_success",
-        "recoil_success",
-        "run_success",
-        "sand_success",
-        "silo_success",
-        "thinice_success",
-        "train_success",
-        "truth_success",
-        "turncrank_success",
-    };
+		base.OnStart();
+	}
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+		OnUpdateWeaponSystem();
+	}
 
-    //from cs:z deleted scenes
-    private static List<string> FailedSoundList = new()
-    {
-        "failure1",
-        "failure2",
-        "failure3",
-        "failure4",
-    };
+	[Rpc.Owner ( Flags= NetFlags.HostOnly | NetFlags.Reliable)]
+	public void ShowStatisticsMenu( bool status, bool cheat, long time, string enemytarget, string friendlytarget)
+	{
+		_ = ProcessScore( status, cheat, time, enemytarget, friendlytarget, GameObject );
+	}
 
-    [Serializable]
-    public struct ScoreData
-    {
-        public float score { get; set; }
-        public long date { get; set; }
-        public string map { get; set; }
-        public long demoid { get; set; }
-    };
+	private static async Task ProcessScore( bool status, bool cheat, long time, string enemytarget, string friendlytarget, GameObject go )
+	{
+		var achievement = Sandbox.Services.Achievements.All.FirstOrDefault( x => x.Name == "success_one_rnd" );
+		if ( achievement != null && !achievement.IsUnlocked )
+			Sandbox.Services.Achievements.Unlock( "success_one_rnd" );
 
-    public bool SupressPickupNotices { get; set; }
+		string sceneName = Game.ActiveScene.Name.ToLower();
 
-    //TimeSince timeSinceDropped;
+		await PolygonScoreboard.leaderBoard.Refresh();
 
-    public ClothingContainer Clothing = new();
+		var playerScore = Sandbox.Services.Stats.LocalPlayer.Get( sceneName ).Min;
+		bool highrecord = status && (playerScore == 0 || playerScore > time);
+		bool worldrecord = highrecord &&
+			PolygonScoreboard.leaderBoard.Entries
+				.Any( x => time < x.Value );
 
-    public PolygonPlayer() : base()
-    {
-        Inventory = new PolygonInventory(this);
+		if ( go != null && go.IsValid() )
+		{
+			if ( status )
+				PolygonGame.EmitPolygonSucceedSound( go, highrecord, worldrecord );
+			else
+				PolygonGame.EmitPolygonFailedSound( go );
+		}
 
-        if (IsClient)
-            loadLocalScores();
-    }
+		PolygonMenu.Result( status, cheat, time, enemytarget, friendlytarget, highrecord, worldrecord );
 
-    public PolygonPlayer(Client client) : this()
-    {
-        // Load clothing from client data
-        Clothing.LoadFromClient(client);
-    }
+		if ( status && highrecord )
+		{
+			Sandbox.Services.Stats.SetValue( sceneName, time );
+			await GameTask.DelaySeconds( 3f );
+			await RefreshScoreManually();
+		}
+	}
 
+	public static async Task RefreshScore()
+	{
+		while( true )
+		{
+			await Sandbox.Services.Stats.Global.Refresh();
+			await Sandbox.Services.Stats.LocalPlayer.Refresh();
+			await PolygonScoreboard.RefreshScores();
+			await GameTask.DelaySeconds( 60f );
+		}
+	}
 
-    public override void Spawn()
-    {
-        EnableLagCompensation = true;
-        base.Spawn();
-    }
+	public static async Task RefreshScoreManually()
+	{
+		await Sandbox.Services.Stats.Global.Refresh();
+		await Sandbox.Services.Stats.LocalPlayer.Refresh();
+		await PolygonScoreboard.RefreshScores();
+	}
 
-    public override void Respawn()
-    {
-        base.Respawn();
+	[Rpc.Broadcast( Flags = NetFlags.HostOnly | NetFlags.Reliable )]
+	public void EmitPolygonStartingSound()
+	{
+		Sound.Play( "startingpolygon", PolygonGame.GameInstance.startButton.WorldPosition );
+	}
 
-        SetModel("models/citizen/citizen.vmdl");
-        Clothing.DressEntity(this);
+	[Rpc.Owner( Flags = NetFlags.HostOnly | NetFlags.Reliable )]
+	public void EmitPolygonCancellationSound()
+	{
+		var s = Sound.Play( "ui.downvote" );
+		s.Pitch = 0.5f;
+		s.Volume = 2f;
+	}
+	[Rpc.Owner( Flags = NetFlags.HostOnly | NetFlags.Reliable )]
+	public void Info( string info)
+	{
+		PolygonMenu.Info( info );
+	}
+	public async Task StartPolygon( int freezetime, CancellationTokenSource cts )
+	{
+		HoldSteadyOnTheStartPoint();
 
-        Controller = new PlayerWalkController();
-        Animator = new PlayerBaseAnimator();
-        CameraMode = new FirstPersonCamera();
+		Freeze = true;
 
-        EnableAllCollisions = true;
-        EnableDrawing = true;
-        EnableHideInFirstPerson = true;
-        EnableShadowInFirstPerson = true;
-        EnableLagCompensation = true;
+		await Task.DelayRealtime( freezetime * 1000 );
 
-        Health = 100;
-    }
+		if ( !PolygonGame.PolygonIsInUse() )
+			return;
 
-    public override void BuildInput()
-    {
-        if (Freeze)
-        {
-            Input.ClearButtons();
-            Input.AnalogMove = Vector3.Zero;
-        }
+		if ( cts.IsCancellationRequested )
+			return;
 
-        base.BuildInput();
-    }
+		PolygonGame.GetPolygonOwner().GetComponent<Rigidbody>().Locking = new PhysicsLock();
 
-    public override void Simulate(Client cl)
-    {
-        base.Simulate(cl);
-        
-        if (LifeState != LifeState.Alive)
-            return;
+		PolygonGame.GameInstance.PolygonInfo.timeStart = PolygonGame.CurTimeMS(); //not accurate?
 
-        TickPlayerUse();
-        
-        if( IsClient )
-            TickGlow();
+		Freeze = false;
 
-        if (Input.Pressed(InputButton.View))
-        {
-            if (CameraMode is ThirdPersonCamera)
-            {
-                CameraMode = new FirstPersonCamera();
-            }
-            else
-            {
-                CameraMode = new ThirdPersonCamera();
-            }
-        }
+		PolygonGame.GameInstance.breakStartDoors();
 
-        SimulateActiveChild(cl, ActiveChild);
+		StartPolygonMusic();
+		
+		//if( !videoStarted ) // TODO: info
+		//{
+		//	videoStarted = true;
+		//	ConsoleSystem.Run( "video" ); // Start video
+		//}
+	}
 
-        //
-        // If the current weapon is out of ammo and we last fired it over half a second ago
-        // lets try to switch to a better wepaon
-        //
-        if (ActiveChild == null || (ActiveChild is WeaponBase weapon && !weapon.IsUsable() && weapon.TimeSincePrimaryAttack > 0.5f && weapon.TimeSinceSecondaryAttack > 0.5f))
-            SwitchToBestWeapon();
-    }
+	private void StartPolygonMusic()
+	{
+		if ( PolygonMusic != null )
+			PolygonMusic.StopSound();
 
-    public override void OnKilled()
-    {
-        base.OnKilled();
+		PolygonMusic = GameObject.AddComponent<SoundPointComponent>();
+		PolygonMusic.SoundEvent = PolygonGame.GameInstance.PolygonMusic;
+		PolygonMusic.StartSound();
 
-        Inventory.DeleteContents();
+	}
 
-        BecomeRagdollOnClient( Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex);
+	[Rpc.Owner( Flags = NetFlags.HostOnly | NetFlags.Reliable )]
+	public void StopPolygonMusic()
+	{
+		//if ( videoStarted ) // TODO: info
+		//{
+		//	videoStarted = false;
+		//	ConsoleSystem.Run( "video" ); // Stop video
+		//}
 
-        Controller = null;
-        CameraMode = new SpectateRagdollCamera();
+		if ( PolygonMusic != null )
+			PolygonMusic.StopSound();
 
-        EnableAllCollisions = false;
-        EnableDrawing = false;
+		PolygonMusic = null;
+	}
 
-        var polygonply = PolygonGame.polygonOwner.polygonPlayer;
-        if (polygonply != null && polygonply.IsValid() && polygonply.Client == Client)
-            PolygonGame.finishPolygon(polygonply, forcefailed: true);
-    }
+	public void HoldSteadyOnTheStartPoint()
+	{
+		var body = Player.GetComponent<Rigidbody>();
+		body.Velocity = 0;
+		Player.WorldPosition = PolygonGame.GameInstance.startPos.WorldPosition;
 
-    public void SwitchToBestWeapon()
-    {
-        var best = Children.Select(x => x as WeaponBase)
-            .Where(x => x.IsValid() && x.IsUsable())
-            .OrderByDescending(x => x.BucketWeight)
-            .FirstOrDefault();
+		var locking = new PhysicsLock();
+		locking.X = true;
+		locking.Y = true;
+		locking.Z = true;
 
-        if (best == null) return;
+		body.Locking = locking;
+	}
 
-        if(IsClient)
-            ActiveChildInput = best;
+	public static void Respawn(Connection owner)
+	{
+		var player = PolygonGame.GameInstance.PlayerPrefab.Clone(
+			new CloneConfig { Transform = global::Transform.Zero, StartEnabled = false } );
 
-        ActiveChild = best;
-    }
-    public async Task playerWaitUntilStartPolygon(int freezetime)
-    {
-        Freeze = true;
-        await Task.Delay(freezetime*1000);
+		player.WorldPosition = PolygonGame.GetRandomSpawnPoint();
+		player.NetworkSpawn( owner );
 
-        if (this != null && Client != null) //TODO: check if player dead..
-        {
-            polygonTime = PolygonGame.curTimeMS;
-            PolygonGame.polygonOwner.timeStart = polygonTime;
-            Freeze = false;
-            PolygonGame.breakStartDoors();
-            startSound(PolygonGame.startbutton);
-        }
-        else
-            PolygonGame.finishPolygon(null);
-    }
-    public void stopSounds()
-    {
-        if (!PolygonFinalSound.Finished)
-            PolygonFinalSound.Stop();
-        if (!PolygonMusic.Finished)
-            PolygonMusic.Stop();
-    }
+		player.Enabled = true;
 
-    [ClientRpc]
-    public void information(string info)
-    {
-        PolygonHUD.infoMenu(ref info);
-    }
-
-    [ClientRpc]
-    public void statistics(bool status, bool cheat, long time, string enemytarget, string friendlytarget)
-    {
-        //not working, because of engine command
-        ConsoleSystem.Run("stop");
-
-        stopSounds();
-        PolygonFinalSound = PlaySound((status ? SucceedSoundList : FailedSoundList)[(new Random()).Next((status ? SucceedSoundList : FailedSoundList).Count)]).SetVolume(0.4f);
-
-        if (status)
-            recordLocalScore(time);
-
-        PolygonHUD.resultMenu(ref status, ref cheat, ref time, ref enemytarget, ref friendlytarget);
-    }
-
-    [ClientRpc]
-    public void startInfo(int freezetime)
-    {
-        //not working, because of engine commands
-        ConsoleSystem.Run("stop");
-        curDemoID = PolygonGame.curTimeMS;
-        ConsoleSystem.Run($"demo {curDemoID}");
-
-        stopSounds();
-
-        PolygonHUD.startInfoPanelBuild();
-
-        PolygonHUD.startInfoActive = PolygonGame.curTime + freezetime;
-
-        PolygonHUD.removePanel();
-    }
-
-    [ClientRpc]
-    public static void hitTarget(Vector3 pos)
-    {
-        Sound.FromWorld("bell_impact", pos);
-    }
-    [ClientRpc]
-    public static void startSound(Entity ent)
-    {
-        if(ent != null && ent.IsValid)
-            Sound.FromEntity("alarm_bell_trimmed", ent);
-    }
-
-    public void loadLocalScores()
-    {
-        var filename = $"{Local.PlayerId}.dat";
-        var scores = new Dictionary<string,List<ScoreData>>();
-
-        if (!FileSystem.Data.FileExists(filename))
-            FileSystem.Data.WriteJson(filename, scores);
-
-        scores = FileSystem.Data.ReadJson<Dictionary<string, List<ScoreData>>>(filename);
-
-        if (scores.TryGetValue(Map.Name, out var data))
-            LocalScores = data.ToList();
-    }
-    public void recordLocalScore(float score)
-    {
-        var filename = $"{Local.PlayerId}.dat";
-        LocalScores.Add(new ScoreData() { score = score / 1000f, date = PolygonGame.curTime, map = Map.Name, demoid = curDemoID });
-        LocalScores = LocalScores.OrderBy(x => x.score).ToList();
-
-        if (LocalScores.Count > 10)
-            LocalScores.RemoveRange(10, LocalScores.Count - 10);
-
-        var scores = FileSystem.Data.ReadJson<Dictionary<string, List<ScoreData>>>(filename);
-        scores.Remove(Map.Name);
-        scores.Add(Map.Name, LocalScores);
-        FileSystem.Data.WriteJson(filename, scores);
-    }
-
-    public bool isNewHighRecord(float newscore) => LocalScores.Any(x => x.score == newscore);
-    public float worstRecord() => LocalScores.Count > 0 ? LocalScores.Last().score : PolygonGame.coolDown; 
-
-    private void TickGlow()
-    {
-        var Ent = FindUsable();
-      
-        if (GlowedEnt != null && !GlowedEnt.Equals(Ent) && (GlowedEnt.Components.TryGet(out Glow glowed)))
-        {
-            ButtonIndicator.Check(GlowedEnt);
-            glowed.Enabled = false;
-            GlowedEnt = null;
-        }
-        if (Ent == null)
-        {
-            GlowedEnt = null;
-            return;
-
-        }
-        if (GlowedEnt == null)
-        { 
-            var glow = Ent.Components.GetOrCreate<Glow>();
-            glow.Enabled = true;
-            glow.Width = 0.15f;
-            glow.Color = new Color(255f, 0.0f, 255.0f, 0.5f) ;
-            glow.ObscuredColor = new Color(255f, 0.0f, 255.0f, 0.0005f);
-            GlowedEnt = Ent;
-        }
-    }
+		player.GetComponent<PolygonPlayer>().Info( "Welcome to Polygon Game! \n\nAll you have to do is press 'E' to start!" );
+	}
 }
-

@@ -1,0 +1,196 @@
+@mixin text($font-size) {
+	position: absolute;
+	background-image: url("materials/polygon/scanlines.vtex");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	font-size: $font-size;
+	font-family: Arial;
+	font-weight: 1000;
+	text-shadow: 5px 5px black, 0px -5px rgba(255,0,0,1),-6px 5px rgba(255,0,0,0), 0px 5px rgba(0, 255, 255,0.95), 10px 5px rgba(0,0,255,0.35);
+	color: #fff;
+	justify-content: center;
+	font-style: italic;
+	text-align: center;
+	white-space:pre;
+}
+@mixin text2($font-size) {
+	position: absolute;
+	font-size: $font-size;
+	font-family: Consolas;
+	text-shadow: 5px 5px black, -6px -5px rgba(0,255,0,0.45),-6px 5px rgba(0,255,0,0.5), 5px 5px rgba(0,255,0,0.55), 10px 5px rgba(0,255,0,0.35);
+	color: #fff;
+	justify-content: center;
+	text-align: center;
+}
+@mixin text3($font-size) {
+	position: absolute;
+	font-size: $font-size;
+	font-family: helvetica;
+	text-shadow: 5px 5px black, -6px -5px rgba(0,0,0,0.45),-6px 5px rgba(0,0,0,0.5), 5px 5px rgba(0,0,0,0.55), 10px 5px rgba(0,0,0,0.35);
+	color: rgba(255,255,255,0.5);
+	justify-content: center;
+	text-align: center;
+}
+
+PolygonMainMenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(to left, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 20%, rgba(20,20,20,0.95) 55%);
+	pointer-events: all;
+	transition: all 0.1s ease-out;
+
+	.blackscreen {
+		position: absolute;
+		background-color: black;
+		transition: all 3s ease-out;
+		opacity: 1;
+		width: 100%;
+		height: 100%;
+		z-index: 10000;
+
+		&:intro {
+			opacity: 0;
+		}
+
+		&:outro {
+			opacity: 1;
+		}
+	}
+
+	.mapselection {
+		position: absolute;
+		width: 1000px;
+		height: 475px;
+		background: linear-gradient(to left, rgba(20,20,20,0) 0%, rgba(20,20,20,0) 0%, rgba(0,0,120,0) 55%);
+		/*left: 5%;*/
+		top: 40%;
+	}
+
+	.title {
+		/*@include text(120);*/
+		position:absolute;
+		left: 60px;
+		top: 80px;
+		transition: all 0.1s ease-out;
+		background-image: url("materials/polygon/logo.vtex");
+		width:1000px;
+		height:300px;
+		background-size: 1200px 330px;
+		background-repeat:no-repeat;
+
+		&:hover {
+			/*transform: scale(1.1);*/
+			animation: shake 0.25s linear;
+		}
+	}
+
+	.info {
+		@include text2(40);
+		left: 30%;
+		/*top: 8%;*/
+	}
+
+	.map1 {
+		position: absolute;
+		left: 10%;
+		top: 30%;
+		width: 270px;
+		height: 270px;
+		border-width: 1px;
+		border-color: white;
+		box-shadow: 2px 2px red, -6px -6px white;
+		background-image: url("materials/polygon/map1.vtex");
+		background-size: cover;
+		border-radius: 3px;
+		filter: brightness(0.8);
+
+		&:hover {
+			box-shadow: -5px -5px cyan;
+			width: 265px;
+			height: 265px;
+		}
+
+		&:active {
+			box-shadow: 2px 2px blue, -6px -6px red;
+			width: 260px;
+			height: 260px;
+		}
+	}
+
+	.map2 {
+		position: absolute;
+		left: 54%;
+		top: 30%;
+		width: 270px;
+		height: 270px;
+		border-width: 1px;
+		border-color: white;
+		box-shadow: 2px 2px blue, -6px -6px white;
+		background-image: url("materials/polygon/map2.vtex");
+		background-size: cover;
+		border-radius: 3px;
+		filter: brightness(0.8);
+
+		&:hover {
+			box-shadow: -5px -5px cyan;
+			width: 265px;
+			height: 265px;
+		}
+
+		&:active {
+			box-shadow: 2px 2px blue, -6px -6px red;
+			width: 260px;
+			height: 260px;
+		}
+	}
+
+	.mapname {
+		position: absolute;
+		width: 100%;
+		height: 15%;
+		background-color: rgba(0,0,0,0.75);
+		top: 44.5%;
+		padding-top: 1px;
+		@include text3(25);
+		opacity: 1;
+	}
+
+	.recommended {
+		position: absolute;
+		font-size: 28px;
+		font-family: Calibri;
+		text-shadow: 3px 3px black;
+		color: white;
+		font-weight: 1000;
+		justify-content: center;
+		text-align: center;
+		top: 85%;
+		left: 5%;
+		/*opacity: 0.7;*/
+		/*transform: rotateZ(-15);*/
+	}
+}
+@keyframes shake {
+	0% {
+		transform: translateX(0);
+	}
+
+	25% {
+		transform: translateX(-10px);
+	}
+
+	50% {
+		transform: translateX(10px);
+	}
+
+	75% {
+		transform: translateX(-10px);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}

@@ -1,0 +1,231 @@
+PolygonMenu {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.35);
+	backdrop-filter: blur(5px);
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	pointer-events: all;
+
+	&:outro {
+		transition: all 0.1s ease-out;
+
+		.menu {
+			transform: scale( 0 );
+		}
+	}
+
+	.menu {
+		position: absolute;
+		/*border-width: 1px;*/
+		/*border-color: rgba(0,0,0,0.3);*/
+		/*background: linear-gradient(to bottom, rgba(20,20,20,1) 0%, rgba(56,56,56,1) 100%);*/
+		box-shadow: 0px 0px 20px 0px rgb(0, 0, 0);
+		transition: all 0.1s ease-out;
+		transform: scale(1);
+		background-image: url("materials/polygon/topology.vtex");
+		background-size: 136% 130%;
+		background-repeat: no-repeat;
+
+
+		&:intro {
+			transform: scale( 0.9 );
+		}
+
+		&:outro {
+			transform: scale( 0 );
+		}
+	}
+
+	.menuframe {
+		width: 100%;
+		height: 100.2%;
+		align-content: center;
+		justify-content: center;
+		flex-direction: column;
+		transition: all 0.1s ease-out;
+		background: linear-gradient(to bottom, rgba(20,20,20,0.1) 0%, rgba(20,20,20,1) 20%);
+	}
+
+	.resultframe {
+		padding: 30px 30px 10px 30px;
+		text-align: center;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	.info {
+		padding: 50px;
+		color: rgba(255,255,255,0.7);
+		font-size: 18px;
+		margin: 5%;
+		font-family: roboto;
+		text-align: center;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		text-shadow: 0 0 2px #000000;
+		white-space: pre-line;
+	}
+
+	.status {
+		text-align: center;
+		align-items: center;
+		font-size: 52px;
+		padding: 3.5%;
+		font-family: Share Tech Mono;
+		overflow: visible;
+		/*text-shadow: 0 2px 2px black, 0 -2px -2px black;*/
+	}
+
+	.highrecord {
+		position: absolute;
+		/*		left: 0.24%;
+		top: 0.345%;*/
+		top: 80px;
+		left: 58%;
+		font-size: 14px;
+		transform-origin: 0.5% 0.5%;
+		color: red;
+		animation: pulseScale 1.2s ease-in-out infinite;
+		transform-origin: 50% 50%;
+		/*text-shadow: none;*/
+	}
+
+	.worldrecord {
+		position: absolute;
+		/*		left: 0.24%;
+		top: 0.345%;*/
+		top: 80px;
+		left: 58%;
+		font-size: 14px;
+		transform-origin: 0.5% 0.5%;
+		color: red;
+		animation: pulseScaleWithRGB 0.8s ease-in infinite;
+		transform-origin: 50% 50%;
+		/*text-shadow: none;*/
+	}
+
+	.time {
+		font-family: roboto;
+		color: rgba(255, 179, 179, 0.9);
+		font-size: 26px;
+		padding: 5%;
+		text-shadow: 0 0 2px #000000;
+		text-align: center;
+		align-items: center;
+	}
+
+	.enemytargets {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 16px;
+		padding: 1%;
+		text-shadow: 0 0 2px #000000;
+		font-family: arial;
+		text-align: center;
+		align-items: center;
+	}
+
+	.friendlytargets {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 16px;
+		padding: 1%;
+		text-shadow: 0 0 2px #000000;
+		font-family: arial;
+		text-align: center;
+		align-items: center;
+	}
+
+	.cheat {
+		color: rgba(255, 255, 255, 0.7);
+		font-size: 16px;
+		padding: 3%;
+		text-shadow: 0 0 2px #000000;
+		font-family: arial;
+		text-align: center;
+		align-items: center;
+	}
+
+	.closebutton {
+		align-items: center;
+		justify-content: center;
+		color: rgba(255,255,255,0.5);
+		font-family: Share Tech Mono;
+		font-size: 18px;
+		margin: 1%;
+		margin-left: 35px;
+		margin-right: 35px;
+		margin-bottom: 35px;
+		border-width: 1px;
+		border-color: black;
+		padding: 1px;
+		flex-shrink: 0;
+		order: 999;
+		background-color: rgb(55,55,55);
+		text-shadow: 0 0 2px #000000;
+		transition: all 0.1s ease-out;
+		height: 38px;
+
+		&:hover {
+			background-color: rgb(70,70,70);
+			color: rgba(255,255,255,0.7);
+		}
+
+		&:outro {
+			transform: scale( 0 );
+		}
+	}
+}
+
+@keyframes pulseScale {
+	0% {
+		transform: scale(0.9) rotateZ(-15deg);
+	}
+
+	50% {
+		transform: scale(1.2) rotateZ(-15deg);
+	}
+
+	100% {
+		transform: scale(0.9) rotateZ(-15deg);
+	}
+}
+
+@keyframes pulseScaleWithRGB {
+	0% {
+		transform: scale(0.9) rotateZ(-15deg);
+		color: red;
+	}
+
+	16% {
+		transform: scale(1) rotateZ(-15deg);
+		color: yellow;
+	}
+
+	33% {
+		transform: scale(1.1) rotateZ(-15deg);
+		color: lime;
+	}
+
+	50% {
+		transform: scale(1.2) rotateZ(-15deg);
+		color: cyan;
+	}
+	66% {
+		transform: scale(1.1) rotateZ(-15deg);
+		color: blue;
+	}
+
+	83% {
+		transform: scale(1) rotateZ(-15deg);
+		color: magenta;
+	}
+	100% {
+		transform: scale(0.9) rotateZ(-15deg);
+		color: red;
+	}
+}

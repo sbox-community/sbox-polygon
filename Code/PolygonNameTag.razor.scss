@@ -1,0 +1,22 @@
+PolygonNameTag {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	justify-content: center;
+
+	.title {
+		position: absolute;
+		/*backdrop-filter: blur(0px);*/
+		background-image: url("materials/polygon/scanlines.vtex");
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		font-size: 25px;
+		font-family: Share Tech Mono;
+		text-shadow: 5px 5px black, -6px -5px rgba(0,255,0,0.45),-6px 5px rgba(0,255,0,0.5), 5px 5px rgba(0,255,0,0.55), 10px 5px rgba(0,255,0,0.35);
+		color: #fff;
+		justify-content: center;
+		text-align: center;
+	}
+}
