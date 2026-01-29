@@ -1,5 +1,4 @@
 # Polygon Gamemode
-![Polygon Gamemode](polygon.png "Polygon Gamemode")
 <br>Race against time..
 
 [Polygon on sbox.game](https://sbox.game/sboxcommunity/polygon)
