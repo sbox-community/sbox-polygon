@@ -1,6 +1,8 @@
 # Polygon Gamemode
 Race against time..
 
+<img width="256" height="256" alt="logo 6ca1c21" src="https://github.com/user-attachments/assets/1f2ffe71-7287-4e14-b3d9-655e52d60e28" />
+
 [Polygon on sbox.game](https://sbox.game/sboxcommunity/polygon)
 
 # Video:
